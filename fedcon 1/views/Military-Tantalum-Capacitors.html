@@ -1,0 +1,357 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Wet Tantalum Capacitors</title>
+    <!--Site CSS-->
+    <link href="/content/css/site.css" rel="stylesheet">
+    <link href="/content/fonts/glyphicons-halflings-regular.svg" rel="stylesheet">
+    <!--Framework CSS-->
+    <link href="/content/bootstrapCss/bootstrap.min.css" rel="stylesheet">
+    <link href="/content/fancybox/jquery.fancybox.css" rel="stylesheet">
+    <!--Javascript-->
+    <script src="/scripts/jquery/jquery-1.10.2.min.js" type="text/javascript"></script>
+    <script src="/scripts/bootstrap/bootstrap.min.js" type="text/javascript"></script>
+    <script src="/scripts/fancybox/fancybox.js" type="text/javascript"></script>
+    <script src="/scripts/fancybox/jquery.fancybox.pack.js" type="text/javascript"></script>
+</head>
+<body class="container">
+    <div class="jumbotron text-center">
+        <a href="https://federalconnectors.com/tantalum-capacitors" target="_blank">
+            <img src="/content/images/tantalumCaps/TantalumCapsBanner.jpg" alt="M39006 Banner" class="ri" />
+        </a>
+    </div>
+    <div class="panel panel-default">
+        <div class="panel-heading text-center"><h2>MIL-PRF-39006 App</h2></div>
+        <div class="panel-body body-content">
+            <form id="formM39006">
+                <div class="row text-center">
+                    <div class="col-md-3">
+                        <div class="well size-l body-content">
+                            <p><strong>M39006/</strong></p>
+                            <p>Basic Document Number</p>
+                            <p>MIL-PRF-39006</p>
+                            <h5><strong id="clrNumberM39006">CLR Number</strong></h5>
+                        </div>
+                    </div>
+                    <div class="col-md-3 text-center">
+                        <div class="well size-l body-content">
+                            <div class="form-group">
+                                <select class="form-control" id="specificationNumberM39006" onchange="validateM39006(specificationNumberM39006[this.selectedIndex].text,specificationNumberM39006.value);">
+                                    <option value="">Select a Specification Number</option>
+                                    <option value="25">01</option>
+                                    <option value="27">02</option>
+                                    <option value="33">03</option>
+                                    <option value="37">04</option>
+                                    <option value="65">09</option>
+                                    <option value="17">20</option>
+                                    <option value="69">21</option>
+                                    <option value="79">22</option>
+                                    <option value="81">25</option>
+                                    <option value="90">30</option>
+                                    <option value="91">31</option>
+                                </select>
+                            </div>
+                            <p>Detail Specification Number</p>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="well size-l body-content">
+                            <a id="specSheetM39006" href="JavaScript:void(0)" target="_self" disabled>
+                                <img src="/content/images/shared/pdf.png" alt="pdf icon" height="75" width="75">
+                            </a>
+                            <p>Dash Number</p>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="well size-l body-content">
+                            <h4>Terminal Drawing</h4>
+                            <img id="terminalPicM39006" src="/content/images/tantalumCaps/M39006.png" class="ri">
+                        </div>
+                    </div>
+                </div>
+                <div class="text-center"><input id="resetM39006" type="reset" value="Reset" class="btn btn-lg button-color"></div>
+            </form>
+        </div>
+    </div>
+    <div class="well">
+        <h2 class="text-center">Tantalum Dielectric</h2>
+        <div class="row  body-content">
+            <div class="col-md-6">
+                <div class="table-responsive">
+                    <table class="table table-striped text-center">
+                        <thead>
+                            <tr>
+                                <th class="text-center">Dielectric</th>
+                                <th class="text-center"><strong>K</strong><br>Dielectric Constants</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Air or Vacuum</td>
+                                <td>1.0</td>
+                            </tr>
+                            <tr>
+                                <td>Paper</td>
+                                <td>2.6 - 6.0</td>
+                            </tr>
+                            <tr>
+                                <td>Plastic</td>
+                                <td>2.1 - 6.0</td>
+                            </tr>
+                            <tr>
+                                <td>Mineral Oil</td>
+                                <td>2.2 - 2.3</td>
+                            </tr>
+                            <tr>
+                                <td>Silicone Oil</td>
+                                <td>2.7 - 2.8</td>
+                            </tr>
+                            <tr>
+                                <td>Quartz</td>
+                                <td>3.8 - 4.4</td>
+                            </tr>
+                            <tr>
+                                <td>Glass</td>
+                                <td>4.8 - 8.0</td>
+                            </tr>
+                            <tr>
+                                <td>Porcelain</td>
+                                <td>5.1 - 5.9</td>
+                            </tr>
+                            <tr>
+                                <td>Mica</td>
+                                <td>5.4 - 8.7</td>
+                            </tr>
+                            <tr>
+                                <td>Aluminum Oxide</td>
+                                <td>8.4</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Tantalum Pentoxide</strong></td>
+                                <td><strong>26</strong></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <p class="text-justify">
+                    What makes Tantalum a perfect dielectric for capacitors? It’s the oxide it produces.
+                    Almost all kinds of metals produce some kind of oxide when reacting with air.
+                    For example iron produces rust and copper produces a black oxide.
+                    Those types of oxides are referred to as crystalline oxides, meaning they are non-protective.
+                    Tantalum belongs to a group of metals called valve metals which include titanium, zirconium, niobium, hafnium, and aluminum.
+                    What makes Valve metals special is that they are able form a tightly adhering, stable, and electrically insulating oxides.
+                    However not all valve metals are able to have the thickness of their oxide accurately controlled through an electrochemical process.
+                </p>
+                <p class="text-justify">
+                    Tantalum pentoxide possesses an extremely high dielectric constant of 26.
+                    When comparing a tantalum pentoxide to aluminum oxide you will notice a huge difference in dielectric constants.
+                    Both dielectrics are made from precious valve metals and possess the highest dielectric constants in the table.
+                    However tantalum pentoxide has a dielectric constant that is almost three times greater than aluminum oxide.
+                </p>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="panel panel-default">
+                <div class="panel-heading text-center"><h2>M39006/22/25/30/31</h2></div>
+                <div class="panel-body body-content">
+                    <div class="text-center">
+                        <h4>All Tantalum Hermetic Seal</h4>
+                        <img src="/content/images/tantalumCaps/diagram1.png" alt="M39006/22/25/30/31 diagram" class="ri">
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <p><strong>Voltage Range:</strong></p>
+                            <uL>
+                                <li>6VDC - 125VDC</li>
+                            </uL>
+                        </div>
+                        <div class="col-lg-6">
+                            <p><strong>Capacitance Range</strong></p>
+                            <uL>
+                                <li>1.7µF - 2200µF</li>
+                            </uL>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <p><strong>Primary Applications</strong></p>
+                            <p class="text-justify">
+                                Designed for heavy duty industrial and military utilization that demands filtering, energy storage, and voltage hold-up.
+                                This type of capacitor is highly resistant to damage from extreme vibration and shock.
+                                This series is excellent for use in aerospace, missiles, power supplies and <strong>"Down-Hole"</strong> oil exploration.
+                            </p>
+                        </div>
+                        <div class="col-lg-6">
+                            <p><strong>Size Range</strong></p>
+                            <div class="text-center"><img src="/content/images/tantalumCaps/diagram3.png" alt="M39006/22/25/30/31 Size Diagram" class="ri"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="panel panel-default">
+                <div class="panel-heading text-center"><h2>M39006/09/21</h2></div>
+                <div class="panel-body body-content">
+                    <div class="text-center">
+                        <h4>Silver Case Hermetic Seal</h4>
+                        <img src="/content/images/tantalumCaps/diagram2.png" alt="M39006/09/21 diagram" class="ri">
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <p><strong>Voltage Range:</strong></p>
+                            <uL>
+                                <li>6VDC - 125VDC</li>
+                            </uL>
+                        </div>
+                        <div class="col-lg-6">
+                            <p><strong>Capacitance Range</strong></p>
+                            <uL>
+                                <li>1.7µF - 2200µF</li>
+                            </uL>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <p><strong>Primary Applications</strong></p>
+                            <p class="text-justify">
+                                Designed for utilization in heavy duty industrial and military equipment.
+                                This capacitor provides premium performance and high reliability with respect to
+                                low DC leakage current, high volumetric efficiency, and high inrush current capability are crucial.
+                            </p>
+                        </div>
+                        <div class="col-lg-6">
+                            <p><strong>Size Range</strong></p>
+                            <div class="text-center"><img src="/content/images/tantalumCaps/diagram4.png" alt="M39006/09/21 Size Diagram" class="ri"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="well">
+        <h2 class="text-center">Technical Specification</h2>
+        <div class="row body-content">
+            <div class="col-md-6">
+                <p>
+                    The military specification <strong>MIL-PRF-39006</strong> establishes the failure rate testing per 1000 hours.
+                </p>
+                <ul>
+                    <li>2%</li>
+                    <li>1%</li>
+                    <li>0.1%</li>
+                    <li>0.01%</li>
+                    <li>0.001%</li>
+                </ul>
+                <div class="body-content text-center">
+                    <img src="/content/images/tantalumCaps/M39006TempGraph.png" alt="M39006 Operating Temp. Graph" class="ri">
+                </div>
+                <p  class="text-justify">
+                    The points on the graph marked with an <strong>“X”</strong> are fixed from ongoing reliability test data at +125 °C and above at the appropriate voltage derating.
+                </p>
+                <p><strong>Note:</strong> Any application above +85°C should be at a derated voltage suitable for the temperature.</p>
+            </div>
+            <div class="col-md-6">
+                <div class="table-responsive">
+                    <table class="table table-striped text-center">
+                        <thead>
+                            <tr class="text-center">
+                                <th class="text-center" colspan="3">Maximum Operating Voltage</th>
+                            </tr>
+                            <tr>
+                                <th class="text-center">Rated (+85°C)<br><strong>VDC</strong></th>
+                                <th class="text-center">Derated (+125°C)<br><strong>VDC</strong></th>
+                                <th class="text-center">Derated (+85°C)<br><strong>VDC</strong></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>6</td>
+                                <td>4</td>
+                                <td>6.9</td>
+                            </tr>
+                            <tr>
+                                <td>8</td>
+                                <td>5</td>
+                                <td>9.2</td>
+                            </tr>
+                            <tr>
+                                <td>10</td>
+                                <td>7</td>
+                                <td>11.5</td>
+                            </tr>
+                            <tr>
+                                <td>15</td>
+                                <td>10</td>
+                                <td>17.2</td>
+                            </tr>
+                            <tr>
+                                <td>25</td>
+                                <td>15</td>
+                                <td>28.8</td>
+                            </tr>
+                            <tr>
+                                <td>30</td>
+                                <td>20</td>
+                                <td>34.5</td>
+                            </tr>
+                            <tr>
+                                <td>50</td>
+                                <td>30</td>
+                                <td>57.5</td>
+                            </tr>
+                            <tr>
+                                <td>60</td>
+                                <td>40</td>
+                                <td>69.0</td>
+                            </tr>
+                            <tr>
+                                <td>75</td>
+                                <td>50</td>
+                                <td>86.2</td>
+                            </tr>
+                            <tr>
+                                <td>100</td>
+                                <td>65</td>
+                                <td>115.0</td>
+                            </tr>
+                            <tr>
+                                <td>125</td>
+                                <td>85</td>
+                                <td>144.0</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="well body-content">
+        <div class="row text-center">
+            <div class="col-md-3">
+                <img src="/content/images/shared/federalConnectorLogo.png" alt="FedConLogo" class="ri" />
+            </div>
+            <div class="col-md-9 text-center">
+                <h2><a href="https://federalconnectors.com/tantalum-capacitors" target="_blank">Click here to browse our <strong>Tantalum Capacitor</strong> inventory</a></h2>
+                <p class="text-justify">
+                    <strong>Federal Connectors</strong> is a supplier of Military Connectors,
+                    Military Fuses, Military Potentiometers, Military Resistors, Military Relays and other electronic components to the US government and various subcontractors.
+                    Our team at Federal Connectors has been serving government agencies and industrial organizations throughout the electronics community for over 25 years.
+                    We provide our customers with an easy shopping experience and reliable fulfillment.
+                </p>
+            </div>
+        </div>
+    </div>
+    <script src="/scripts/utils/Utils.js" type="text/javascript"></script>
+    <script src="/scripts/m39006App/App.js" type="text/javascript"></script>
+</body>
+</html>
+
+    

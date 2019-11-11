@@ -1,0 +1,37 @@
+.heading-text{
+    padding: 0px 0px 10px 0px;
+}
+.text-red{
+    color: crimson;
+}
+a:hover{
+    text-decoration: none !important;
+}
+img{
+    margin: 10px 5px 10px 5px;
+}
+.div-parent {
+    height: 200px;
+    line-height: 200px;
+}
+.div-child{
+    vertical-align: middle;
+}
+.img-drop-shadow:hover{
+    width: 100px;
+    -webkit-filter: drop-shadow(5px 5px 5px #b3daff);
+    filter: drop-shadow(5px 5px 5px #b3daff);
+}
+.resize-logo{
+    width: 40%;
+}
+.button-color:hover {
+    background-color: #406327;
+}
+@media (max-width: 750px){
+    .center-logo{
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+    }
+}

@@ -1,0 +1,746 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Military Trimmer Potentiometers</title>
+    <!--Site CSS-->
+    <link href="/content/css/site.css" rel="stylesheet">
+    <link href="/content/fonts/glyphicons-halflings-regular.svg" rel="stylesheet">
+    <!--Framework CSS-->
+    <link href="/content/bootstrapCss/bootstrap.min.css" rel="stylesheet">
+    <link href="/content/fancybox/jquery.fancybox.css" rel="stylesheet">
+    <!--Javascript-->
+    <script src="/scripts/jquery/jquery-1.10.2.min.js" type="text/javascript"></script>
+    <script src="/scripts/bootstrap/bootstrap.min.js" type="text/javascript"></script>
+    <script src="/scripts/fancybox/fancybox.js" type="text/javascript"></script>
+    <script src="/scripts/fancybox/jquery.fancybox.pack.js" type="text/javascript"></script>
+</head>
+<body class="container">
+    <div class="jumbotron text-center">
+        <a href="https://federalconnectors.com/trim-pots" target="_blank">
+            <img src="/content/images/trimPots/TrimPotsBanner.jpg" alt="Trim Pots Banner" class="ri" />
+        </a>
+    </div>
+    <div class="row">
+        <div class="col-md-3 text-center">
+            <div class="panel panel-default">
+                <div class="panel-heading size-m">
+                    <h3>RT/RTR & RJ/RJR Information</h3>
+                </div>
+                <div class="panel-body">
+                    <p>Specifications</p>
+                    <p><a class="btn btn-default" href="#info">Learn more &raquo;</a></p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3 text-center">
+            <div class="panel panel-default">
+                <div class="panel-heading size-m">
+                    <h3>RT/RTR Part Number Breakdown</h3>
+                </div>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-xs-6">
+                            <p>RT</p>
+                            <p><a class="btn btn-default" href="#rtPNB">View &raquo;</a></p>
+                        </div>
+                        <div class="col-xs-6">
+                            <p>RTR</p>
+                            <p><a class="btn btn-default" href="#rtrPNB">View &raquo;</a></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3 text-center">
+            <div class="panel panel-default">
+                <div class="panel-heading size-m">
+                    <h3>RJ/RJR Part Number Breakdown</h3>
+                </div>
+                <div class="panel-body">
+                    <p>RJ/RJR</p>
+                    <p><a class="btn btn-default" href="#rjrPNB">View &raquo;</a></p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3 text-center">
+            <div class="panel panel-default">
+                <div class="panel-heading size-m">
+                    <h3>RT/RTR & RJ/RJR Terminals</h3>
+                </div>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-xs-6">
+                            <p>RT/RTR</p>
+                            <p><a class="btn btn-default" href="#rtRtrTerminal">View &raquo;</a></p>
+                        </div>
+                        <div class="col-xs-6">
+                            <p>RJ/RJR</p>
+                            <p><a class="btn btn-default" href="#rjRjrTerminals">View &raquo;</a></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="well">
+        <h2 class="text-center">How do Trimmer Potentiometers Work?</h2>
+        <div class="row body-content">
+            <div class="col-md-6">
+                <p class="text-justify">
+                    <strong>Trimmer Potentiometers</strong> or “<strong>Trim Pots</strong>” as they are often called are basically miniature three terminal variable resistors (potentiometers).
+                    Trim pots work on the same principle as potentiometers.
+                    Trim pots have three terminals two of which are connected to a resistive strip or resistive track, the third is connected to an adjustable wiper.
+                    The position of the wiper on the resistive track determines the output voltage (as shown in the diagram).
+                    The material that’s used for the resistive element typically is made out of a carbon composition(Wirewound) or cermet.
+                    Usually trim pots are installed onto PCB’s (Printed Circuit Board) for fine tuning, (re)calibration, or any other type of adjustments in a circuit.
+                    When trim pots are used as replacements for regular potentiometers, adjustments should only be done when it’s absolutely necessary.
+                    Due to their size trim pots are very fragile, and most manufactures rate their lifespan at 200 cycles so frequent adjustments are not recommended.
+                    This rating applies to both Mil-Spec and commercial variants of trim pots.
+                </p>
+            </div>
+            <div class="col-md-6 text-center">
+                <img src="/content/images/trimPots/trimPotDiagram1.png" class="ri" alt="trimpot diagram" />
+            </div>
+        </div>
+    </div>
+    <div class="well" id="info">
+        <h2 class="text-center">RT/RTR & RJ/RJR Series Trim Pots</h2>
+        <div class="body-content">
+            <p class="text-justify">
+                RT/RTR and RJ/RJR series trim pots are made to military specifications and are listed on the QPL (Qualified Parts List).
+                Which simply means that they are on a government approved list of parts that are approved for government and military use.
+                RT/RJ series trim pots are made to the MIL-PRF-22097 and the RTR/RJR series trim pots are made to the MIL-PRF-39035.
+                The major difference between RT/RJ and the RTR/RJR series is that the RTR/RJR trim pots are offered with a failure rate.
+                A failure rate is the frequency at which a component fails during testing over a set period of time.
+                RTR/RJR series of trim pots are offered in three failure rate levels:
+            </p>
+            <p>
+                Note: Failure per 1000 hours of testing
+            </p>
+            <ul>
+                <li>M = 1.0%</li>
+                <li>P = 0.1%</li>
+                <li>R = 0.01%</li>
+            </ul>
+            <p class="text-justify">
+                Although the RJ/RJR series and the RT/RTR series look pretty much identical, 
+                they have two different restive elements used for the resistive track that the wiper follows.
+            </p>
+            <ul>
+                <li>RT/RTR = Wirewound</li>
+                <li>RJ/RJR = Cermet</li>
+            </ul>
+            <p class="text-justify">
+                Please note that we at <a href="https://federalconnectors.com/" target="_blank"><strong>Federal Connectors</strong></a> recommend the RJ/RJR series trim pots over the RT/RTR series trim pots.
+                Due to the RT/RTR series slowly becoming obsolete, there has been an increase in price of trim pots in that series.
+                Another factor to take in consideration is longer lead times for trim pots that are out of stock from the RT/RTR series.
+            </p>
+            <p class="text-justify">
+                All the series of trim pots mentioned above are a sealed style trim pot, which means that the resistive track and the wiper are covered by a protective material.
+                These trim pots are available in a wide variety of resistance ranges.
+                Depending on the series, these trim pots they may either have a temperature rating of -55°C to 150°C or -65°C to +150°C.
+                Since trim pots are designed for making small adjustments to electrical circuits and are usually mounted to a PCB (Printed Circuit Board),
+                they relatively have a low rotational life.
+                Both the RT/RTR and the RJ/RJR series of trim pots are rated at 200 cycles (For more info take a look at the spec. tables below).
+                Differentiating between manufactures is relatively easy, Bourns trim pots are blue in color and VRN trim pots are green (As shown in the images below).
+            </p>
+            <div class="row">
+                <div class="col-md-6 text-center img-responsive">
+                    <img src="/content/images/trimPots/Bourns.png" alt="Bourns Trim Pot" class="ri">
+                    <p>RT12 - Bourns</p>
+                </div>
+                <div class="col-md-6 text-center img-responsive">
+                    <img src="/content/images/trimPots/VRN.png" alt="VRN Trim Pot" class="ri">
+                    <p>RT12 - VRN</p>
+                </div>
+            </div>
+            <div class="col-12 table-responsive">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th scope="col" colspan="9" class="text-center">RT/RTR Specifications</th>
+                        </tr>
+                        <tr>
+                            <th scope="col" class="text-center">Series</th>
+                            <th scope="col" class="text-center">Mil-Pref</th>
+                            <th scope="col" class="text-center">Power Rating</th>
+                            <th scope="col" class="text-center">Size (in")</th>
+                            <th scope="col" class="text-center">Standard Resistance Range</th>
+                            <th scope="col" class="text-center">Absoulute Minimum Resistance</th>
+                            <th scope="col" class="text-center">Temp. Range</th>
+                            <th scope="col" class="text-center">Adjustment Travel</th>
+                            <th scope="col" class="text-center">Torque</th>
+                        </tr>
+                    </thead>
+                    <tbody class="text-center">
+                        <tr>
+                            <th><a href="https://federalconnectors.com/search?q=RT12" target="_blank">RT12</a></th>
+                            <td>MIL-PRF-27208</td>
+                            <td>70°C 1 Watt</td>
+                            <td>1 1/4</td>
+                            <td>10 - 20K ohms</td>
+                            <td>0.1% or 1ohm max</td>
+                            <td>-55°C to +150°C</td>
+                            <td>22 turns nominal</td>
+                            <td>5.0 oz-in. max</td>
+                        </tr>
+                        <tr>
+                            <th><a href="https://federalconnectors.com/search?q=RT22" target="_blank">RT22</a></th>
+                            <td>MIL-PRF-27208</td>
+                            <td>85°C 0.75 Watt</td>
+                            <td>1/2"</td>
+                            <td>50 - 20K ohms</td>
+                            <td>0.1% or 1ohm max</td>
+                            <td>-65°C to +150°C</td>
+                            <td>25 turns nominal</td>
+                            <td>5.0 oz-in. max</td>
+                        </tr>
+                        <tr>
+                            <th><a href="https://federalconnectors.com/search?q=RTR22" target="_blank">RTR22</a></th>
+                            <td>MIL-PRF-39015</td>
+                            <td>85°C 0.75 Watt</td>
+                            <td>1/2"</td>
+                            <td>500 - 20K ohms</td>
+                            <td>0.1% or 1ohm max</td>
+                            <td>-65°C to +150°C</td>
+                            <td>25 turns nominal</td>
+                            <td>5.0 oz-in. max</td>
+                        </tr>
+                        <tr>
+                            <th><a href="https://federalconnectors.com/search?q=RT24" target="_blank">RT24</a></th>
+                            <td>MIL-PRF-27208</td>
+                            <td>85°C 0.25 Watt</td>
+                            <td>3/8"</td>
+                            <td>10 - 10K ohms</td>
+                            <td>0.1% or 1ohm max</td>
+                            <td>-65°C to +150°C</td>
+                            <td>25 turns nominal</td>
+                            <td>5.0 oz-in. max</td>
+                        </tr>
+                        <tr>
+                            <th><a href="https://federalconnectors.com/search?q=RTR24" target="_blank">RTR24</a></th>
+                            <td>MIL-PRF-39015</td>
+                            <td>85°C 0.25 Watt</td>
+                            <td>3/8"</td>
+                            <td>500 - 10K ohms</td>
+                            <td>0.1% or 1ohm max</td>
+                            <td>-65°C to +150°C</td>
+                            <td>25 turns nominal</td>
+                            <td>5.0 oz-in. max</td>
+                        </tr>
+                        <tr>
+                            <th><a href="https://federalconnectors.com/search?q=RT26" target="_blank">RT26</a></th>
+                            <td>MIL-PRF-27208</td>
+                            <td>85°C 0.25 Watt</td>
+                            <td>1/4"</td>
+                            <td>10 - 5K ohms</td>
+                            <td>0.25% or 1ohm max</td>
+                            <td>-55°C to +150°C</td>
+                            <td>11 turns nominal</td>
+                            <td>3.0 oz-in. max</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="col-12 table-responsive">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th scope="col" colspan="9" class="text-center">RJ/RJR Specifications</th>
+                        </tr>
+                        <tr>
+                            <th scope="col" class="text-center">Series</th>
+                            <th scope="col" class="text-center">Mil-Pref</th>
+                            <th scope="col" class="text-center">Power Rating</th>
+                            <th scope="col" class="text-center">Size (in")</th>
+                            <th scope="col" class="text-center">Standard Resistance Range</th>
+                            <th scope="col" class="text-center">Absoulute Minimum Resistance</th>
+                            <th scope="col" class="text-center">Temp. Range</th>
+                            <th scope="col" class="text-center">Adjustment Travel</th>
+                            <th scope="col" class="text-center">Torque</th>
+                        </tr>
+                    </thead>
+                    <tbody class="text-center">
+                        <tr>
+                            <th><a href="https://federalconnectors.com/search?q=RJ12" target="_blank">RJ12</a></th>
+                            <td>MIL-PRF-22097</td>
+                            <td>70°C 1 Watt</td>
+                            <td>1 1/4</td>
+                            <td>10 ohms - 1 megohm</td>
+                            <td>1% or 2ohms max</td>
+                            <td>-55°C to +150°C</td>
+                            <td>22 turns nominal</td>
+                            <td>5.0 oz-in. max</td>
+                        </tr>
+                        <tr>
+                            <th><a href="https://federalconnectors.com/search?q=RJ22" target="_blank">RJ22</a></th>
+                            <td>MIL-PRF-22097</td>
+                            <td>85°C 0.25 Watt</td>
+                            <td>1/2"</td>
+                            <td>10 ohms - 1 megohm</td>
+                            <td>1ohm max</td>
+                            <td>-65°C to +150°C</td>
+                            <td>25 turns nominal</td>
+                            <td>5.0 oz-in. max</td>
+                        </tr>
+                        <tr>
+                            <th><a href="https://federalconnectors.com/search?q=RJ24" target="_blank">RJ24</a></th>
+                            <td>MIL-PRF-22097</td>
+                            <td>85°C 0.50 Watt</td>
+                            <td>3/8"</td>
+                            <td>10 ohms - 1 megohm</td>
+                            <td>2% or 20ohms max</td>
+                            <td>-55°C to +150°C</td>
+                            <td>25 turns nominal</td>
+                            <td>5.0 oz-in. max</td>
+                        </tr>
+                        <tr>
+                            <th><a href="https://federalconnectors.com/search?q=RJR24" target="_blank">RJR24</a></th>
+                            <td>MIL-PRF-39035</td>
+                            <td>85°C 0.50 Watt</td>
+                            <td>3/8"</td>
+                            <td>10 ohms - 1 megohm</td>
+                            <td>2% or 2ohms max</td>
+                            <td>-55°C to +150°C</td>
+                            <td>25 turns nominal</td>
+                            <td>5.0 oz-in. max</td>
+                        </tr>
+                        <tr>
+                            <th><a href="https://federalconnectors.com/search?q=RJ26" target="_blank">RJ26</a></th>
+                            <td>MIL-PRF-22097</td>
+                            <td>85°C 0.25 Watt</td>
+                            <td>1/4"</td>
+                            <td>10 - 1 megohm</td>
+                            <td>2% or 20ohm max</td>
+                            <td>-65°C to +150°C</td>
+                            <td>12 turns nominal</td>
+                            <td>3.0 oz-in. max</td>
+                        </tr>
+                        <tr>
+                            <th><a href="https://federalconnectors.com/search?q=RJR26" target="_blank">RJR26</a></th>
+                            <td>MIL-PRF-39035</td>
+                            <td>85°C 0.25 Watt</td>
+                            <td>1/4"</td>
+                            <td>10 - 1 megohms</td>
+                            <td>2% or 2ohms max</td>
+                            <td>-65°C to +150°C</td>
+                            <td>12 turns nominal</td>
+                            <td>3.0 oz-in. max</td>
+                        </tr>
+                        <tr>
+                            <th><a href="https://federalconnectors.com/search?q=RJ50" target="_blank">RJ50</a></th>
+                            <td>MIL-PRF-27208</td>
+                            <td>85°C 0.50 Watt</td>
+                            <td>1/4"</td>
+                            <td>10 - 1 megohms</td>
+                            <td>1% or 2ohms max</td>
+                            <td>-55°C to +150°C</td>
+                            <td>1 turn (240°) nominal</td>
+                            <td>5.0 oz-in. max</td>
+                        </tr>
+                        <tr>
+                            <th><a href="https://federalconnectors.com/search?q=RJR50" target="_blank">RJR50</a></th>
+                            <td>MIL-PRF-39035</td>
+                            <td>85°C 0.50 Watt</td>
+                            <td>1/4"</td>
+                            <td>10 - 1 megohms</td>
+                            <td>1% or 2ohms max</td>
+                            <td>-55°C to +150°C</td>
+                            <td>1 turn (240°) nominal</td>
+                            <td>5.0 oz-in. max</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="well" id="rtPNB">
+        <h2 class="text-center">Part Number Breakdown for RT Style Trim Pots</h2>
+        <div class="body-content">
+            <p><strong>Example:  RT12  C2  P  101</strong></p>
+            <div class="table-responsive col-md-12">
+                <table class="table table-sm borderless text-center">
+                    <tr>
+                        <td><strong>RT12</strong></td>
+                        <td><strong>C2</strong></td>
+                        <td><strong>P</strong></td>
+                        <td><strong>101</strong></td>
+                    </tr>
+                    <tr>
+                        <td>|</td>
+                        <td>|</td>
+                        <td>|</td>
+                        <td>|</td>
+                    </tr>
+                    <tr>
+                        <td>Model</td>
+                        <td>Characteristic</td>
+                        <td>Terminal Style</td>
+                        <td>Resistance Code</td>
+                    </tr>
+                    <tr>
+                        <td>1</td>
+                        <td>2</td>
+                        <td>3</td>
+                        <td>4</td>
+                    </tr>
+                </table>
+            </div>
+            <div class="row">
+                <div class="col-md-3 text-center">
+                    <p>1. <strong>Model</strong></p>
+                    <ul class="list-unstyled">
+                        <li>RT12</li>
+                        <li>RT22</li>
+                        <li>RT24</li>
+                        <li>RT26</li>
+                    </ul>
+                </div>
+                <div class="col-md-3 text-center">
+                    <p>2. <strong>Characteristic</strong><br></p>
+                    <ul class="list-unstyled">
+                        <li>
+                            C = ±50ppm/C° Temp. Coeff. Max.<br />
+                            2 = 85°C - 150°C Operating Temp.
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-md-3 text-center">
+                    <p>3. <strong>Terminal Style</strong></p>
+                    <ul class="list-unstyled">
+                        <li><a href="#rtRtrTerminal">Click here to view terminal styles</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-3 text-center">
+                    <p>4. <strong>Resistance Code</strong></p>
+                    <a href="/content/images/trimPots/resistanceTableRtTrimPots.PNG" class="fancybox">
+                        <img src="/content/images/trimPots/resistanceTableRtTrimPots.PNG" alt="Resistance Table RT Series" class="ri large">
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="well" id="rtrPNB">
+        <h2 class="text-center">Part Number Breakdown for RTR Style Trim Pots</h2>
+        <div class="body-content">
+            <p><strong>Example:  RTR24  D  P  202  M</strong></p>
+            <div class="table-responsive col-md-12">
+                <table class="table table-sm borderless text-center">
+                    <tr>
+                        <td><strong>RTR24</strong></td>
+                        <td><strong>D</strong></td>
+                        <td><strong>P</strong></td>
+                        <td><strong>202</strong></td>
+                        <td><strong>M</strong></td>
+                    </tr>
+                    <tr>
+                        <td>|</td>
+                        <td>|</td>
+                        <td>|</td>
+                        <td>|</td>
+                        <td>|</td>
+                    </tr>
+                    <tr>
+                        <td>Model</td>
+                        <td>Characteristic</td>
+                        <td>Terminal Style</td>
+                        <td>Resistance Code</td>
+                        <td>Failure Rate</td>
+                    </tr>
+                    <tr>
+                        <td>1</td>
+                        <td>2</td>
+                        <td>3</td>
+                        <td>4</td>
+                        <td>5</td>
+                    </tr>
+                </table>
+            </div>
+            <div class="row">
+                <div class="col-md-3 text-center">
+                    <p>1. <strong>Model</strong></p>
+                    <ul class="list-unstyled">
+                        <li>RTR22</li>
+                        <li>RTR24</li>
+                    </ul>
+                </div>
+                <div class="col-md-3 text-center">
+                    <p>2. <strong>Characteristic</strong><br></p>
+                    <ul class="list-unstyled">
+                        <li>D = ±50ppm/C° Temp. Coeff. Max.</li>
+                    </ul>
+                </div>
+                <div class="col-md-3 text-center">
+                    <p>3. <strong>Terminal Style</strong></p>
+                    <ul class="list-unstyled">
+                        <li><a href="#rtRtrTerminal">Click here to view terminal styles</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-3 text-center">
+                    <p>4. <strong>Resistance Code</strong></p>
+                    <a href="/content/images/trimPots/resistanceTableRtr24Rtr22.png" class="fancybox">
+                        <img src="/content/images/trimPots/resistanceTableRtr24Rtr22.png" alt="Resistance Table RTR22/RTR24 Series" class="ri large">
+                    </a>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-3 text-center" style="margin-top: 10px;">
+                    <p>5. <strong>Failure Rate</strong></p>
+                    <ul class="list-unstyled">
+                        <li>M = 1.0%</li>
+                        <li>P = 0.1%</li>
+                        <li>R = 0.01%</li>
+                    </ul>
+                </div>
+                <div class="col-md-9">
+                    &nbsp;
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="well" id="rtRtrTerminal">
+        <h2 class="text-center">Terminal Styles for RT/RTR Trim Pots</h2>
+        <div class="body-content">
+            <div class="row">
+                <div class="col-md-3 text-center">
+                    <a href="/content/images/trimPots/rt12TerminalL.PNG" class="fancybox" target="_blank">
+                        <img src='/content/images/trimPots/rt12Terminal.PNG'>
+                    </a>
+                    <p>RT12</p>
+                </div>
+                <div class="col-md-3 text-center">
+                    <a href="/content/images/trimPots/rt22TerminalL.PNG"  class="fancybox"target="_blank">
+                        <img src='/content/images/trimPots/rt22Terminal.PNG'>
+                    </a>
+                    <p>RT/RTR22</p>
+                </div>
+                <div class="col-md-3 text-center">
+                    <a href="/content/images/trimPots/rt24TerminalL.PNG" class="fancybox" target="_blank">
+                        <img src='/content/images/trimPots/rt24Terminal.PNG'>
+                    </a>
+                    <p>RT/RTR24</p>
+                </div>
+                <div class="col-md-3 text-center">
+                    <a href="/content/images/trimPots/rt26TerminalL.PNG" class="fancybox" target="_blank">
+                        <img src='/content/images/trimPots/rt26Terminal.PNG'>
+                    </a>
+                    <p>RT26</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="well" id="rjrPNB">
+        <h2 class="text-center">Part Number Breakdown for RJ/RJR Style Trim Pots</h2>
+        <div class="body-content">
+            <p><strong>Example:  RJR24  F  W  502  R</strong></p>
+            <div class="table-responsive col-md-12">
+                <table class="table table-sm borderless text-center">
+                    <tr>
+                        <td><strong>RJR24</strong></td>
+                        <td><strong>F</strong></td>
+                        <td><strong>W</strong></td>
+                        <td><strong>502</strong></td>
+                        <td><strong>R</strong></td>
+                    </tr>
+                    <tr>
+                        <td>|</td>
+                        <td>|</td>
+                        <td>|</td>
+                        <td>|</td>
+                        <td>|</td>
+                    </tr>
+                    <tr>
+                        <td>Model</td>
+                        <td>Characteristic</td>
+                        <td>Terminal Style</td>
+                        <td>Resistance Code</td>
+                        <td>Failure Rate</td>
+                    </tr>
+                    <tr>
+                        <td>1</td>
+                        <td>2</td>
+                        <td>3</td>
+                        <td>4</td>
+                        <td>5</td>
+                    </tr>
+                </table>
+            </div>
+            <div class="row text-center">
+                <div class="col-md-3">
+                    <p>1. <strong>Model</strong></p>
+                    <ul class="list-unstyled">
+                        <li>RJ12</li>
+                        <li>RJ22</li>
+                        <li>RJR24</li>
+                        <li>RJ24</li>
+                        <li>RJ26</li>
+                        <li>RJR26</li>
+                        <li>RJ50</li>
+                        <li>RJR50</li>
+                    </ul>
+                </div>
+                <div class="col-md-3">
+                    <p>2. <strong>Characteristic</strong><br></p>
+                    <ul class="list-unstyled">
+                        <li>F= ±100 ppm/°C Temp. Coeff. Max.</li>
+                    </ul>
+                </div>
+                <div class="col-md-3">
+                    <p>3. <strong>Terminal Style</strong></p>
+                    <ul class="list-unstyled">
+                        <li><a href="#rjRjrTerminals">Click here to view terminal styles</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-3">
+                    <p>4. <strong>Resistance Code</strong></p>
+                    <a href="/content/images/trimPots/resistanceTableRjRjrTrimPots.PNG" class="fancybox">
+                        <img src="/content/images/trimPots/resistanceTableRjRjrTrimPots.PNG" alt="Resistance Table RJ/RJR Series" class="ri large">
+                    </a>
+                </div>
+            </div>
+            <div class="row text-center">
+                <div class="col-md-3" style="margin-top: 10px;">
+                    <p>5. <strong>Failure Rate</strong></p>
+                    <ul class="list-unstyled">
+                        <li>M = 1.0%</li>
+                        <li>P = 0.1%</li>
+                        <li>R = 0.01%</li>
+                    </ul>
+                </div>
+                <div class="col-md-9">
+                    &nbsp;
+                </div>
+            </div>
+            <p class="text-center">
+                <strong>Note:</strong> failure rate only applies to RJR Part Numbers.
+            </p>
+        </div>
+    </div>
+    <div class="well" id="rjRjrTerminals">
+        <h2 class="text-center">Terminal Styles for RJ/RJR Trim Pots</h2>
+        <div class="body-content">
+            <div class="row text-center">
+                <div class="col-md-4">
+                    <a href="/content/images/trimPots/rj12TerminalL.PNG" class="fancybox" target="_blank">
+                        <img src='/content/images/trimPots/rj12Terminal.PNG'>
+                    </a>
+                    <p>RJ12</p>
+                </div>
+                <div class="col-md-4">
+                    <a href="/content/images/trimPots/rj22TerminalL.PNG" class="fancybox" target="_blank">
+                        <img src='/content/images/trimPots/rj22Terminal.PNG'>
+                    </a>
+                    <p>RJ22</p>
+                </div>
+                <div class="col-md-4">
+                    <a href="/content/images/trimPots/rj24TerminalL.PNG" class="fancybox" target="_blank">
+                        <img src='/content/images/trimPots/rj24Terminal.PNG'>
+                    </a>
+                    <p>RJ/RJR24</p>
+                </div>
+            </div>
+            <div class="row text-center">
+                <div class="col-md-6">
+                    <a href="/content/images/trimPots/rj26TerminalL.PNG" class="fancybox" target="_blank">
+                        <img src='/content/images/trimPots/rJ26Terminal.PNG'>
+                    </a>
+                    <p>RJ/RJR26</p>
+                </div>
+                <div class="col-md-6">
+                    <a href="/content/images/trimPots/rj50TerminalL.PNG" class="fancybox" target="_blank">
+                        <img src='/content/images/trimPots/rj50Terminal.PNG'>
+                    </a>
+                    <p>RJ/RJR50</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="well body-content">
+        <div class="row text-center">
+            <div class="col-md-3">
+                <img src="/content/images/shared/federalConnectorLogo.png" alt="FedConLogo" class="ri" />
+            </div>
+            <div class="col-md-9">
+                <h2><a href="https://federalconnectors.com/trim-pots" target="_blank">Click here to browse our <strong>Trim Pot</strong> inventory</a></h2>
+                <p class="text-justify">
+                    <strong>Federal Connectors</strong> is a supplier of Military Connectors,
+                    Military Fuses, Military Potentiometers, Military Resistors, Military Relays and other electronic components to the US government and various subcontractors.
+                    Our team at Federal Connectors has been serving government agencies and industrial organizations throughout the electronics community for over 25 years.
+                    We provide our customers with an easy shopping experience and reliable fulfillment.
+                </p>
+            </div>
+        </div>
+    </div>
+    <div class="well">
+        <h2 class="text-center">Datasheets and Resources</h2>
+        <div class="body-content">
+            <div class="row">
+                <div class="col-md-5">
+                    <p class="text-justify">
+                        <a href="https://federalconnectors.com/" target="_blank"><strong>Federal Connectors</strong></a> not only provides our customers with great products at exceptional prices.
+                        We also offer our customers access to our vast library of resources, which includes everything from datasheets to technical drawings.
+                    </p>
+                    <p class="text-justify">
+                        The most recent datasheets and specifications on RJ/RJR and RT/RTR Series Trim Pots can be downloaded by clicking on the pdf icons.
+                        Major manufacturers of the RJ/RJR and RT/RTR Series Trim Pots include <strong>Bourns</strong> and <strong>VRN</strong> (No longer Manufacturing Trim Pots).
+                    </p>
+                </div>
+                <div class="col-md-7 table-responsive">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th colspan="4" class="text-center">Bourns Trim Pots Datasheets</th>
+                            </tr>
+                            <tr>
+                                <th colspan="2" class="text-center">RT/RTR Series</th>
+                                <th colspan="2" class="text-center">RJ/RJR Series</th>
+                            </tr>
+                            <tr>
+                                <th class="text-center">Series</th>
+                                <th class="text-center">Datasheet</th>
+                                <th class="text-center">Series</th>
+                                <th class="text-center">Datasheet</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <th>RT12</th>
+                                <td><a target="spec" href="/content/specsheet/trimPots/RT12.pdf"><img src="/content/images/shared/pdf.png" alt="pdf icon" height="100" width="100"/></a></td>
+                                <th>RJ12</th>
+                                <td><a target="spec" href="/content/specsheet/trimPots/RJ12.pdf"><img src="/content/images/shared/pdf.png" alt="pdf icon" height="100" width="100"/></a></td>
+                            </tr>
+                            <tr>
+                                <th>RT22/RTR22</th>
+                                <td><a target="spec" href="/content/specsheet/trimPots/RT-RTR22.pdf"><img src="/content/images/shared/pdf.png" alt="pdf icon" height="100" width="100"/></a></td>
+                                <th>RJ22</th>
+                                <td><a target="spec" href="/content/specsheet/trimPots/RJ22.pdf"><img src="/content/images/shared/pdf.png" alt="pdf icon" height="100" width="100"/></a></td>
+                            </tr>
+                            <tr>
+                                <th>RT24/RTR24</th>
+                                <td><a target="spec" href="/content/specsheet/trimPots/RT-RTR24.pdf"><img src="/content/images/shared/pdf.png" alt="pdf icon" height="100" width="100"/></a></td>
+                                <th>RJ24/RJR24</th>
+                                <td><a target="spec" href="/content/specsheet/trimPots/RJ-RJR24.pdf"><img src="/content/images/shared/pdf.png" alt="pdf icon" height="100" width="100"/></a></td>
+                            </tr>
+                            <tr>
+                                <th>RT26</th>
+                                <td><a target="spec" href="/content/specsheet/trimPots/RT26.pdf"><img src="/content/images/shared/pdf.png" alt="pdf icon" height="100" width="100"/></a></td>
+                                <th>RJ26/RJR26</th>
+                                <td><a target="spec" href="/content/specsheet/trimPots/RJ-RJR26.pdf"><img src="/content/images/shared/pdf.png" alt="pdf icon" height="100" width="100"/></a></td>
+                            </tr>
+                            <tr>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <th>RJ50/RJR50</th>
+                                <td><a target="spec" href="/content/specsheet/trimPots/RJ-RJR50.pdf"><img src="/content/images/shared/pdf.png" alt="pdf icon" height="100" width="100"/></a></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
