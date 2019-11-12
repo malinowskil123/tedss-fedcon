@@ -13,7 +13,7 @@ function validateAN3155(){
 
 }
 function loadResourcesAN3155(model){
-    let pictureLink = `/content/images/rheostats/AN3155-${model.substring(7)}.png`;
+    let pictureLink = `/fedcon/content/images/rheostats/AN3155-${model.substring(7)}.png`;
     $("#diagramAN3155").attr('href',pictureLink);
 }
 function populateDropDownAN3155(model){

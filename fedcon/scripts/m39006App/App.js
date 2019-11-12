@@ -27,7 +27,7 @@ function showTerminalM39006(specificationNumber) {
     }else {
         pic = "M39006";
     }
-    return `/content/images/tantalumCaps/${pic}.png`;
+    return `/fedcon/content/images/tantalumCaps/${pic}.png`;
 }
 const resetAppM39006 = (function(){
     $("#specificationNumberM39006").change(function(){

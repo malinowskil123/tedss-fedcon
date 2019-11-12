@@ -21,8 +21,8 @@ function showPartNumbers(dataObject,specNumber,electricalPosition,shaftMounting)
 }
 function loadResources(specNumber){
     const specNumberNoDash = specNumber.replace("/","");
-    let fancyboxPictureLink = `/content/images/rheostats/${specNumberNoDash}.jpg`
-    let specSheetLink = `/content/specsheet/rheostats/${specNumberNoDash}.pdf`
+    let fancyboxPictureLink = `/fedcon/content/images/rheostats/${specNumberNoDash}.jpg`
+    let specSheetLink = `/fedcon/content/specsheet/rheostats/${specNumberNoDash}.pdf`
     $("#fancyboxDiagramM22").attr('href', fancyboxPictureLink,true);
     $("#specSheetLinkM22").attr("href", specSheetLink);
 }
