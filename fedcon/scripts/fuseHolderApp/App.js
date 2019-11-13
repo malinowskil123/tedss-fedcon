@@ -1,8 +1,6 @@
 const utilsMilF19207 = new Utils();
 const globalJqueryMilF19207 = new GlobalJquery();
  
-
-
 function validateMilF19207(partNumber){
     let partNumberDataObject = utilsMilF19207.getDataFromStorage("milFuseHolderArr",partNumber,"governmentDesignation");
     if (partNumberDataObject==null) {
@@ -25,7 +23,6 @@ function validateMilF19207(partNumber){
         displayPartNumberBreakdownMilF19207(partNumber);
     }
 }
-
 function displayTableMilF19207(partNumberDataObject){
     const tableIdMilF19207 = [
         "#militarySpecification",
@@ -46,13 +43,11 @@ function displayTableMilF19207(partNumberDataObject){
        $(tableIdMilF19207[counter++]).text(partNumberDataObject[i]);
     }  
 }
-
 function displayDiagramMilF19207(partNumberDataObject) {
     let imgFileName = utilsMilF19207.remove(partNumberDataObject.militarySpecification,12);
     let imgPath = `/fedcon/content/images/fuseHolders/${imgFileName}.jpg`;
     $("#diagramMilF19207").attr("href",imgPath);
 }
-
 function displayPartNumberBreakdownMilF19207(partNumber) {
     const partNumberIdMilF19207 = ["#characteristic", "#construction", "#enclosure", "#style"]
     let pnbArr = [partNumber.substring(2,3),partNumber.substring(3,5),partNumber.substring(5,6),partNumber.substring(6)]
@@ -73,7 +68,6 @@ function displayPartNumberBreakdownMilF19207(partNumber) {
         }
     })();
 }
-
 const resetAppFH = (function(){
     $("#resetMilF19207").click(function(){
         utilsMilF19207.resetApp("#formMilF19207","#resourcesMilF19207")

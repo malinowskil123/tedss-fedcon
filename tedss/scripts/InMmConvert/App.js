@@ -1,3 +1,4 @@
+// first javascript app
 function lengthConverter(source,valNum){
     valNum = parseFloat(valNum);
     let inputInchesL = $("#inputInchesL").val();
@@ -12,9 +13,9 @@ function diameterConverter(source,valNum1){
     if(source=="inputInchesD") $("#inputMiliMetersD").val((valNum1 * 25.4).toFixed(2));
     if(source=="inputMiliMetersD") $("#inputInchesD").val((valNum1 / 25.4).toFixed(2));
 }
-const resetApp = $(function(){
+const resetApp = (function(){
     $("#reset").click(function(){
         $("#inToMmConversion").trigger('reset');
     });
-});
+})();
 window.onload = resetApp;
