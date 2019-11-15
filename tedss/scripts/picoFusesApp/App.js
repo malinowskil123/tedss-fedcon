@@ -1,24 +1,23 @@
 const picoUtils = new Utils();
-const picoGlobalJquery = new GlobalJquery();
 
 function validate(){
     const dropdownId = ["#series","#ampCode"];
     let valuesArr = picoUtils.getSelectedFields(dropdownId);
-    let partNumberDataObject = picoUtils.getDataFromStorage(valuesArr[0],valuesArr[1],"ampCode");
     let resourceBool;
     if(valuesArr.includes("")!=true){
-        displayTable(partNumberDataObject);
+        let partNumberDataObject = picoUtils.getDataFromStorage(valuesArr[0],valuesArr[1],"ampCode");
+        displayData(partNumberDataObject);
+        displayRating(partNumberDataObject);
         resourceBool = true;
     } else resourceBool = false;
-    picoGlobalJquery.fadeInFadeOut(resourceBool,"#resources")
+    picoUtils.showHide(resourceBool,"#resourcesPicoApp");
 }
 function loadValuesDropDown(series){
     let dropDownLength = $("#ampCode").children("option").length;
     if(dropDownLength>1)picoUtils.resetDynamicDropDown("#ampCode");
     picoUtils.populateDropDown(series,"ampCode","ampCode");
 }
-
-function displayTable(partNumberDataObject){
+function displayData(partNumberDataObject){
     const tableId = ["#amperageRating","#maxVoltage","#interruptingRating","#application"];
     if($(tableId[0]).text()!="") picoUtils.clearText(tableId);
     $("#resetMilF19207").click(function(){
@@ -26,24 +25,27 @@ function displayTable(partNumberDataObject){
     });
     let counter = 0;
     for(let i in partNumberDataObject){
-        if(i==="ampCode"){
-            ; //nop
-        } else $(tableId[counter++]).text(partNumberDataObject[i]);
-       console.log(partNumberDataObject[i]);
+        if(i==="amperageRating"||i==="maxVoltage"||i==="interruptingRating"||i==="application") $(tableId[counter++]).text(partNumberDataObject[i]);
+        else ;
     }  
 }
-
+function displayRating(partNumberDataObject){
+    const tableId = ["#rcLogo","#csaLogo","#pseLogo"];
+    let counter = 0;
+    for(let i in partNumberDataObject){
+        if(i==="rcRating"||i==="csaRating"||i==="pseRating"){
+            if(partNumberDataObject[i]===false) counter++;
+            if(partNumberDataObject[i]===true) $(tableId[counter++]).show();
+        } else ;
+    }  
+}
 const reset = (function(){
     $("#series").change(function(){
         let resetDropDownVal = $("#series").val();
-        if(resetDropDownVal=="") picoUtils.resetApp("#picoApp","#resources");
+        if(resetDropDownVal=="") picoUtils.resetApp("#picoApp","#resourcesPicoApp");
     });
     $("#resetApp").click(function(){
-        picoUtils.resetApp("#picoApp","#resources");
+        picoUtils.resetApp("#picoApp","#resourcesPicoApp");
     });
 })();
 window.onload = reset;
-const onLoadFunctions = (function(){
-    picoGlobalJquery.hideElement("#resources");
-})();
-window.onload = onLoadFunctions;

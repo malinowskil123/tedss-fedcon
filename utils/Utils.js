@@ -29,9 +29,11 @@ class Utils {
         return str.substring(0,index-1) + str.substring(index);
     }  
     resetApp(formId,elementId){
-        $(formId).get(0).reset();
-        const globalJquery = new GlobalJquery();
-        globalJquery.fadeInFadeOut(false,elementId);
+        $(formId)[0].reset();
+        this.showHide(false,elementId);
+    }
+    showHide(reset, id) {
+        (reset === true)? $(id).show("slow"):$(id).hide("slow"); 
     }
     setTedssLink(partNumber,category){
         return `https://www.tedss.com/Catalog/Browse?pageNumber=1&searchString=${partNumber}&inCategory=${category}`;
@@ -148,12 +150,15 @@ class OrangeDropTerminal {
     }
 }
 class PicoFuse{
-    constructor(ampCode, amperageRating, maxVoltage, interruptingRating, application){
+    constructor(ampCode, amperageRating, maxVoltage, interruptingRating, application, rcRating, csaRating, pseRating){
         this.ampCode = ampCode;
         this.amperageRating = amperageRating;
         this.maxVoltage = maxVoltage;
         this.interruptingRating = interruptingRating;
         this.application = application;
+        this.rcRating = rcRating;
+        this.csaRating = csaRating;
+        this.pseRating = pseRating;
     }
 }
 class DataStorageFunctions {
@@ -170,30 +175,10 @@ class DataStorageFunctions {
         return tables[tableKey];
     }
 }
-class GlobalJquery {
-    constructor() { };
-    hideElement(id) {
-        if(typeof id == "string") $(id).hide();
-        if(typeof id== "object"){
-            for(var i in id){
-                $(id[i]).hide();
-            }
-        }
-    }
-    fadeInFadeOut(reset, id) {
-        if(typeof id =="string")(reset == true) ? $(id).fadeIn(1000) : $(id).fadeOut(1000);
-        if(typeof id =="object"){
-            for(var i in id){
-                (reset == true) ? $(id[i]).fadeIn(1000) : $(id[i]).fadeOut(1000);
-            }
-        }
-    }
-}
 const enablePopover = (function (){
     $('[data-toggle="popover"]').popover()
 });
 window.onload = enablePopover;
-
 
 tables = {
     //fedcon
@@ -350,148 +335,148 @@ tables = {
         new OrangeDropTerminal("715PM", "1.70[43.180]", "1.406[35.712]", "1.344[34.138]", "1.094[27.788]")
     ],
     "251" : [
-        new PicoFuse(".062", ".062", 125, "300A@125VDC \n 50A@125VAC", "commercial"),
-        new PicoFuse(".125", ".125", 125, "300A@125VDC \n 50A@125VAC", "commercial"),
-        new PicoFuse(".200", ".200", 125, "300A@125VDC \n 50A@125VAC", "commercial"),
-        new PicoFuse(".250", ".250", 125, "300A@125VDC \n 50A@125VAC", "commercial"),
-        new PicoFuse(".375", ".375", 125, "300A@125VDC \n 50A@125VAC", "commercial"),
-        new PicoFuse(".500", ".500", 125, "300A@125VDC \n 50A@125VAC", "commercial"),
-        new PicoFuse(".630", ".630", 125, "300A@125VDC \n 50A@125VAC", "commercial"),
-        new PicoFuse(".750", ".750", 125, "300A@125VDC \n 50A@125VAC", "commercial"),
-        new PicoFuse("1.0", "001.", 125, "300A@125VDC \n 50A@125VAC", "commercial"),
-        new PicoFuse("1.25", "1.25", 125, "300A@125VDC \n 50A@125VAC", "commercial"),
-        new PicoFuse("1.5", "01.5", 125, "300A@125VDC \n 50A@125VAC", "commercial"),
-        new PicoFuse("2.0", "002.", 125, "300A@125VDC \n 50A@125VAC", "commercial"),
-        new PicoFuse("2.5", "02.5", 125, "300A@125VDC \n 50A@125VAC", "commercial"),
-        new PicoFuse("3.0", "003.", 125, "300A@125VDC \n 50A@125VAC", "commercial"),
-        new PicoFuse("3.5", "03.5", 125, "300A@125VDC \n 50A@125VAC", "commercial"),
-        new PicoFuse("4.0", "004.", 125, "300A@125VDC \n 50A@125VAC", "commercial"),
-        new PicoFuse("5.0", "005.", 125, "300A@125VDC \n 50A@125VAC", "commercial"),
-        new PicoFuse("7.0", "007.", 125, "300A@125VDC \n 50A@125VAC", "commercial"),
-        new PicoFuse("10.0", "010.", 125, "300A@125VDC \n 50A@125VAC", "commercial"),
-        new PicoFuse("12.0", "012.", 32, "300A @ 32VDC \n 50A @ 32VAC", "commercial"),
-        new PicoFuse("15.0", "015.", 32, "300A @ 32VDC \n 50A @ 32VAC", "commercial")
+        new PicoFuse(".062", ".062", 125, "300A@125VDC \n 50A@125VAC", "commercial" ,true, true, false),
+        new PicoFuse(".125", ".125", 125, "300A@125VDC \n 50A@125VAC", "commercial" ,true, true, false),
+        new PicoFuse(".200", ".200", 125, "300A@125VDC \n 50A@125VAC", "commercial" ,true, true, false),
+        new PicoFuse(".250", ".250", 125, "300A@125VDC \n 50A@125VAC", "commercial" ,true, true, false),
+        new PicoFuse(".375", ".375", 125, "300A@125VDC \n 50A@125VAC", "commercial" ,true, true, false),
+        new PicoFuse(".500", ".500", 125, "300A@125VDC \n 50A@125VAC", "commercial" ,true, true, false),
+        new PicoFuse(".630", ".630", 125, "300A@125VDC \n 50A@125VAC", "commercial" ,true, true, false),
+        new PicoFuse(".750", ".750", 125, "300A@125VDC \n 50A@125VAC", "commercial" ,true, true, false),
+        new PicoFuse("1.0", "001.", 125, "300A@125VDC \n 50A@125VAC", "commercial", true, true, true),
+        new PicoFuse("1.25", "1.25", 125, "300A@125VDC \n 50A@125VAC", "commercial", true, true, true),
+        new PicoFuse("1.5", "01.5", 125, "300A@125VDC \n 50A@125VAC", "commercial", true, true, true),
+        new PicoFuse("2.0", "002.", 125, "300A@125VDC \n 50A@125VAC", "commercial", true, true, true),
+        new PicoFuse("2.5", "02.5", 125, "300A@125VDC \n 50A@125VAC", "commercial", true, true, true),
+        new PicoFuse("3.0", "003.", 125, "300A@125VDC \n 50A@125VAC", "commercial", true, true, true),
+        new PicoFuse("3.5", "03.5", 125, "300A@125VDC \n 50A@125VAC", "commercial", true, true, true),
+        new PicoFuse("4.0", "004.", 125, "300A@125VDC \n 50A@125VAC", "commercial", true, true, true),
+        new PicoFuse("5.0", "005.", 125, "300A@125VDC \n 50A@125VAC", "commercial", true, true, true),
+        new PicoFuse("7.0", "007.", 125, "300A@125VDC \n 50A@125VAC", "commercial", true, true, false),
+        new PicoFuse("10.0", "010.", 125, "300A@125VDC \n 50A@125VAC", "commercial", true, true, false),
+        new PicoFuse("12.0", "012.", 32, "300A @ 32VDC \n 50A @ 32VAC", "commercial", true, true, false),
+        new PicoFuse("15.0", "015.", 32, "300A @ 32VDC \n 50A @ 32VAC", "commercial", true, true, false)
     ],
     "253" : [
-        new PicoFuse(".062", ".062", 125, "300A@125VDC \n 50A@125VAC", "military"),
-        new PicoFuse(".125", ".125", 125, "300A@125VDC \n 50A@125VAC", "military"),
-        new PicoFuse(".250", ".250", 125, "300A@125VDC \n 50A@125VAC", "military"),
-        new PicoFuse(".375", ".375", 125, "300A@125VDC \n 50A@125VAC", "military"),
-        new PicoFuse(".500", ".500", 125, "300A@125VDC \n 50A@125VAC", "military"),
-        new PicoFuse(".750", ".750", 125, "300A@125VDC \n 50A@125VAC", "military"),
-        new PicoFuse("1.0", "001.", 125, "300A@125VDC \n 50A@125VAC", "military"),
-        new PicoFuse("1.5", "01.5", 125, "300A@125VDC \n 50A@125VAC", "military"),
-        new PicoFuse("2.0", "002.", 125, "300A@125VDC \n 50A@125VAC", "military"),
-        new PicoFuse("3.0", "003.", 125, "300A@125VDC \n 50A@125VAC", "military"),
-        new PicoFuse("4.0", "004.", 125, "300A@125VDC \n 50A@125VAC", "military"),
-        new PicoFuse("5.0", "005.", 125, "300A@125VDC \n 50A@125VAC", "military"),
-        new PicoFuse("7.0", "007.", 125, "300A@125VDC \n 50A@125VAC", "military"),
-        new PicoFuse("10.0", "010.", 125, "300A@125VDC \n 50A@125VAC", "military"),
-        new PicoFuse("15.0", "015.", 32, "300A @ 32VDC \n 50A @ 32VAC", "military")
+        new PicoFuse(".062", ".062", 125, "300A@125VDC \n 50A@125VAC", "military", true, true, false), 
+        new PicoFuse(".125", ".125", 125, "300A@125VDC \n 50A@125VAC", "military", true, true, false),
+        new PicoFuse(".250", ".250", 125, "300A@125VDC \n 50A@125VAC", "military", true, true, false),
+        new PicoFuse(".375", ".375", 125, "300A@125VDC \n 50A@125VAC", "military", true, true, false),
+        new PicoFuse(".500", ".500", 125, "300A@125VDC \n 50A@125VAC", "military", true, true, false),
+        new PicoFuse(".750", ".750", 125, "300A@125VDC \n 50A@125VAC", "military", true, true, true),
+        new PicoFuse("1.0", "001.", 125, "300A@125VDC \n 50A@125VAC", "military", true, true, true),
+        new PicoFuse("1.5", "01.5", 125, "300A@125VDC \n 50A@125VAC", "military", true, true, true),
+        new PicoFuse("2.0", "002.", 125, "300A@125VDC \n 50A@125VAC", "military", true, true, true),
+        new PicoFuse("3.0", "003.", 125, "300A@125VDC \n 50A@125VAC", "military", true, true, true),
+        new PicoFuse("4.0", "004.", 125, "300A@125VDC \n 50A@125VAC", "military", true, true, true),
+        new PicoFuse("5.0", "005.", 125, "300A@125VDC \n 50A@125VAC", "military", true, true, true),
+        new PicoFuse("7.0", "007.", 125, "300A@125VDC \n 50A@125VAC", "military", true, true, false),
+        new PicoFuse("10.0", "010.", 125, "300A@125VDC \n 50A@125VAC", "military", true, true, false),
+        new PicoFuse("15.0", "015.", 32, "300A @ 32VDC \n 50A @ 32VAC", "military", true, true, false)
     ],
     "263" : [
-        new PicoFuse("0.062", ".062", 250, "50A@250VDC \n PSE: 100A@125VAC", "commercial"),
-        new PicoFuse("0.125", ".125", 250, "50A@250VDC \n PSE: 100A@125VAC", "commercial"),
-        new PicoFuse("0.250", ".250", 250, "50A@250VDC \n PSE: 100A@125VAC", "commercial"),
-        new PicoFuse("0.375", ".375", 250, "50A@250VDC \n PSE: 100A@125VAC", "commercial"),
-        new PicoFuse("0.500", ".500", 250, "50A@250VDC \n PSE: 100A@125VAC", "commercial"),
-        new PicoFuse("0.750", ".750", 250, "50A@250VDC \n PSE: 100A@125VAC", "commercial"),
-        new PicoFuse("1.0", "001.", 250, "50A@250VDC \n PSE: 100A@125VAC", "commercial"),
-        new PicoFuse("1.5", "01.5", 250, "50A@250VDC \n PSE: 100A@125VAC", "commercial"),
-        new PicoFuse("2.0", "002.", 250, "50A@250VDC \n PSE: 100A@125VAC", "commercial"),
-        new PicoFuse("2.5", "02.5", 250, "50A@250VDC \n PSE: 100A@125VAC", "commercial"),
-        new PicoFuse("3.0", "003.", 250, "50A@250VDC \n PSE: 100A@125VAC", "commercial"),
-        new PicoFuse("3.5", "03.5", 250, "50A@250VDC \n PSE: 100A@125VAC", "commercial"),
-        new PicoFuse("4.0", "004.", 250, "50A@250VDC \n PSE: 100A@125VAC", "commercial"),
-        new PicoFuse("5.0", "005.", 250, "50A@250VDC \n PSE: 100A@125VAC", "commercial")
+        new PicoFuse("0.062", ".062", 250, "50A@250VDC \n PSE: 100A@125VAC", "commercial", true, false, false),
+        new PicoFuse("0.125", ".125", 250, "50A@250VDC \n PSE: 100A@125VAC", "commercial", true, true, false),
+        new PicoFuse("0.250", ".250", 250, "50A@250VDC \n PSE: 100A@125VAC", "commercial", true, true, false),
+        new PicoFuse("0.375", ".375", 250, "50A@250VDC \n PSE: 100A@125VAC", "commercial", true, true, false),
+        new PicoFuse("0.500", ".500", 250, "50A@250VDC \n PSE: 100A@125VAC", "commercial", true, true, false),
+        new PicoFuse("0.750", ".750", 250, "50A@250VDC \n PSE: 100A@125VAC", "commercial", true, true, false),
+        new PicoFuse("1.0", "001.", 250, "50A@250VDC \n PSE: 100A@125VAC", "commercial", true, true, true),
+        new PicoFuse("1.5", "01.5", 250, "50A@250VDC \n PSE: 100A@125VAC", "commercial", true, true, true),
+        new PicoFuse("2.0", "002.", 250, "50A@250VDC \n PSE: 100A@125VAC", "commercial", true, true, true),
+        new PicoFuse("2.5", "02.5", 250, "50A@250VDC \n PSE: 100A@125VAC", "commercial", true, true, true),
+        new PicoFuse("3.0", "003.", 250, "50A@250VDC \n PSE: 100A@125VAC", "commercial", true, true, true),
+        new PicoFuse("3.5", "03.5", 250, "50A@250VDC \n PSE: 100A@125VAC", "commercial", true, true, true),
+        new PicoFuse("4.0", "004.", 250, "50A@250VDC \n PSE: 100A@125VAC", "commercial", true, true, true),
+        new PicoFuse("5.0", "005.", 250, "50A@250VDC \n PSE: 100A@125VAC", "commercial", true, true, true)
     ],
     "275" : [
-        new PicoFuse("20.0", "020.", 32, "300A@32VDC \n 100A@32VAC", "commercial"),
-        new PicoFuse("25.0", "025.", 32, "300A@32VDC \n 100A@32VAC", "commercial"),
-        new PicoFuse("30.0", "030.", 32, "300A@32VDC \n 100A@32VAC", "commercial")
+        new PicoFuse("20.0", "020.", 32, "300A@32VDC \n 100A@32VAC", "commercial", true, false, false),
+        new PicoFuse("25.0", "025.", 32, "300A@32VDC \n 100A@32VAC", "commercial", true, false, false),
+        new PicoFuse("30.0", "030.", 32, "300A@32VDC \n 100A@32VAC", "commercial", true, false, false)
     ],
     "265" : [
-        new PicoFuse("0.062", ".062", 125, "300A@1250VDC \n 50A@125VAC", "commercial"),
-        new PicoFuse("0.125", ".125", 125, "300A@1250VDC \n 50A@125VAC", "commercial"),
-        new PicoFuse("0.250", ".250", 125, "300A@1250VDC \n 50A@125VAC", "commercial"),
-        new PicoFuse("0.375", ".375", 125, "300A@1250VDC \n 50A@125VAC", "commercial"),
-        new PicoFuse("0.500", ".500", 125, "300A@1250VDC \n 50A@125VAC", "commercial"),
-        new PicoFuse("0.750", ".750", 125, "300A@1250VDC \n 50A@125VAC", "commercial"),
-        new PicoFuse("1.0", "001.", 125, "300A@1250VDC \n 50A@125VAC", "commercial"),
-        new PicoFuse("1.5", "01.5", 125, "300A@1250VDC \n 50A@125VAC", "commercial"),
-        new PicoFuse("2.0", "002.", 125, "300A@1250VDC \n 50A@125VAC", "commercial"),
-        new PicoFuse("2.5", "02.5", 125, "300A@1250VDC \n 50A@125VAC", "commercial"),
-        new PicoFuse("3.0", "003.", 125, "300A@1250VDC \n 50A@125VAC", "commercial"),
-        new PicoFuse("4.0", "004.", 125, "300A@1250VDC \n 50A@125VAC", "commercial"),
-        new PicoFuse("7.0", "007.", 125, "300A@1250VDC \n 50A@125VAC", "commercial"),
-        new PicoFuse("10.0", "010.", 125, "300A@1250VDC \n 50A@125VAC", "commercial"),
-        new PicoFuse("15.0", "015.", 32, "300A@32VDC \n 50A@32VAC", "commercial")
+        new PicoFuse("0.062", ".062", 125, "300A@1250VDC \n 50A@125VAC", "commercial", false, true, false),
+        new PicoFuse("0.125", ".125", 125, "300A@1250VDC \n 50A@125VAC", "commercial", false, true, false),
+        new PicoFuse("0.250", ".250", 125, "300A@1250VDC \n 50A@125VAC", "commercial", false, true, false),
+        new PicoFuse("0.375", ".375", 125, "300A@1250VDC \n 50A@125VAC", "commercial", false, true, false),
+        new PicoFuse("0.500", ".500", 125, "300A@1250VDC \n 50A@125VAC", "commercial", false, true, false),
+        new PicoFuse("0.750", ".750", 125, "300A@1250VDC \n 50A@125VAC", "commercial", false, true, false),
+        new PicoFuse("1.0", "001.", 125, "300A@1250VDC \n 50A@125VAC", "commercial", false, true, false),
+        new PicoFuse("1.5", "01.5", 125, "300A@1250VDC \n 50A@125VAC", "commercial", false, true, false),
+        new PicoFuse("2.0", "002.", 125, "300A@1250VDC \n 50A@125VAC", "commercial", false, true, false),
+        new PicoFuse("2.5", "02.5", 125, "300A@1250VDC \n 50A@125VAC", "commercial", false, true, false),
+        new PicoFuse("3.0", "003.", 125, "300A@1250VDC \n 50A@125VAC", "commercial", false, true, false),
+        new PicoFuse("4.0", "004.", 125, "300A@1250VDC \n 50A@125VAC", "commercial", false, true, false),
+        new PicoFuse("7.0", "007.", 125, "300A@1250VDC \n 50A@125VAC", "commercial", false, true, false),
+        new PicoFuse("10.0", "010.", 125, "300A@1250VDC \n 50A@125VAC", "commercial", false, true, false),
+        new PicoFuse("15.0", "015.", 32, "300A@32VDC \n 50A@32VAC", "commercial", false, true, false)
     ],
     "266" : [
-        new PicoFuse("0.062", ".062", 125, "300A@1250VDC \n 50A@125VAC", "commercial"),
-        new PicoFuse("0.125", ".125", 125, "300A@1250VDC \n 50A@125VAC", "commercial"),
-        new PicoFuse("0.250", ".250", 125, "300A@1250VDC \n 50A@125VAC", "commercial"),
-        new PicoFuse("0.375", ".375", 125, "300A@1250VDC \n 50A@125VAC", "commercial"),
-        new PicoFuse("0.500", ".500", 125, "300A@1250VDC \n 50A@125VAC", "commercial"),
-        new PicoFuse("0.750", ".750", 125, "300A@1250VDC \n 50A@125VAC", "commercial"),
-        new PicoFuse("1.0", "001.", 125, "300A@1250VDC \n 50A@125VAC", "commercial"),
-        new PicoFuse("1.5", "01.5", 125, "300A@1250VDC \n 50A@125VAC", "commercial"),
-        new PicoFuse("2.0", "002.", 125, "300A@1250VDC \n 50A@125VAC", "commercial"),
-        new PicoFuse("2.5", "02.5", 125, "300A@1250VDC \n 50A@125VAC", "commercial"),
-        new PicoFuse("3.0", "003.", 125, "300A@1250VDC \n 50A@125VAC", "commercial"),
-        new PicoFuse("4.0", "004.", 125, "300A@1250VDC \n 50A@125VAC", "commercial"),
-        new PicoFuse("7.0", "007.", 125, "300A@1250VDC \n 50A@125VAC", "commercial"),
-        new PicoFuse("10.0", "010.", 125, "300A@1250VDC \n 50A@125VAC", "commercial"),
-        new PicoFuse("15.0", "015.", 32, "300A @ 32VDC \n 50A @ 32VAC", "commercial")
+        new PicoFuse("0.062", ".062", 125, "300A@1250VDC \n 50A@125VAC", "commercial", false, true, false),
+        new PicoFuse("0.125", ".125", 125, "300A@1250VDC \n 50A@125VAC", "commercial", false, true, false),
+        new PicoFuse("0.250", ".250", 125, "300A@1250VDC \n 50A@125VAC", "commercial", false, true, false),
+        new PicoFuse("0.375", ".375", 125, "300A@1250VDC \n 50A@125VAC", "commercial", false, true, false),
+        new PicoFuse("0.500", ".500", 125, "300A@1250VDC \n 50A@125VAC", "commercial", false, true, false),
+        new PicoFuse("0.750", ".750", 125, "300A@1250VDC \n 50A@125VAC", "commercial", false, true, false),
+        new PicoFuse("1.0", "001.", 125, "300A@1250VDC \n 50A@125VAC", "commercial", false, true, false),
+        new PicoFuse("1.5", "01.5", 125, "300A@1250VDC \n 50A@125VAC", "commercial", false, true, false),
+        new PicoFuse("2.0", "002.", 125, "300A@1250VDC \n 50A@125VAC", "commercial", false, true, false),
+        new PicoFuse("2.5", "02.5", 125, "300A@1250VDC \n 50A@125VAC", "commercial", false, true, false),
+        new PicoFuse("3.0", "003.", 125, "300A@1250VDC \n 50A@125VAC", "commercial", false, true, false),
+        new PicoFuse("4.0", "004.", 125, "300A@1250VDC \n 50A@125VAC", "commercial", false, true, false),
+        new PicoFuse("7.0", "007.", 125, "300A@1250VDC \n 50A@125VAC", "commercial", false, true, false),
+        new PicoFuse("10.0", "010.", 125, "300A@1250VDC \n 50A@125VAC", "commercial", false, true, false),
+        new PicoFuse("15.0", "015.", 32, "300A @ 32VDC \n 50A @ 32VAC", "commercial", false, true, false)
     ],
     "267" : [
-        new PicoFuse("0.062", ".062", 125, "300A@1250VDC \n 50A@125VAC", "military"),
-        new PicoFuse("0.125", ".125", 125, "300A@1250VDC \n 50A@125VAC", "military"),
-        new PicoFuse("0.250", ".250", 125, "300A@1250VDC \n 50A@125VAC", "military"),
-        new PicoFuse("0.375", ".375", 125, "300A@1250VDC \n 50A@125VAC", "military"),
-        new PicoFuse("0.500", ".500", 125, "300A@1250VDC \n 50A@125VAC", "military"),
-        new PicoFuse("0.750", ".750", 125, "300A@1250VDC \n 50A@125VAC", "military"),
-        new PicoFuse("1.0", "001.", 125, "300A@1250VDC \n 50A@125VAC", "military"),
-        new PicoFuse("1.5", "01.5", 125, "300A@1250VDC \n 50A@125VAC", "military"),
-        new PicoFuse("2.0", "002.", 125, "300A@1250VDC \n 50A@125VAC", "military"),
-        new PicoFuse("2.5", "02.5", 125, "300A@1250VDC \n 50A@125VAC", "military"),
-        new PicoFuse("3.0", "003.", 125, "300A@1250VDC \n 50A@125VAC", "military"),
-        new PicoFuse("4.0", "004.", 125, "300A@1250VDC \n 50A@125VAC", "military"),
-        new PicoFuse("7.0", "007.", 125, "300A@1250VDC \n 50A@125VAC", "military"),
-        new PicoFuse("10.0", "010.", 125, "300A@1250VDC \n 50A@125VAC", "military"),
-        new PicoFuse("15.0", "015.", 32, "300A@32VDC \n 50A@32VAC", "military")
+        new PicoFuse("0.062", ".062", 125, "300A@1250VDC \n 50A@125VAC", "military", false, true, false),
+        new PicoFuse("0.125", ".125", 125, "300A@1250VDC \n 50A@125VAC", "military", false, true, false),
+        new PicoFuse("0.250", ".250", 125, "300A@1250VDC \n 50A@125VAC", "military", false, true, false),
+        new PicoFuse("0.375", ".375", 125, "300A@1250VDC \n 50A@125VAC", "military", false, true, false),
+        new PicoFuse("0.500", ".500", 125, "300A@1250VDC \n 50A@125VAC", "military", false, true, false),
+        new PicoFuse("0.750", ".750", 125, "300A@1250VDC \n 50A@125VAC", "military", false, true, false),
+        new PicoFuse("1.0", "001.", 125, "300A@1250VDC \n 50A@125VAC", "military", false, true, false),
+        new PicoFuse("1.5", "01.5", 125, "300A@1250VDC \n 50A@125VAC", "military", false, true, false),
+        new PicoFuse("2.0", "002.", 125, "300A@1250VDC \n 50A@125VAC", "military", false, true, false),
+        new PicoFuse("2.5", "02.5", 125, "300A@1250VDC \n 50A@125VAC", "military", false, true, false),
+        new PicoFuse("3.0", "003.", 125, "300A@1250VDC \n 50A@125VAC", "military", false, true, false),
+        new PicoFuse("4.0", "004.", 125, "300A@1250VDC \n 50A@125VAC", "military", false, true, false),
+        new PicoFuse("7.0", "007.", 125, "300A@1250VDC \n 50A@125VAC", "military", false, true, false),
+        new PicoFuse("10.0", "010.", 125, "300A@1250VDC \n 50A@125VAC", "military", false, true, false),
+        new PicoFuse("15.0", "015.", 32, "300A@32VDC \n 50A@32VAC", "military", false, true, false)
     ],
     "471" : [
-        new PicoFuse("0.500", ".500", 125, "50A@1250VAC/DC", "commercial"),
-        new PicoFuse("1.0", "001.", 125, "50A@1250VAC/DC", "commercial"),
-        new PicoFuse("1.5", "01.5", 125, "50A@1250VAC/DC", "commercial"),
-        new PicoFuse("2.0", "002.", 125, "50A@1250VAC/DC", "commercial"),
-        new PicoFuse("2.5", "02.5", 125, "50A@1250VAC/DC", "commercial"),
-        new PicoFuse("3.0", "003.", 125, "50A@1250VAC/DC", "commercial"),
-        new PicoFuse("3.5", "03.5", 125, "50A@1250VAC/DC", "commercial"),
-        new PicoFuse("4.0", "004.", 125, "50A@1250VAC/DC", "commercial"),
-        new PicoFuse("5.0", "005.", 125, "50A@1250VAC/DC", "commercial")
+        new PicoFuse("0.500", ".500", 125, "50A@1250VAC/DC", "commercial", false, true, false),
+        new PicoFuse("1.0", "001.", 125, "50A@1250VAC/DC", "commercial", true, true, true),
+        new PicoFuse("1.5", "01.5", 125, "50A@1250VAC/DC", "commercial", true, true, true),
+        new PicoFuse("2.0", "002.", 125, "50A@1250VAC/DC", "commercial", true, true, true),
+        new PicoFuse("2.5", "02.5", 125, "50A@1250VAC/DC", "commercial", true, true, true),
+        new PicoFuse("3.0", "003.", 125, "50A@1250VAC/DC", "commercial", true, true, true),
+        new PicoFuse("3.5", "03.5", 125, "50A@1250VAC/DC", "commercial", true, true, true),
+        new PicoFuse("4.0", "004.", 125, "50A@1250VAC/DC", "commercial", true, true, true),
+        new PicoFuse("5.0", "005.", 125, "50A@1250VAC/DC", "commercial", true, true, true)
     ],
     "472" : [
-        new PicoFuse("0.500", ".500", 125, "50A@1250VAC/DC", "commercial"),
-        new PicoFuse("1.0", "001.", 125, "50A@1250VAC/DC", "commercial"),
-        new PicoFuse("1.5", "01.5", 125, "50A@1250VAC/DC", "commercial"),
-        new PicoFuse("2.0", "002.", 125, "50A@1250VAC/DC", "commercial"),
-        new PicoFuse("2.5", "02.5", 125, "50A@1250VAC/DC", "commercial"),
-        new PicoFuse("3.0", "003.", 125, "50A@1250VAC/DC", "commercial"),
-        new PicoFuse("5.0", "005.", 125, "50A@1250VAC/DC", "commercial")
+        new PicoFuse("0.500", ".500", 125, "50A@1250VAC/DC", "commercial", true, false, false),
+        new PicoFuse("1.0", "001.", 125, "50A@1250VAC/DC", "commercial", true, false, false),
+        new PicoFuse("1.5", "01.5", 125, "50A@1250VAC/DC", "commercial", true, false, false),
+        new PicoFuse("2.0", "002.", 125, "50A@1250VAC/DC", "commercial", true, false, false),
+        new PicoFuse("2.5", "02.5", 125, "50A@1250VAC/DC", "commercial", true, false, false),
+        new PicoFuse("3.0", "003.", 125, "50A@1250VAC/DC", "commercial", true, false, false),
+        new PicoFuse("5.0", "005.", 125, "50A@1250VAC/DC", "commercial", true, false, false)
     ],
     "473" : [
-        new PicoFuse("0.375", ".375", 125, "50A@1250VAC/DC", "commercial"),
-        new PicoFuse("0.500", ".500", 125, "50A@1250VAC/DC", "commercial"),
-        new PicoFuse("0.750", ".750", 125, "50A@1250VAC/DC", "commercial"),
-        new PicoFuse("1.0", "001.", 125, "50A@1250VAC/DC", "commercial"),
-        new PicoFuse("1.5", "01.5", 125, "50A@1250VAC/DC", "commercial"),
-        new PicoFuse("2.0", "002.", 125, "50A@1250VAC/DC", "commercial"),
-        new PicoFuse("2.5", "02.5", 125, "50A@1250VAC/DC", "commercial"),
-        new PicoFuse("3.0", "003.", 125, "50A@1250VAC/DC", "commercial"),
-        new PicoFuse("4.0", "004.", 125, "50A@1250VAC/DC", "commercial"),
-        new PicoFuse("5.0", "005.", 125, "50A@1250VAC/DC", "commercial"),
-        new PicoFuse("7.0", "007.", 125, "50A@1250VAC/DC", "commercial")
+        new PicoFuse("0.375", ".375", 125, "50A@1250VAC/DC", "commercial", true, true, false),
+        new PicoFuse("0.500", ".500", 125, "50A@1250VAC/DC", "commercial", true, true, false),
+        new PicoFuse("0.750", ".750", 125, "50A@1250VAC/DC", "commercial", true, true, false),
+        new PicoFuse("1.0", "001.", 125, "50A@1250VAC/DC", "commercial", true, true, true),
+        new PicoFuse("1.5", "01.5", 125, "50A@1250VAC/DC", "commercial", true, true, true),
+        new PicoFuse("2.0", "002.", 125, "50A@1250VAC/DC", "commercial", true, true, true),
+        new PicoFuse("2.5", "02.5", 125, "50A@1250VAC/DC", "commercial", true, true, true),
+        new PicoFuse("3.0", "003.", 125, "50A@1250VAC/DC", "commercial", true, true, true),
+        new PicoFuse("4.0", "004.", 125, "50A@1250VAC/DC", "commercial", true, true, true),
+        new PicoFuse("5.0", "005.", 125, "50A@1250VAC/DC", "commercial", true, true, true),
+        new PicoFuse("7.0", "007.", 125, "50A@1250VAC/DC", "commercial", true, true, false)
     ]
 };

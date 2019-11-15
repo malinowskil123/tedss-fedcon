@@ -1,9 +1,8 @@
-let utilsM39006 = new Utils();
-let globalJqueryM39006 = new GlobalJquery();
+const utilsM39006 = new Utils();
 
 function validateM39006(specificationNumber,clrNumber){
-    if(clrNumber!="")globalJqueryM39006.fadeInFadeOut(true,"#resetM39006");
-    let pdfLink = `/content/specsheet/tantalumCaps/M39006-${specificationNumber}.pdf`, 
+    if (clrNumber != "")utilsM39006.showHide(true,"#resetM39006");
+    let pdfLink = `files/specsheet/tantalumCaps/M39006-${specificationNumber}.pdf`, 
     imgLink = showTerminalM39006(specificationNumber);
     $("#clrNumberM39006").text(`CLR Number ${clrNumber}`);
     $("#terminalPicM39006").attr('src', imgLink);
@@ -31,25 +30,17 @@ function showTerminalM39006(specificationNumber) {
 }
 const resetAppM39006 = (function(){
     $("#specificationNumberM39006").change(function(){
-        // test line without option:selected with text()
-        // let resetDropDownVal = $("#specificationNumberM39006 option:selected").text();
-        let resetDropDownVal = $("#specificationNumberM39006").val();
-
+        let resetDropDownVal = $("#specificationNumberM39006 option:selected").val();
         if(resetDropDownVal=="") {
             utilsM39006.resetApp("#formM39006","#resetM39006");
             resetLink();
         }
        
     });
-    $("#resetM39006").click(function(){
+    $("resetM39006").click(function(){
         utilsM39006.resetApp("#formM39006","#resetM39006");
         validateM39006("","");
         resetLink();
     });
 })();
 window.onload = resetAppM39006;
-
-const pageLoadFunction = (function(){
-    globalJqueryM39006.hideElement("#resetM39006");
-})();
-window.onload = pageLoadFunction;

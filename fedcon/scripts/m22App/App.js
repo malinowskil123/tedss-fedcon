@@ -1,12 +1,11 @@
 const utilsM22 = new Utils();
-const globalJqueryM22 = new GlobalJquery();
 
 function validateM22() {
     const dropdownId = ["#specificationM22", "#resistanceM22", "#electricalPositionM22", "#shaftMountingM22"];
-    let valuesArrM22 = utilsM22.getSelectedFields(dropdownId,"val");
+    let valuesArrM22 = utilsM22.getSelectedFields(dropdownId, "val");
     let resourcesBool;
-    if(valuesArrM22.includes("")!==true){
-        let dataObject = utilsM22.getDataFromStorage(valuesArrM22[0],valuesArrM22[1],"milType");
+    if (valuesArrM22.includes("") !== true) {
+        let dataObject = utilsM22.getDataFromStorage(valuesArrM22[0], valuesArrM22[1], "milType");
         resourcesBool = true;
         showPartNumbers(dataObject, valuesArrM22[0], valuesArrM22[2], valuesArrM22[3])
         loadResources(valuesArrM22[0]);
@@ -14,7 +13,7 @@ function validateM22() {
         showElectricalPosition(valuesArrM22[2]);
         showShaftInfo(valuesArrM22[3]);
     } else resourcesBool = false;
-    globalJqueryM22.fadeInFadeOut(resourcesBool, "#resourcesM22D");   
+    utilsM22.showHide(resourcesBool, "#resourcesM22D");
 }
 function showPartNumbers(dataObject,specNumber,electricalPosition,shaftMounting){
     let milType = utilsM22.insert(specNumber + dataObject.milType, 6, "-");
@@ -62,21 +61,17 @@ function showShaftInfo(shaftMounting) {
         } else $(displayShaftID[counter++]).val(dataObject[i]);
     }//BADNEW;-)       
 }   
-
-const resetAppM22 = (function(){
-    $("#specificationM22").change(function(){
+const resetAppM22 = (function () {
+    //populate shaft drop down
+    utilsM22.populateDropDown("shaftDataArr", "symbol", "shaftMountingM22");
+    $("#specificationM22").change(function () {
         let resetDropDownVal = $("#specificationM22").val();
-        if(resetDropDownVal=="") utilsM22.resetApp("#formM22","#resourcesM22D");
+        if (resetDropDownVal == "") utilsM22.resetApp("#formM22", "#resourcesM22D");
     });
-    $("#resetM22").click(function(){
-        utilsM22.resetApp("#formM22","#resourcesM22D");
+    $("#resetM22").click(function () {
+        utilsM22.resetApp("#formM22", "#resourcesM22D");
     });
 })();
 window.onload = resetAppM22;
-const onLoadFunctionsM22 = (function(){
-    globalJqueryM22.hideElement("#resourcesM22D");
-    utilsM22.populateDropDown("shaftDataArr", "symbol", "shaftMountingM22");
-})();
-window.onload = onLoadFunctionsM22;
 
 

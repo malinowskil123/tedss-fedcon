@@ -1,3 +1,8 @@
+#resourcesM22D, #resourcesAN3155, #popupMilF19207,
+#resourcesMilF19207, #resetM39006 {
+    display: none;
+}
+
 body {
     max-width: 100%;
     overflow-x: hidden;
@@ -5,40 +10,50 @@ body {
     font-size: 18px;
     letter-spacing: 1px;
 }
-h1, h2, h3, h4, h5, h6, p{
+
+h1, h2, h3, h4, h5, h6, p {
     color: #333333 !important;
 }
-a{
+
+a {
     color: #51703b !important;
 }
-a:hover{
+
+a:hover {
     text-decoration: none !important;
     color: #2D4D17 !important;
 }
+
 .body-content {
     padding-top: 25px;
     padding-bottom: 25px;
     padding-left: 25px;
     padding-right: 25px;
 }
+
 .button-color {
     background-color: #51703b;
     color: #fff !important;
     margin: 10px 0px 20px !important;
 }
+
 .button-color:hover {
     background-color: #2D4D17;
 }
-.input{
+
+.input {
     padding: 10px !important;
 }
-hr{
+
+hr {
     border-color: #51703b !important;
 }
-.part-number-section{
+
+.part-number-section {
     margin-top: 25px;
 }
-.popup{
+
+.popup {
     position: fixed;
     z-index: 1;
     padding-top: 100px;
@@ -50,7 +65,8 @@ hr{
     background-color: rgb(0,0,0);
     background-color: rgba(0,0,0,0.4);
 }
-.popup-content{
+
+.popup-content {
     position: relative;
     background-color: #fefefe;
     margin: auto;
@@ -59,56 +75,71 @@ hr{
     width: 80%;
     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.4),0 6px 20px 0 rgba(0,0,0,0.19);
 }
-@media only screen and (min-width: 992px){
-    .popup-content{
+
+@media only screen and (min-width: 992px) {
+    .popup-content {
         width: 55%;
     }
 }
-.popup-header{
+
+.popup-header {
     padding: 2px 16px;
     background-color: #51703b;
 }
-.popup-header h2{
+
+.popup-header h2 {
     color: #ffffff !important;
 }
-.popup-body{
+
+.popup-body {
     padding: 25px 16px;
 }
-.popup-content p{
+
+.popup-content p {
     font-size: 20px;
 }
+
 .div-parent {
     height: 50px;
     line-height: 50px;
 }
-.div-child{
+
+.div-child {
     vertical-align: middle;
 }
+
 .size-l {
     height: 150px;
     max-height: 150px;
 }
+
 .size-m {
     height: 125px;
     max-height: 125px;
 }
+
 .size-s {
     height: 100px;
     max-height: 100px;
 }
+
 img.ri {
     max-width: 90%;
     max-height: 90%;
 }
-img.large{
-    width:80%;
+
+img.large {
+    width: 80%;
 }
+
 img.medium {
     width: 60%;
 }
+
 img.small {
     width: 40%;
 }
+
 img.extra-small {
     width: 20%;
 }

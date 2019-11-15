@@ -101,13 +101,13 @@
                         <select id="ampCode" class="form-control" onchange="validate();"><option value="">Select Amp Code</option></select>
                     </div>
                 </div>
-                <div id="resources">
+                <div id="resourcesPicoApp" class="hidden">
                     <div class="row">
-                        <div class="col-md-6">
+                        <div class="col-md-8 offset-md-2">
                             <h3 class="text-center">Technical Information</h3>
-                            <div class="table-responsive pl-2">
+                            <div class="table-responsive pl-2 pr-2">
                                 <table class="table table-striped">
-                                    <thead>
+                                    <thead class="thead-dark">
                                         <tr>
                                             <th>Amperage Rating</th>
                                             <th>Max Voltage</th>
@@ -126,8 +126,34 @@
                                 </table>
                             </div>
                         </div>
-                        <div class="col-md-6">
-                        <!-- work here -->
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <h3 class="text-center">Ratings</h3>
+                            <div class="table-responsive pr-2 pl-2">
+                                <table class="table table-striped">
+                                    <thead class="thead-dark">
+                                        <tr>
+                                            <th>Agency</th>
+                                            <th>&nbsp;</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr id="rcLogo" class="hidden">
+                                            <th>Recognized Component</th>
+                                            <td><img src="/tedss/content/picoFuseData/rc-logo.png" alt="recognized component logo" class="img-fluid"></td>
+                                        </tr>
+                                        <tr id="csaLogo" class="hidden"> 
+                                            <th>CSA</th>
+                                            <td><img src="/tedss/content/picoFuseData/csa.png" alt="csa logo" class="img-fluid"></td>
+                                        </tr>
+                                        <tr id="pseLogo" class="hidden">
+                                            <th>PSE</th>
+                                            <td><img src="/tedss/content/picoFuseData/pse-logo.png" alt="pse logo" class="img-fluid"></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
                     </div>
                     <div class="row text-center">
