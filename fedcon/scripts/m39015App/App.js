@@ -1,8 +1,7 @@
-let utilsM39015 = new Utils();
-let globalJqueryM39015 = new GlobalJquery();
-
+const utilsM39015 = new Utils();
+//convert values table
 // let dropDownValuesTerminalArrM39015 = [
-//     ["RTR22","L|L","P|P","W|W","X|X"],
+//     ["RTR22","L","P|P","W|W","X|X"],
 //     ["RTR24","P|P","W|W","X|X"]
 // ];
 // let dropDownValuesResistanceArrM39015 = [
@@ -13,19 +12,47 @@ let globalJqueryM39015 = new GlobalJquery();
 
 
 function validateM39015(){
-    const dropDownIdM39015 = ["#styleM39015","#terminalM39015","#failureRateM39015"];
+    const dropDownIdM39015 = ["#styleM39015","#terminalM39015","#resistanceM39015","#failureRateM39015"];
     let valuesArr = utilsM39015.getSelectedFields(dropDownIdM39015);
-    valuesArr.push(localStorage.getItem("resistance"));
-    console.log(valuesArr)
-    // pop failure rate from dropdown arr by return value form hideFailureRate
-    let failureRate = hideFailureRate(valuesArr[0]);
-    populateTerminal(valuesArr[0]);
-    
+    hideFailureRate(valuesArr[0]);
+    validateResistance(valuesArr[2]);
+}
+let terminals = {};
+    terminals["RT12"] = ["L","P","Y"];
+    terminals["RT22"] = ["P","W","X","L"];
+    terminals["RTR22"] = ["P","W","X","L"];
+    terminals["RJ22"] = ["P","W","X","L"];
+    terminals["RJ24"] = ["P","W","X","L"];
+    terminals["RJR24"] = ["P","W","X","L"];
+    terminals["RT24"] = ["X","P","W"];
+    terminals["RTR24"] = ["X","P","W"];
+    terminals["RT26"] = ["X","W"];
+    terminals["RJ12"] = ["P","Y"];
+    terminals["RJ26"] = ["P","W","X","A","B"];
+    terminals["RJR26"] = ["P","W","X","A","B"];
+    terminals["RJ50"] = ["P"];
+    terminals["RJR50"] = ["P"];
+//onchange trigger
+function populateResistanceM39015() {
+    const styleList = document.getElementById("styleM39015");
+    const terminalList = document.getElementById("terminalM39015");
+    let selectedValue =  styleList.options[styleList.selectedIndex].value;
+    for(let j=terminalList.options.length-1; j>=1; j--){
+        terminalList.remove(j);
+    }
+    let dropdownOptions = terminals[selectedValue];
+    if(dropdownOptions){
+        for(let i=0; i<dropdownOptions.length; i++){
+            let value = new Option(dropdownOptions[i],dropdownOptions[i]);
+            terminalList.options.add(value);
+        }
+    }
 }
 function hideFailureRate(style){
     const divId = ["#divStyle","#divTerminal","#divResistance","#divFailureRate"];
     const styleRegEx = new RegExp(/(R[T,J][\d]{2})/);
-    (styleRegEx.test(style))? $("#divFailureRate").hide():$("#divFailureRate").show();
+    let displayBool = (styleRegEx.test(style))? false:true;
+    utilsM39015.showHide(displayBool,"divFailureRate");
     const toggleBootstrapColumns = (function(){
         for(let i=0; i<divId.length-1; i++){
             let remove = (styleRegEx.test(style))? "col-md-3":"col-md-4";
@@ -40,35 +67,19 @@ function hideFailureRate(style){
 }
 function validateResistance(resistance){
     const resistanceInputTest = new RegExp(/^([\d]{3})$/);
-    if(resistanceInputTest.test(resistance)!==true){
+    if(resistanceInputTest.test(resistance)!==true&&resistance!==""){
         const popup = (function(){
             $("#popupTextM39015").text(`Incorrect Resistance Code "${resistance}"`);
-            globalJqueryM39015.fadeInFadeOut(true,"#popupM39015");
+            utilsM39015.showHide(true,"popupM39015");
             $('body').css("overflow","hidden");
             const popupArea = document.getElementById("popupM39015");
             $(window).click(function(event){
                 if(event.target==popupArea) {
-                    globalJqueryM39015.fadeInFadeOut(false,"#popupM39015");
+                    utilsM39015.showHide(false,"popupM39015")
                     $('body').css("overflow","visible");
                 }
             });
         })();
-    } else localStorage.setItem("resistance",resistance);
+        $("#resistanceM39015").val("");
+    } else return resistance;
 }
-function populateTerminal(style){
-    const dropDownValues = [
-        ["RT12","L|L","P|P","Y|Y"],
-        ["RT22/RTR22/RJ22/RJ24/RJR24","P|P","W|W","X|X","L|L"],
-        ["RT24/RTR24","X|X","P|P","W|W"],
-        ["RT26","X|X","W|W"],
-        ["RJ12","P|P","Y|Y"],
-        ["RJ26/RJR26","P|P","W|W","X|X","A|A","B|B"],
-        ["RJ50/RJR50","P|P"]
-    ];
-    utilsM39015.populateFromArray(style,"terminalM39015",dropDownValues);
-}
-
-const onloadFunctions = (function(){
-    globalJqueryM39015.hideElement("#popupM39015");
-})();
-window.onload = onloadFunctions;

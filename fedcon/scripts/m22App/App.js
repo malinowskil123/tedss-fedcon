@@ -13,7 +13,7 @@ function validateM22() {
         showElectricalPosition(valuesArrM22[2]);
         showShaftInfo(valuesArrM22[3]);
     } else resourcesBool = false;
-    utilsM22.showHide(resourcesBool, "#resourcesM22D");
+    utilsM22.showHide(resourcesBool,"resourcesM22D");
 }
 function showPartNumbers(dataObject,specNumber,electricalPosition,shaftMounting){
     let milType = utilsM22.insert(specNumber + dataObject.milType, 6, "-");
@@ -66,10 +66,10 @@ const resetAppM22 = (function () {
     utilsM22.populateDropDown("shaftDataArr", "symbol", "shaftMountingM22");
     $("#specificationM22").change(function () {
         let resetDropDownVal = $("#specificationM22").val();
-        if (resetDropDownVal == "") utilsM22.resetApp("#formM22", "#resourcesM22D");
+        if (resetDropDownVal == "") utilsM22.resetApp("#formM22","resourcesM22D");
     });
     $("#resetM22").click(function () {
-        utilsM22.resetApp("#formM22", "#resourcesM22D");
+        utilsM22.resetApp("#formM22","resourcesM22D");
     });
 })();
 window.onload = resetAppM22;

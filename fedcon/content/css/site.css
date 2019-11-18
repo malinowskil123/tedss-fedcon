@@ -1,7 +1,3 @@
-#resourcesM22D, #resourcesAN3155, #popupMilF19207,
-#resourcesMilF19207, #resetM39006 {
-    display: none;
-}
 
 body {
     max-width: 100%;
@@ -99,6 +95,9 @@ hr {
     font-size: 20px;
 }
 
+.hidden{
+    display: none;
+}
 .div-parent {
     height: 50px;
     line-height: 50px;
