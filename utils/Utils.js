@@ -22,12 +22,8 @@ class Utils{
         let select = $(id).get(0);
         select.options.length = 1;
     }
-    insert(str,index,value) {
-        return str.substr(0,index) + value + str.substr(index);
-    }
-    remove(str,index){
-        return str.substring(0,index-1) + str.substring(index);
-    }  
+    insert(str,index,value) {return str.substr(0,index) + value+str.substr(index);}
+    remove(str,index){return str.substring(0,index-1)+str.substring(index);}  
     resetApp(formId,elementId){
         $(formId)[0].reset();
         this.showHide(false,elementId);
@@ -44,19 +40,20 @@ class Utils{
         return `https://www.tedss.com/Catalog/Browse?pageNumber=1&searchString=${partNumber}&inCategory=${category}`;
     }
     threeDigitCodeCalculator(code,exponent,lowerValueSymbol,higherValueSymbol){
-        let result =(function(){
+        // storing var might be a problem -when pushing to the server 
+        let result = (function(){
             let loopControl = parseInt(code.substring(2));
             let value = code.substring(0,2);
-            for(let i = 0; i<loopControl; i++){
-                value = value + "0";
+            for(let i=0; i<loopControl; i++){
+                value = value+"0";
             }
             return value;
         })(); 
-        if(result<=1000) result = result + lowerValueSymbol;
+        if(result<=1000) result = result+lowerValueSymbol;
         else{
-            result = (result * Math.pow(10,exponent));
+            result = (result*Math.pow(10,exponent));
             if(result<0.9) result = result.toFixed(3);
-            result = result + higherValueSymbol;
+            result = result+higherValueSymbol;
         }
         return result;
     }
@@ -66,15 +63,14 @@ class Utils{
     }
     populateDropDown(tableKey,objectProperty,htmlElementId) {
         const dropDown = document.getElementById(htmlElementId);
-        if(tableKey==="") {
-            this.resetDynamicDropDown("#"+htmlElementId);
-            return;
+        for(let j=dropDown.options.length-1; j>=1; j--){
+            dropDown.remove(j);
         }
         const dataStorageFunctions = new DataStorageFunctions();
         try{
             let optionArr = dataStorageFunctions.getTable(tableKey);
             let selectElement = document.getElementById(htmlElementId);
-            for (let i = 0; i < optionArr.length; i++) {
+            for (let i=0; i<optionArr.length; i++) {
                 let option = document.createElement("OPTION");
                 let displayedValue = document.createTextNode(optionArr[i][objectProperty]);
                 option.appendChild(displayedValue);
@@ -135,10 +131,10 @@ class OrangeDropTerminal {
     }
 }
 class LittleFuse{
-    constructor(ampCode,amperageRating,maxVoltage,interruptingRating,
+    constructor(amperageRating,ampCode,maxVoltage,interruptingRating,
         action,application,rcRating,csaRating,pseRating){
-        this.ampCode = ampCode;
         this.amperageRating = amperageRating;
+        this.ampCode = ampCode;
         this.maxVoltage = maxVoltage;
         this.interruptingRating = interruptingRating;
         this.action = action;
@@ -148,7 +144,7 @@ class LittleFuse{
         this.pseRating = pseRating;
     }
 }
-class BelFuse{
+class SubminiFuse{
     constructor(partNumber,amperageRating,maxVoltage,action){
         this.partNumber = partNumber;
         this.amperageRating = amperageRating;
@@ -170,10 +166,11 @@ class DataStorageFunctions {
         return tables[tableKey];
     }
 }
-const enablePopover = (function (){
-    $('[data-toggle="popover"]').popover()
-});
-window.onload = enablePopover;
+//move this into scripts----------------------------
+// const enablePopover = (function (){
+//     $('[data-toggle="popover"]').popover()
+// });
+// window.onload = enablePopover;
 
 tables = {
     //fedcon
@@ -475,37 +472,59 @@ tables = {
         new LittleFuse(7.0,"007.",125,"50A@1250VAC/DC","slo-blo","commercial",true,true,false)
     ],
     "MQ" : [
-        new BelFuse("MQ250",0.250,125,"fast-acting"),
-        new BelFuse("MQ300",0.300,125,"fast-acting"),
-        new BelFuse("MQ375",0.375,125,"fast-acting"),
-        new BelFuse("MQ500",0.500,125,"fast-acting"),
-        new BelFuse("MQ750",0.750,125,"fast-acting"),
-        new BelFuse("MQ1",1,125,"fast-acting"),
-        new BelFuse("MQ1.5",1.5,125,"fast-acting"),
-        new BelFuse("MQ2","2",125,"fast-acting"),
-        new BelFuse("MQ2.5",2.5,125,"fast-acting"),
-        new BelFuse("MQ3",3,125,"fast-acting"),
-        new BelFuse("MQ4",4,125,"fast-acting"),
-        new BelFuse("MQ5",5,125,"fast-acting"),
-        new BelFuse("MQ7",7,125,"fast-acting"),
-        new BelFuse("MQ10",10,125,"fast-acting"),
-        new BelFuse("MQ12",12,125,"fast-acting"),
-        new BelFuse("MQ15",15,125,"fast-acting")
+        new SubminiFuse("MQ250",0.250,125,"fast-acting"),
+        new SubminiFuse("MQ300",0.300,125,"fast-acting"),
+        new SubminiFuse("MQ375",0.375,125,"fast-acting"),
+        new SubminiFuse("MQ500",0.500,125,"fast-acting"),
+        new SubminiFuse("MQ750",0.750,125,"fast-acting"),
+        new SubminiFuse("MQ1",1,125,"fast-acting"),
+        new SubminiFuse("MQ1.5",1.5,125,"fast-acting"),
+        new SubminiFuse("MQ2","2",125,"fast-acting"),
+        new SubminiFuse("MQ2.5",2.5,125,"fast-acting"),
+        new SubminiFuse("MQ3",3,125,"fast-acting"),
+        new SubminiFuse("MQ4",4,125,"fast-acting"),
+        new SubminiFuse("MQ5",5,125,"fast-acting"),
+        new SubminiFuse("MQ7",7,125,"fast-acting"),
+        new SubminiFuse("MQ10",10,125,"fast-acting"),
+        new SubminiFuse("MQ12",12,125,"fast-acting"),
+        new SubminiFuse("MQ15",15,125,"fast-acting")
     ],
     "MS" : [
-        new BelFuse("MS250",0.250,125,"slo-blo"),
-        new BelFuse("MS350",0.300,125,"slo-blo"),
-        new BelFuse("MS375",0.375,125,"slo-blo"),
-        new BelFuse("MS500",0.500,125,"slo-blo"),
-        new BelFuse("MS750",0.750,125,"slo-blo"),
-        new BelFuse("MS1",1,125,"slo-blo"),
-        new BelFuse("MS1.25",1.25,125,"slo-blo"),
-        new BelFuse("MS1.5",1.5,125,"slo-blo"),
-        new BelFuse("MS2",2,125,"slo-blo"),
-        new BelFuse("MS2.5",2.5,125,"slo-blo"),
-        new BelFuse("MS3",3,125,"slo-blo"),
-        new BelFuse("MS4",4,125,"slo-blo"),
-        new BelFuse("MS5",5,125,"slo-blo"),
-        new BelFuse("MS7",7,125,"slo-blo")
-    ] 
+        new SubminiFuse("MS250",0.250,125,"slo-blo"),
+        new SubminiFuse("MS350",0.300,125,"slo-blo"),
+        new SubminiFuse("MS375",0.375,125,"slo-blo"),
+        new SubminiFuse("MS500",0.500,125,"slo-blo"),
+        new SubminiFuse("MS750",0.750,125,"slo-blo"),
+        new SubminiFuse("MS1",1,125,"slo-blo"),
+        new SubminiFuse("MS1.25",1.25,125,"slo-blo"),
+        new SubminiFuse("MS1.5",1.5,125,"slo-blo"),
+        new SubminiFuse("MS2",2,125,"slo-blo"),
+        new SubminiFuse("MS2.5",2.5,125,"slo-blo"),
+        new SubminiFuse("MS3",3,125,"slo-blo"),
+        new SubminiFuse("MS4",4,125,"slo-blo"),
+        new SubminiFuse("MS5",5,125,"slo-blo"),
+        new SubminiFuse("MS7",7,125,"slo-blo")
+    ],
+    "MCRW" : [
+        new SubminiFuse("MCRW100mA",0.100,125,"fast-acting"),
+        new SubminiFuse("MCRW15mA",0.125,125,"fast-acting"),
+        new SubminiFuse("MCRW150mA",0.150,125,"fast-acting"),
+        new SubminiFuse("MCRW200mA",0.200,125,"fast-acting"),
+        new SubminiFuse("MCRW250mA",0.250,125,"fast-acting"),
+        new SubminiFuse("MCRW300mA",0.300,125,"fast-acting"),
+        new SubminiFuse("MCRW375mA",0.375,125,"fast-acting"),
+        new SubminiFuse("MCRW500mA",0.500,125,"fast-acting"),
+        new SubminiFuse("MCRW750mA",0.750,125,"fast-acting"),
+        new SubminiFuse("MCRW1A",1,125,"fast-acting"),
+        new SubminiFuse("MCRW1.5A",1.5,125,"fast-acting"),
+        new SubminiFuse("MCRW2A",2,125,"fast-acting"),
+        new SubminiFuse("MCRW2.5A",2.5,125,"fast-acting"),
+        new SubminiFuse("MCRW3A",3,125,"fast-acting"),
+        new SubminiFuse("MCRW4A",4,125,"fast-acting"),
+        new SubminiFuse("MCRW5A",5,125,"fast-acting"),
+        new SubminiFuse("MCRW7A",7,125,"fast-acting"),
+        new SubminiFuse("MCRW10A",10,125,"fast-acting"),
+        new SubminiFuse("MCRW12A",12,125,"fast-acting"),
+        new SubminiFuse("MCRW15A",15,125,"fast-acting")
+    ]
 };

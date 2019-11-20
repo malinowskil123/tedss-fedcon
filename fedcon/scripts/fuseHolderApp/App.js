@@ -17,8 +17,8 @@ function validateMilF19207(partNumber) {
     } else {
         utilsMilF19207.showHide(true, "resourcesMilF19207");
         displayTableMilF19207(partNumberDataObject);
-        displayDiagramMilF19207(partNumberDataObject);
         displayPartNumberBreakdownMilF19207(partNumber);
+        loadResourcesMilF19207(partNumberDataObject);
     }
 }
 function displayTableMilF19207(partNumberDataObject){
@@ -41,7 +41,7 @@ function displayTableMilF19207(partNumberDataObject){
        $(tableIdMilF19207[counter++]).text(partNumberDataObject[i]);
     }  
 }
-function displayDiagramMilF19207(partNumberDataObject) {
+function loadResourcesMilF19207(partNumberDataObject) {
     let imgFileName = utilsMilF19207.remove(partNumberDataObject.militarySpecification,12);
     let imgPath = `/fedcon/content/images/fuseHolders/${imgFileName}.jpg`;
     $("#diagramMilF19207").attr("href",imgPath);

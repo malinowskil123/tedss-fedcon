@@ -2,16 +2,19 @@ const utilsM39006 = new Utils();
 
 function validateM39006(specificationNumber,clrNumber){
     if (clrNumber != "")utilsM39006.showHide(true,"resetM39006");
-    let pdfLink = `/fedcon/content/specsheet/tantalumCaps/M39006-${specificationNumber}.pdf`, 
-    imgLink = showTerminalM39006(specificationNumber);
     $("#clrNumberM39006").text(`CLR Number ${clrNumber}`);
-    $("#terminalPicM39006").attr('src', imgLink);
-    $("#specSheetM39006").attr('href', pdfLink);
-    $("#specSheetM39006").attr('target', "_blank");
+    loadResources(specificationNumber);
 }
 function resetLink(){
     $("#specSheetM39006").attr('href', "Javascript:void(0);");
     $("#specSheetM39006").attr('target', "_self");
+}
+function loadResources(specificationNumber){
+    let pdfLink = `/fedcon/content/specsheet/tantalumCaps/M39006-${specificationNumber}.pdf`, 
+    imgLink = showTerminalM39006(specificationNumber);
+    $("#terminalPicM39006").attr('src', imgLink);
+    $("#specSheetM39006").attr('href', pdfLink);
+    $("#specSheetM39006").attr('target', "_blank");
 }
 function showTerminalM39006(specificationNumber) {
     let pic;
@@ -32,6 +35,7 @@ const resetAppM39006 = (function(){
         let resetDropDownVal = $("#specificationNumberM39006 option:selected").val();
         if(resetDropDownVal==="") {
             utilsM39006.resetApp("#formM39006","resetM39006");
+            resetLink();
         }
     });
     $("#resetM39006").click(function(){

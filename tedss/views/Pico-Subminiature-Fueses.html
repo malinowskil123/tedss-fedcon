@@ -4,9 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Pico / Subminiature Fuses</title>
+    <title>Subminiature Fuses</title>
     <!-- Change -->
-    <meta name="description" content="Learn more about pico and subminiature fuses"/>        
+    <meta name="description" content="Learn more about subminiature fuses"/>        
     <meta name="keywords" content=""/>    
     <link href="/tedss/content/images/favicon.ico" rel="shortcut icon" type="image/x-icon" />
     <link href="/libraries/css/bootstrap-4.0.0/css/bootstrap.min.css" rel="stylesheet">
@@ -70,10 +70,10 @@
         </nav>        
         <div class="framedArea my-2">
             <div class="lightColorBar mx-2 mt-1 pl-3 text-center text-center"><h1>Mosfet</h1></div>
-            <div class="breadCrumbs text-uppercase mx-3 mt-2"><a href="/">HOME</a> > <a href="/LearnMore">RESOURCES</a> > Pico/Subminiature Fuses</div>
+            <div class="breadCrumbs text-uppercase mx-3 mt-2"><a href="/">HOME</a> > <a href="/LearnMore">RESOURCES</a> > Subminiature Fuses</div>
         </div>
         <div class="framedArea my-2">              
-            <div class="mx-2 mt-2 mx-md-3 mt-md-3 text-center"><h2>What is a Pico / Subminiature Fuse?</h2></div>
+            <div class="mx-2 mt-2 mx-md-3 mt-md-3 text-center"><h2>What is a Subminiature Fuse?</h2></div>
             
         </div>
         <div class="framedArea my-2">
@@ -103,7 +103,7 @@
                 </div>
                 <div id="resourcesPicoApp" class="hidden">
                     <div class="row">
-                        <div class="col-md-8">
+                        <div class="col-md-10 offset-md-1">
                             <h3 class="text-center">Technical Information</h3>
                             <hr>
                             <div class="table-responsive pl-2 pr-2">
@@ -128,22 +128,11 @@
                                     </tbody>
                                 </table>
                             </div>
-                            <h3 class="text-center">Alternate Part Numbers</h3>
-                            <hr>
-                            <div class="pl-2 pr-2">
-                                <div id="" class="hidden">
-                                    <label for="belfuseMq">MQ Series</label>
-                                    <input id="belfuseMq" class="form-control" disabled>
-                                </div>
-                                <div id="" class="hidden">
-                                    <label for="belfuseMs">MS Series</label>
-                                    <input id="belfuseMs" class="form-control" disabled>
-                                </div>
-                            </div>
                         </div>
-                        <div class="col-md-4">
-                            <h3 class="text-center">Ratings</h3>
-                            <hr>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4 offset-md-1">
+                            <h3 class="text-center">Ratings</h3><hr>
                             <div class="table-responsive pr-2 pl-2">
                                 <table class="table table-striped">
                                     <thead class="thead-dark">
@@ -169,19 +158,42 @@
                                 </table>
                             </div>
                         </div>
+                        <div class="col-md-6">
+                            <h3 class="text-center">Resources</h3><hr>
+                            <div class="pl-2 pr-2">
+                                <div class="row">
+                                    <div id="" class="col-md-6">
+                                        <div id="divBelfuse" class="">
+                                            <label for="belfusePn">Belfuse</label>
+                                            <input id="belfusePn" class="form-control" disabled>
+                                        </div>
+                                        <div id="divBussmann" class="">
+                                            <label for="bussmanPn">Bussmann</label>
+                                            <input id="bussmanPn" class="form-control" disabled>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="">Data Sheet</label>
+                                        <select id="" class="form-control" onchange="">
+                                            <option value="">Select Data Sheet</option>
+                                            <option id="littleFuseDataSheet" value="">LittleFuse</option>
+                                            <option value="belfuse">BelFuse</option>
+                                            <option value="bussmann">Bussmann</option>
+                                        </select>
+                                        <div class="text-center">
+                                            <a id="terminalImgButton" href="#" class="fancybox"><input type="button" value="Data Sheet" class="btn btn-lg btn-dark mt-2 mb-4"></a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                     <div class="row text-center">
-                        <div class="col-md-3">
+                        <div class="col-md-6">
                             <input id="resetApp" type="reset" value="Reset" class="btn btn-lg btn-dark mt-2 mb-4">
                         </div>
-                        <div class="col-md-3">
+                        <div class="col-md-6">
                             <a id="terminalImgButton" href="#" class="fancybox"><input type="button" value="Terminal" class="btn btn-lg btn btn-dark mt-2 mb-4"></a>
-                        </div>
-                        <div class="col-md-3">
-                            <a id="terminalImgButton" href="#" class="fancybox"><input type="button" value="Data Sheet" class="btn btn-lg btn-dark mt-2 mb-4"></a>
-                        </div>
-                        <div class="col-md-3">
-                            <a id="productLinkOrangeDropCaps" name="productLinkOrangeDropCaps" href="#" target="_blank"><input type="button" value="Search PNB" class="btn btn-lg btn-dark mt-2 mb-4"></a>
                         </div>
                     </div>
                 </div>
@@ -190,7 +202,7 @@
         <div class="framedArea my-2">              
             <div class="text-center"><h2>Resources</h2></div>
             <div class="alert alert-primary mt-2 mt-md-3 text-center biggerBlueTxt w-75 mx-auto" role="alert">
-                <a href="https://www.tedss.com/Semiconductors/Browse/mosfet" target="_blank">Click here to browse our <strong>Pico / Subminiature</strong> Fuse inventory.</a><br>
+                <a href="https://www.tedss.com/Semiconductors/Browse/mosfet" target="_blank">Click here to browse our <strong>Subminiature</strong> Fuse inventory.</a><br>
             </div>
         </div>       
         <div class="mb-2">
