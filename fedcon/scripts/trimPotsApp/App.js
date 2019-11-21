@@ -88,22 +88,22 @@ function displayData(valuesArr){
     }
 }
 // work here------------ show hide alternate part number field
-function hideAlternatePn(style){
-    const divId = ["#","#"];
-    let displayBool = (styleRegEx.test(style))? false:true;
-    utilsM39015.showHide(displayBool,"");
-    (function(){
-        for(let i=0; i<divId.length-1; i++){
-            let remove = (styleRegEx.test(style))? "col-md-3":"col-md-4";
-            let add = (styleRegEx.test(style))? "col-md-4":"col-md-3";
-            if($(divId[i]).attr("class")!=add){
-                $(divId[i]).removeClass(remove); 
-                $(divId[i]).toggleClass(add); 
-            }
-        }  
-    })();
-    return displayBool;       
-}
+// function hideAlternatePn(style){
+//     const divId = ["#","#"];
+//     let displayBool = (styleRegEx.test(style))? false:true;
+//     utilsM39015.showHide(displayBool,"");
+//     (function(){
+//         for(let i=0; i<divId.length-1; i++){
+//             let remove = (styleRegEx.test(style))? "col-md-3":"col-md-4";
+//             let add = (styleRegEx.test(style))? "col-md-4":"col-md-3";
+//             if($(divId[i]).attr("class")!=add){
+//                 $(divId[i]).removeClass(remove); 
+//                 $(divId[i]).toggleClass(add); 
+//             }
+//         }  
+//     })();
+//     return displayBool;       
+// }
 // work here--------------------------
 function loadResources(specNumber){
 //     let fancyboxPictureLink = `/fedcon/content/images/rheostats/${specNumberNoDash}.jpg`
@@ -111,13 +111,12 @@ function loadResources(specNumber){
 //     $("#fancyboxDiagramM22").attr('href', fancyboxPictureLink,true);
 //     $("#specSheetLinkM22").attr("href", specSheetLink);
 }
-//fix bug during reset show failure rate return to original state
 const resetAppTrimPot = (function () {
     $("#style").change(function () {
-        let resetDropDownVal = $("#style").val();
-        if (resetDropDownVal==="") utilsM39015.resetApp("#form", "resources");
+        if ($("#style").val()==="") utilsM39015.resetApp("#form", "resources");
     });
     $("#resetButton").click(function () {
+        hideFailureRate("");
         utilsM39015.resetApp("#form","resources")
     });
 })();
@@ -172,3 +171,4 @@ function convertToM39015(valuesArr){
         return `M39015/${specNumber}-${resistance}${valuesArr[1]}${failureRate}`;
     } else return null;
 }
+// values to pnb-------------------------
