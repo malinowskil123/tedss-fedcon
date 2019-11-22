@@ -3,7 +3,7 @@ function validateAN3155() {
     const dropDownIdArrAN3155 = ["#wattageAN3155", "#resistanceAN3155"];
     let valuesArrAN3155 = utilsAN3155.getSelectedFields(dropDownIdArrAN3155, "val");
     let resourceBool;
-    if (valuesArrAN3155.includes("") != true) {
+    if (valuesArrAN3155.includes("")!=true) {
         let dataObject = utilsAN3155.getDataFromStorage(valuesArrAN3155[0], valuesArrAN3155[1], "resistance");
         resourceBool = true;
         loadResourcesAN3155(valuesArrAN3155[0]);

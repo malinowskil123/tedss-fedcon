@@ -43,29 +43,22 @@ class Utils{
         }
         return result;
     }
-    getDataFromStorage(tableName,tableKey,objectProperty) {
-        const dataStorageFunctions = new DataStorageFunctions();
-        return dataStorageFunctions.getObject(tableName,tableKey,objectProperty);
+    getObject(tableKey,rowKey,matchProperty) {
+        if(tableKey==="")return null;
+        let tempArr = tables[tableKey];
+        for (let i in tempArr) {
+            if (tempArr[i][matchProperty]===rowKey)return tempArr[i];
+        }
+        return null;
     }
-    populateDropDown(tableKey,objectProperty,htmlElementId) {
-        const dropDown = document.getElementById(htmlElementId);
-        for(let j=dropDown.options.length-1; j>=1; j--){
-            dropDown.remove(j);
+    getDropDownValues(tableKey,matchProperty) {
+        if(tableKey==="") return null;
+        let dropdownVal =[];
+        let tempArr = tables[tableKey];
+        for(let i=0; i<tempArr.length; i++){
+            dropdownVal[i] = tempArr[i][matchProperty];
         }
-        const dataStorageFunctions = new DataStorageFunctions();
-        try{
-            let optionArr = dataStorageFunctions.getTable(tableKey);
-            let selectElement = document.getElementById(htmlElementId);
-            for (let i=0; i<optionArr.length; i++) {
-                let option = document.createElement("OPTION");
-                let displayedValue = document.createTextNode(optionArr[i][objectProperty]);
-                option.appendChild(displayedValue);
-                option.setAttribute("value",displayedValue.nodeValue);
-                selectElement.insertBefore(option,option.lastElementChild);
-            }
-        } catch(err) {
-            console.log(err);
-        }
+        return dropdownVal;
     }
     // Tedss
     resetAppTedss(formId,elementId){
@@ -151,20 +144,6 @@ class SubminiFuse{
         this.amperageRating = amperageRating;
         this.maxVoltage = maxVoltage;
         this.action = action;
-    }
-}
-class DataStorageFunctions {
-    getObject(tableKey,rowId,objectProperty) {
-        let tempArr = this.getTable(tableKey);
-        for (let a = 0; a < tempArr.length; a++) {
-            if (tempArr[a][objectProperty] == rowId) {
-                return tempArr[a];
-            }
-        }
-        return null;
-    }
-    getTable(tableKey) {
-        return tables[tableKey];
     }
 }
 //move this into scripts----------------------------

@@ -82,7 +82,7 @@
                 <div class="row pr-2 pl-2 pb-4">
                     <div class="col-md-4 offset-md-2">
                         <label for="series">Pico Fuse Series</label>
-                        <select id="series" class="form-control" onchange="validate();loadValuesDropDown(series.value);">
+                        <select id="series" class="form-control" onchange="loadValuesDropDown(series.value);validate();">
                             <option value="">Select Series</option>
                             <option value="251">0251</option>
                             <option value="253">0253</option>
@@ -162,12 +162,15 @@
                             <h3 class="text-center">Resources</h3><hr>
                             <div class="pl-2 pr-2">
                                 <div class="row">
-                                    <div id="" class="col-md-6">
-                                        <div id="divBelfuse" class="">
+                                    <div class="col-md-6">
+                                        <label for="littleFusePn">LittleFuse</label>
+                                        <!-- hidden -->
+                                        <input id="littleFusePn" class="form-control" disabled>
+                                        <div id="divBelfuse" class="hidden">
                                             <label for="belfusePn">Belfuse</label>
                                             <input id="belfusePn" class="form-control" disabled>
                                         </div>
-                                        <div id="divBussmann" class="">
+                                        <div id="divBussmann" class="hidden">
                                             <label for="bussmanPn">Bussmann</label>
                                             <input id="bussmanPn" class="form-control" disabled>
                                         </div>
@@ -181,20 +184,16 @@
                                             <option value="bussmann">Bussmann</option>
                                         </select>
                                         <div class="text-center">
-                                            <a id="terminalImgButton" href="#" class="fancybox"><input type="button" value="Data Sheet" class="btn btn-lg btn-dark mt-2 mb-4"></a>
+                                            <a id="terminalImgButton" href="#" class="fancybox"><input type="button" value="Data Sheet" class="btn btn-lg btn-dark mt-2 mt-md-3"></a>
+                                            <a id="terminalImgButton" href="#" class="fancybox"><input type="button" value="Terminal" class="btn btn-lg btn btn-dark mt-2 mt-md-3"></a>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="row text-center">
-                        <div class="col-md-6">
-                            <input id="resetApp" type="reset" value="Reset" class="btn btn-lg btn-dark mt-2 mb-4">
-                        </div>
-                        <div class="col-md-6">
-                            <a id="terminalImgButton" href="#" class="fancybox"><input type="button" value="Terminal" class="btn btn-lg btn btn-dark mt-2 mb-4"></a>
-                        </div>
+                    <div class="text-center">
+                        <input id="resetApp" type="reset" value="Reset" class="btn btn-lg btn-dark mt-2 mb-4">
                     </div>
                 </div>
            </form>
