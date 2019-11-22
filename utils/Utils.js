@@ -1,5 +1,6 @@
 class Utils{
     constructor() {};
+    // general
     getSelectedFields(dropDownIdArr,attr) {
         let selectedFieldsVal = [];
         if(attr==="text"){
@@ -24,21 +25,6 @@ class Utils{
     }
     insert(str,index,value) {return str.substr(0,index) + value+str.substr(index);}
     remove(str,index){return str.substring(0,index-1)+str.substring(index);}  
-    resetApp(formId,elementId){
-        $(formId)[0].reset();
-        this.showHide(false,elementId);
-    }
-    showHide(reset,id) {
-        if(id.substring(0,1)==="#") (reset === true)? $(id).show("slow"):$(id).hide("slow");
-        else{
-            let elm = document.getElementById(id);
-            (reset===true)? elm.classList.remove("hidden"):elm.classList.add("hidden");
-            elm.style.display = (reset === true)? "inline":"none"; 
-        }
-    }
-    setTedssLink(partNumber,category){
-        return `https://www.tedss.com/Catalog/Browse?pageNumber=1&searchString=${partNumber}&inCategory=${category}`;
-    }
     threeDigitCodeCalculator(code,exponent,lowerValueSymbol,higherValueSymbol){
         // storing var might be a problem -when pushing to the server 
         let result = (function(){
@@ -77,11 +63,26 @@ class Utils{
                 option.setAttribute("value",displayedValue.nodeValue);
                 selectElement.insertBefore(option,option.lastElementChild);
             }
-        } catch(err){
+        } catch(err) {
             console.log(err);
-            console.log(`couldn't match a table to key = ${tableKey}`)
         }
-        
+    }
+    // Tedss
+    resetAppTedss(formId,elementId){
+        $(formId)[0].reset();
+        this.showHideJquery(false,elementId)
+    }
+    showHideJquery(reset,id) {(reset === true)? $(id).show("slow"):$(id).hide("slow");}
+    // FedCon
+    resetFedCon(formId,elementId,cssDisplay){
+        document.getElementById(formId).reset();
+        this.showHideJs(false,elementId,cssDisplay)
+    }
+    showHideJs(reset,id,cssDisplay){
+        let elm = document.getElementById(id);
+        if(cssDisplay===undefined) cssDisplay = "inline";//default inline unless specified
+        (reset===true)? elm.classList.remove("hidden"):elm.classList.add("hidden");
+        elm.style.display = (reset === true)? cssDisplay:"none";
     }
     //add new code here
 }

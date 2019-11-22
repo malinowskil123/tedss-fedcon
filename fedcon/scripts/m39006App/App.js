@@ -1,7 +1,6 @@
 const utilsM39006 = new Utils();
-
 function validateM39006(specificationNumber,clrNumber){
-    if (clrNumber != "")utilsM39006.showHide(true,"resetM39006");
+    if (clrNumber != "")utilsM39006.showHideJs(true,"resetM39006");
     $("#clrNumberM39006").text(`CLR Number ${clrNumber}`);
     loadResources(specificationNumber);
 }
@@ -34,12 +33,12 @@ const resetAppM39006 = (function(){
     $("#specificationNumberM39006").change(function(){
         let resetDropDownVal = $("#specificationNumberM39006 option:selected").val();
         if(resetDropDownVal==="") {
-            utilsM39006.resetApp("#formM39006","resetM39006");
+            utilsM39006.resetFedCon("formM39006","resetM39006");
             resetLink();
         }
     });
     $("#resetM39006").click(function(){
-        utilsM39006.resetApp("#formM39006","resetM39006");
+        utilsM39006.resetFedCon("formM39006","resetM39006");
         validateM39006("","");
         resetLink();
     });

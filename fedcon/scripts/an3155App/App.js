@@ -1,5 +1,4 @@
 const utilsAN3155 = new Utils();
-
 function validateAN3155() {
     const dropDownIdArrAN3155 = ["#wattageAN3155", "#resistanceAN3155"];
     let valuesArrAN3155 = utilsAN3155.getSelectedFields(dropDownIdArrAN3155, "val");
@@ -10,7 +9,7 @@ function validateAN3155() {
         loadResourcesAN3155(valuesArrAN3155[0]);
         showElectricalDataAN3155(valuesArrAN3155, dataObject);
     } else resourceBool = false;
-    utilsAN3155.showHide(resourceBool,"resourcesAN3155");
+    utilsAN3155.showHideJs(resourceBool,"resourcesAN3155");
 }
 function loadResourcesAN3155(model){
     let pictureLink = `/fedcon/content/images/rheostats/AN3155-${model.substring(7)}.png`;
@@ -30,14 +29,13 @@ function showElectricalDataAN3155(pnArr,dataObject){
     $("#showModelWattageAN3155").val(modelText);
     $("#showPartNumberAN3155").val(pnArr.join("-"));
 }
-
 const resetAppAN3155 = (function () {
     $("#wattageAN3155").change(function () {
         let resetDropDownVal = $("#wattageAN3155").val();
-        if (resetDropDownVal == "") utilsAN3155.resetApp("#formAN3155", "resourcesAN3155");
+        if (resetDropDownVal == "") utilsAN3155.resetFedCon("formAN3155", "resourcesAN3155");
     });
     $("#resetAN3155").click(function () {
-        utilsAN3155.resetApp("#formAN3155", "resourcesAN3155")
+        utilsAN3155.resetFedCon("formAN3155", "resourcesAN3155");
     });
 })();
 window.onload = resetAppAN3155;

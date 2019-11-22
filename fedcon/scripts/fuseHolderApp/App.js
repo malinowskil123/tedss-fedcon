@@ -1,21 +1,20 @@
 const utilsMilF19207 = new Utils();
- 
 function validateMilF19207(partNumber) {
     let partNumberDataObject = utilsMilF19207.getDataFromStorage("milFuseHolderArr", partNumber, "governmentDesignation");
     if (partNumberDataObject == null) {
         (function () {
-            utilsMilF19207.showHide(true, "popupMilF19207");
+            utilsMilF19207.showHideJs(true, "popupMilF19207");
             $('body').css("overflow", "hidden");
             const popupArea = document.getElementById("popupMilF19207");
             $(window).click(function (event) {
                 if (event.target == popupArea) {
-                    utilsMilF19207.showHide(false, "popupMilF19207");
+                    utilsMilF19207.showHideJs(false, "popupMilF19207");
                     $('body').css("overflow", "visible");
                 }
             });
         })();
     } else {
-        utilsMilF19207.showHide(true, "resourcesMilF19207");
+        utilsMilF19207.showHideJs(true, "resourcesMilF19207");
         displayTableMilF19207(partNumberDataObject);
         displayPartNumberBreakdownMilF19207(partNumber);
         loadResourcesMilF19207(partNumberDataObject);
@@ -68,7 +67,17 @@ function displayPartNumberBreakdownMilF19207(partNumber) {
 }
 const resetAppFH = (function () {
     $("#resetMilF19207").click(function () {
-        utilsMilF19207.resetApp("#formMilF19207", "resourcesMilF19207")
+        utilsMilF19207.resetFedCon("formMilF19207", "resourcesMilF19207")
     });
 })();
 window.onload = resetAppFH;
+const onEnterValidateFH = (function(){
+    let input = document.getElementById("partNumberMilF19207");
+    input.addEventListener("keyup", function(event) {
+        if (event.keyCode===13) {
+            event.preventDefault();
+            document.getElementById("submitMilF19207").click(validateMilF19207(partNumberMilF19207.value.replace('-','').toUpperCase()));
+        }
+    });    
+})();
+window.onload = onEnterValidateFH;
