@@ -49,7 +49,6 @@ function displayRating(partNumberDataObject){
         } else ;
     }  
 }
-// work here
 function displayAlternatePn(littleFuseData,littleFusePn){
     if(littleFuseData!==null){
         const divId = ["#divBelfuse","#divBussmann"];
@@ -65,6 +64,7 @@ function displayAlternatePn(littleFuseData,littleFusePn){
         }
     }
 }
+// work here
 // function resourcesLayout(){
 //     const divId = ["divBelFuse","divBussmann"];
 // }

@@ -1,6 +1,6 @@
 const utilsMilF19207 = new Utils();
 function validateMilF19207(partNumber) {
-    let partNumberDataObject = utilsMilF19207.getDataFromStorage("milFuseHolderArr", partNumber, "governmentDesignation");
+    let partNumberDataObject = utilsMilF19207.getObject("milFuseHolderArr", partNumber, "governmentDesignation");
     if (partNumberDataObject == null) {
         (function () {
             utilsMilF19207.showHideJs(true, "popupMilF19207");

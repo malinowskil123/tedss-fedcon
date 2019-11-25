@@ -1,23 +1,52 @@
 const utilsM22 = new Utils();
 function validateM22() {
-    const dropdownId = ["#specificationM22", "#resistanceM22", "#electricalPositionM22", "#shaftMountingM22"];
+    const dropdownId = ["#specificationM22","#resistanceM22","#electricalPositionM22","#shaftMountingM22"];
     let valuesArrM22 = utilsM22.getSelectedFields(dropdownId, "val");
     let resourcesBool;
     if (valuesArrM22.includes("") !== true) {
-        let dataObject = utilsM22.getDataFromStorage(valuesArrM22[0], valuesArrM22[1], "milType");
+        let m22Object = utilsM22.getObject(valuesArrM22[0],valuesArrM22[1],"milType");
+        console.log(m22Object);
         resourcesBool = true;
-        showPartNumbers(dataObject, valuesArrM22[0], valuesArrM22[2], valuesArrM22[3])
+        showPartNumbers(m22Object,valuesArrM22[0],valuesArrM22[2],valuesArrM22[3])
         loadResources(valuesArrM22[0]);
-        showElectricalData(dataObject);
+        showElectricalData(m22Object);
         showElectricalPosition(valuesArrM22[2]);
         showShaftInfo(valuesArrM22[3]);
     } else resourcesBool = false;
     utilsM22.showHideJs(resourcesBool,"resourcesM22D");
 }
-function showPartNumbers(dataObject,specNumber,electricalPosition,shaftMounting){
-    let milType = utilsM22.insert(specNumber + dataObject.milType, 6, "-");
+// onchange
+function populateResistanceM22(specNumber){
+    const specList = document.getElementById("specificationM22");
+    const resistanceList = document.getElementById("resistanceM22");
+    let selectedValue =  specList.options[specList.selectedIndex].value;
+    for(let j=resistanceList.options.length-1; j>=1; j--){
+        resistanceList.remove(j);
+    }
+    let dropdownOptions = utilsM22.getDropDownValues(specNumber,"milType");
+    if(dropdownOptions){
+        for(let i=0; i<dropdownOptions.length; i++){
+            let value = new Option(dropdownOptions[i],dropdownOptions[i]);
+            resistanceList.options.add(value);
+        }
+    }
+}
+const populateShaftData = (function(){
+    const shaftMountingList = document.getElementById("shaftMountingM22");
+    let dropdownOptions = utilsM22.getDropDownValues("shaftDataArr","symbol");
+    console.log(dropdownOptions);
+    if(dropdownOptions){
+        for(let i=0; i<dropdownOptions.length; i++){
+            let value = new Option(dropdownOptions[i],dropdownOptions[i]);
+            shaftMountingList.options.add(value);
+        }
+    }
+})();
+window.onload = populateShaftData;
+function showPartNumbers(m22Object,specNumber,electricalPosition,shaftMounting){
+    let milType = utilsM22.insert(specNumber + m22Object.milType, 6, "-");
     $("#showPartNumberM22").val(milType + electricalPosition + shaftMounting);
-    $("#showRpNumberM22").val(utilsM22.insert(dataObject.rpNumber, 4, electricalPosition + shaftMounting));
+    $("#showRpNumberM22").val(utilsM22.insert(m22Object.rpNumber, 4, electricalPosition + shaftMounting));
 }
 function loadResources(specNumber){
     const specNumberNoDash = specNumber.replace("/","");
@@ -26,19 +55,13 @@ function loadResources(specNumber){
     $("#fancyboxDiagramM22").attr('href', fancyboxPictureLink,true);
     $("#specSheetLinkM22").attr("href", specSheetLink);
 }
-// triggered by onchange event
-function populateResistanceDropDown(specNumber) {
-    if(specNumber===""||specNumber==="M22/03"||specNumber==="M22/05") utilsM22.resetDynamicDropDown("#resistanceM22");
-    // doesn't trigger find method by empty spec number
-    if(specNumber!="") utilsM22.populateDropDown(specNumber, "milType", "resistanceM22");
-}
-function showElectricalData(dataObject) {
+function showElectricalData(m22Object) {
     const displayElectricalId = ["#showResistanceM22","#showAmperageM22"];
     let counter = 0;
-    for(let i in dataObject){
+    for(let i in m22Object){
         if(i==="milType"||i==="rpNumber") {
             ;
-        } else $(displayElectricalId[counter++]).val(dataObject[i]);
+        } else $(displayElectricalId[counter++]).val(m22Object[i]);
     }
 }
 function showElectricalPosition(electricalPosition) {
@@ -52,17 +75,17 @@ function showElectricalPosition(electricalPosition) {
 }
 function showShaftInfo(shaftMounting) {
     const displayShaftID = ["#showShaftStyleM22", "#showBushingStyleM22", "#showShaftLengthM22", "#showShaftDiameterM22"];
-    let dataObject = utilsM22.getDataFromStorage("shaftDataArr",shaftMounting,"symbol");
+    let m22Object = utilsM22.getObject("shaftDataArr",shaftMounting,"symbol");
     let counter = 0;
-    for(let i in dataObject){
+    for(let i in m22Object){
         if(i==="symbol") {
             ;//nop
-        } else $(displayShaftID[counter++]).val(dataObject[i]);
+        } else $(displayShaftID[counter++]).val(m22Object[i]);
     }//BADNEW;-)       
 }   
 const resetAppM22 = (function () {
     //populate shaft drop down
-    utilsM22.populateDropDown("shaftDataArr", "symbol", "shaftMountingM22");
+    // utilsM22.populateDropDown("shaftDataArr", "symbol", "shaftMountingM22");
     $("#specificationM22").change(function () {
         let resetDropDownVal = $("#specificationM22").val();
         if (resetDropDownVal == "") utilsM22.resetFedCon("#formM22","resourcesM22D");

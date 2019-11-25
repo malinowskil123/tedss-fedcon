@@ -43,22 +43,26 @@ class Utils{
         }
         return result;
     }
-    getObject(tableKey,rowKey,matchProperty) {
+    getObject(tableKey,rowKey,matchObjectProperty) {
         if(tableKey==="")return null;
         let tempArr = tables[tableKey];
         for (let i in tempArr) {
-            if (tempArr[i][matchProperty]===rowKey)return tempArr[i];
+            if (tempArr[i][matchObjectProperty]===rowKey)return tempArr[i];
         }
         return null;
     }
-    getDropDownValues(tableKey,matchProperty) {
+    getDropDownValues(tableKey,matchObjectProperty) {
         if(tableKey==="") return null;
         let dropdownVal =[];
         let tempArr = tables[tableKey];
-        for(let i=0; i<tempArr.length; i++){
-            dropdownVal[i] = tempArr[i][matchProperty];
+        try{
+            for(let i=0; i<tempArr.length; i++){
+                dropdownVal[i] = tempArr[i][matchObjectProperty];
+            }
+            return dropdownVal;
+        } catch(err){
+            console.log(err);
         }
-        return dropdownVal;
     }
     // Tedss
     resetAppTedss(formId,elementId){
