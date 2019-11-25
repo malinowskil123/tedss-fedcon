@@ -28,24 +28,24 @@ function loadValuesDropDown(series){
         }
     }
 }
-function displayTechnicalData(partNumberDataObject){
+function displayTechnicalData(littleFuseData){
     const tableId = ["#amperageRating","#maxVoltage","#interruptingRating","#action","#application"];
     let counter = 0;
-    for(let i in partNumberDataObject){
+    for(let i in littleFuseData){
         if(i==="amperageRating"||i==="maxVoltage"||i==="interruptingRating"||i==="action"||i==="application") {
-            if(i==="amperageRating") $(tableId[counter++]).text(partNumberDataObject[i]+"A");
-            else if(i==="maxVoltage") $(tableId[counter++]).text(partNumberDataObject[i]+"V")
-            else $(tableId[counter++]).text(partNumberDataObject[i]);
+            if(i==="amperageRating") $(tableId[counter++]).text(littleFuseData[i]+"A");
+            else if(i==="maxVoltage") $(tableId[counter++]).text(littleFuseData[i]+"V")
+            else $(tableId[counter++]).text(littleFuseData[i]);
         } else ;
     }  
 }
-function displayRating(partNumberDataObject){
+function displayRating(littleFuseData){
     const tableId = ["#rcLogo","#csaLogo","#pseLogo"];
     let counter = 0;
-    for(let i in partNumberDataObject){
+    for(let i in littleFuseData){
         if(i==="rcRating"||i==="csaRating"||i==="pseRating"){
-            if(partNumberDataObject[i]===false) $(tableId[counter++]).hide("slow");
-            if(partNumberDataObject[i]===true) $(tableId[counter++]).show("fast");
+            if(littleFuseData[i]===false) $(tableId[counter++]).hide("slow");
+            if(littleFuseData[i]===true) $(tableId[counter++]).show("fast");
         } else ;
     }  
 }
@@ -64,10 +64,19 @@ function displayAlternatePn(littleFuseData,littleFusePn){
         }
     }
 }
-// work here
-// function resourcesLayout(){
-//     const divId = ["divBelFuse","divBussmann"];
-// }
+function getDataSheetFileName(series){
+    if(series==="251"||series==="253") series="251-253";
+    else if(series==="265"||series==="266"||series==="267") series="265-266-267"
+    return  series+"Series";
+}
+// onchange
+function loadDataSheet(manufacturer,series,ampCode){
+    let partNumber = series+ampCode;
+    // let fileName = (manufacturer==="littlefuse")?getDataSheetExt(series):
+    //     (manufacturer==="belfuse") getDataSheetFileName() : ;
+    let path = `/tedss/content/picoFuseData/${fileName}.pdf`;
+    console.log(path)
+}
 const reset = (function(){
     $("#series").change(function(){
         let resetDropDownVal = $("#series").val();

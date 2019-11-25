@@ -8,7 +8,7 @@ function validateM39015(){
     let displayBool = (valuesArr.includes(""))? false : true;
     utilsM39015.showHideJs(displayBool,"resources");
 }
-//onchange trigger
+//onchange
 function populateResistanceM39015() {
     let terminals = {};
         terminals["RT12"] = ["L","P","Y"];
@@ -41,10 +41,14 @@ function populateResistanceM39015() {
 }
 function validateResistance(resistance){
     const resistanceInputTest = new RegExp(/^([\d]{3})$/);
+    // resistance!=="" don't trigger on empty string
+    // add condition if code not part of table show popup
     if(resistanceInputTest.test(resistance)!==true&&resistance!==""){
-        const popup = (function(){
-            $("#popupText").text(`Incorrect Resistance Code "${resistance}"`);
+        (function(){
             utilsM39015.showHideJs(true,"popup");
+            // add function to change resistance table img
+            let msg = (resistance.length>3)? "Resistance Code Too Long!" : `Incorrect Resistance Code "${resistance}"`;
+            $("#popupText").text(msg);
             $('body').css("overflow","hidden");
             const popupArea = document.getElementById("popup");
             $(window).click(function(event){

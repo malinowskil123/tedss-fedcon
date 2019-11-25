@@ -163,7 +163,7 @@
                             <div class="pl-2 pr-2">
                                 <div class="row">
                                     <div class="col-md-6">
-                                        <label for="littleFusePn">LittleFuse</label>
+                                        <label for="littleFusePn"><strong>OLD</strong> LittleFuse</label>
                                         <!-- hidden -->
                                         <input id="littleFusePn" class="form-control" disabled>
                                         <div id="divBelfuse" class="hidden">
@@ -177,15 +177,15 @@
                                     </div>
                                     <div class="col-md-6">
                                         <label for="">Data Sheet</label>
-                                        <select id="" class="form-control" onchange="">
+                                        <select id="dataSheetDropDown" class="form-control" onchange="loadDataSheet(dataSheetDropDown.value,series.value,ampCode)">
                                             <option value="">Select Data Sheet</option>
-                                            <option id="littleFuseDataSheet" value="">LittleFuse</option>
+                                            <option id="littleFuseDataSheet" value="littlefuse">LittleFuse</option>
                                             <option value="belfuse">BelFuse</option>
                                             <option value="bussmann">Bussmann</option>
                                         </select>
                                         <div class="text-center">
-                                            <a id="terminalImgButton" href="#" class="fancybox"><input type="button" value="Data Sheet" class="btn btn-lg btn-dark mt-2 mt-md-3"></a>
-                                            <a id="terminalImgButton" href="#" class="fancybox"><input type="button" value="Terminal" class="btn btn-lg btn btn-dark mt-2 mt-md-3"></a>
+                                            <a id="dataSheet" href="" class="fancybox"><input type="button" value="Data Sheet" class="btn btn-lg btn-dark mt-2 mt-md-3"></a>
+                                            <a id="terminal" href="#" class="fancybox"><input type="button" value="Terminal" class="btn btn-lg btn btn-dark mt-2 mt-md-3"></a>
                                         </div>
                                     </div>
                                 </div>

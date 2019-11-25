@@ -17,9 +17,12 @@
     <div id="popupMilF19207" class="popup container-popup hidden">
         <div class="popup-content">
             <div class="popup-header">
-                <h2>Incorrect Part Number!</h2>
+                <h2>Incorrect Part Number</h2>
             </div>
-            <div class="popup-body"><p>Please Try Again.</p></div>
+            <div class="popup-body text-center">
+                <p id="popupText"></p>
+                <p>Please Try Again.</p>
+            </div>
         </div>
     </div>
     <div class="jumbotron text-center">
@@ -100,7 +103,7 @@
                             <div class="text-center">
                                 <input type="text" id="partNumberMilF19207" class="form-control" placeholder="FHL10U">    
                                 <div class="div-parent"><input id="submitMilF19207" type="button" value="Submit" class="btn button-color btn-lg div-child" 
-                                    onclick="validateMilF19207(partNumberMilF19207.value.replace('-','').toUpperCase());">
+                                    onclick="validateMilF19207(partNumberMilF19207.value);">
                                 </div>
                             </div>
                         </div>

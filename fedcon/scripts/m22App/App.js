@@ -5,7 +5,6 @@ function validateM22() {
     let resourcesBool;
     if (valuesArrM22.includes("") !== true) {
         let m22Object = utilsM22.getObject(valuesArrM22[0],valuesArrM22[1],"milType");
-        console.log(m22Object);
         resourcesBool = true;
         showPartNumbers(m22Object,valuesArrM22[0],valuesArrM22[2],valuesArrM22[3])
         loadResources(valuesArrM22[0]);
@@ -34,7 +33,6 @@ function populateResistanceM22(specNumber){
 const populateShaftData = (function(){
     const shaftMountingList = document.getElementById("shaftMountingM22");
     let dropdownOptions = utilsM22.getDropDownValues("shaftDataArr","symbol");
-    console.log(dropdownOptions);
     if(dropdownOptions){
         for(let i=0; i<dropdownOptions.length; i++){
             let value = new Option(dropdownOptions[i],dropdownOptions[i]);
@@ -84,11 +82,9 @@ function showShaftInfo(shaftMounting) {
     }//BADNEW;-)       
 }   
 const resetAppM22 = (function () {
-    //populate shaft drop down
-    // utilsM22.populateDropDown("shaftDataArr", "symbol", "shaftMountingM22");
     $("#specificationM22").change(function () {
         let resetDropDownVal = $("#specificationM22").val();
-        if (resetDropDownVal == "") utilsM22.resetFedCon("#formM22","resourcesM22D");
+        if (resetDropDownVal == "") utilsM22.resetFedCon("formM22","resourcesM22D");
     });
     $("#resetM22").click(function () {
         utilsM22.resetFedCon("formM22","resourcesM22D");

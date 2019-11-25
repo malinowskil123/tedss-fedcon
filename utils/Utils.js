@@ -83,6 +83,7 @@ class Utils{
     }
     //add new code here
 }
+// fedcon
 class M22DataSpecs {
     constructor(milType,rpNumber,resistance,maxAmperage) {
         this.milType = milType;
@@ -119,6 +120,7 @@ class MilF19207{
         this.maxPanelThickness = maxPanelThickness;
     }
 }
+// tedss
 class OrangeDropTerminal {
     constructor(typeCaseCode,length,terminalA,terminalB,terminalD) {
         this.typeCaseCode = typeCaseCode;

@@ -1,9 +1,12 @@
 const utilsMilF19207 = new Utils();
 function validateMilF19207(partNumber) {
-    let partNumberDataObject = utilsMilF19207.getObject("milFuseHolderArr", partNumber, "governmentDesignation");
-    if (partNumberDataObject == null) {
+    partNumber = formatPartNumber(partNumber);
+    let fuseHolderObject = utilsMilF19207.getObject("milFuseHolderArr", partNumber, "governmentDesignation");
+    if (fuseHolderObject == null) {
         (function () {
             utilsMilF19207.showHideJs(true, "popupMilF19207");
+            let msg = (partNumber.length>=8)? "Part Number Too Long!" : `Incorrect Part Number "${partNumber}"`;
+            $("#popupText").text(msg);
             $('body').css("overflow", "hidden");
             const popupArea = document.getElementById("popupMilF19207");
             $(window).click(function (event) {
@@ -15,12 +18,20 @@ function validateMilF19207(partNumber) {
         })();
     } else {
         utilsMilF19207.showHideJs(true, "resourcesMilF19207");
-        displayTableMilF19207(partNumberDataObject);
+        displayTableMilF19207(fuseHolderObject);
         displayPartNumberBreakdownMilF19207(partNumber);
-        loadResourcesMilF19207(partNumberDataObject);
+        loadResourcesMilF19207(fuseHolderObject);
     }
 }
-function displayTableMilF19207(partNumberDataObject){
+function formatPartNumber(partNumber){
+    while(partNumber.includes("-")){
+        partNumber = partNumber.replace('-','');
+    }
+    partNumber = partNumber.toUpperCase()
+    $("#partNumberMilF19207").val(partNumber); 
+    return partNumber;
+};
+function displayTableMilF19207(fuseHolderObject){
     const tableIdMilF19207 = [
         "#militarySpecification",
         "#governmentDesignation",
@@ -36,12 +47,12 @@ function displayTableMilF19207(partNumberDataObject){
        utilsMilF19207.clearText(tableIdMilF19207);
     });
     let counter = 0;
-    for(let i in partNumberDataObject){
-       $(tableIdMilF19207[counter++]).text(partNumberDataObject[i]);
+    for(let i in fuseHolderObject){
+       $(tableIdMilF19207[counter++]).text(fuseHolderObject[i]);
     }  
 }
-function loadResourcesMilF19207(partNumberDataObject) {
-    let imgFileName = utilsMilF19207.remove(partNumberDataObject.militarySpecification,12);
+function loadResourcesMilF19207(fuseHolderObject) {
+    let imgFileName = utilsMilF19207.remove(fuseHolderObject.militarySpecification,12);
     let imgPath = `/fedcon/content/images/fuseHolders/${imgFileName}.jpg`;
     $("#diagramMilF19207").attr("href",imgPath);
 }
