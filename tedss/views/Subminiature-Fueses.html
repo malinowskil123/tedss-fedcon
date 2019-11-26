@@ -163,28 +163,27 @@
                             <div class="pl-2 pr-2">
                                 <div class="row">
                                     <div class="col-md-6">
-                                        <label for="littleFusePn"><strong>OLD</strong> LittleFuse</label>
-                                        <!-- hidden -->
-                                        <input id="littleFusePn" class="form-control" disabled>
+                                        <label for="littlefusePn"><strong>OLD</strong> LittleFuse</label>
+                                        <input id="littlefusePn" class="form-control" disabled>
                                         <div id="divBelfuse" class="hidden">
                                             <label for="belfusePn">Belfuse</label>
                                             <input id="belfusePn" class="form-control" disabled>
                                         </div>
                                         <div id="divBussmann" class="hidden">
-                                            <label for="bussmanPn">Bussmann</label>
-                                            <input id="bussmanPn" class="form-control" disabled>
+                                            <label for="bussmannPn">Bussmann</label>
+                                            <input id="bussmannPn" class="form-control" disabled>
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <label for="">Data Sheet</label>
-                                        <select id="dataSheetDropDown" class="form-control" onchange="loadDataSheet(dataSheetDropDown.value,series.value,ampCode)">
+                                        <select id="dataSheetDropDown" class="form-control" onchange="loadDataSheet(dataSheetDropDown.value);">
                                             <option value="">Select Data Sheet</option>
-                                            <option id="littleFuseDataSheet" value="littlefuse">LittleFuse</option>
-                                            <option value="belfuse">BelFuse</option>
-                                            <option value="bussmann">Bussmann</option>
+                                            <option value="littlefuse">LittleFuse</option>
+                                            <option id="belfuseOption" class="hidden" value="belfuse">BelFuse</option>
+                                            <option id="bussmannOption" class="hidden" value="bussmann">Bussmann</option>
                                         </select>
                                         <div class="text-center">
-                                            <a id="dataSheet" href="" class="fancybox"><input type="button" value="Data Sheet" class="btn btn-lg btn-dark mt-2 mt-md-3"></a>
+                                            <a id="dataSheet" href="" alt="datasheet link" target="_blank"><input type="button" value="Data Sheet" class="btn btn-lg btn-dark mt-2 mt-md-3"></a>
                                             <a id="terminal" href="#" class="fancybox"><input type="button" value="Terminal" class="btn btn-lg btn btn-dark mt-2 mt-md-3"></a>
                                         </div>
                                     </div>

@@ -8,6 +8,7 @@ function validate(){
         displayTechnicalData(littleFuseData);
         displayRating(littleFuseData);
         displayAlternatePn(littleFuseData,valuesArr.join(""));
+        toggleDataSheetOptions();
         displayBool = true;
     } else  displayBool = false;
     picoUtils.showHideJquery(displayBool,"#resourcesPicoApp");
@@ -53,9 +54,9 @@ function displayAlternatePn(littleFuseData,littleFusePn){
     if(littleFuseData!==null){
         const divId = ["#divBelfuse","#divBussmann"];
         const alternatePn = [belfuseConversion(littleFuseData),bussmannConversion(littleFuseData)];
-        $("#littleFusePn").val(littleFusePn);
+        $("#littlefusePn").val(littleFusePn);
         $("#belfusePn").val(belfuseConversion(littleFuseData));
-        $("#bussmanPn").val(bussmannConversion(littleFuseData));
+        $("#bussmannPn").val(bussmannConversion(littleFuseData));
         let displayBool;
         for(let i=0; i<alternatePn.length; i++){
             if(alternatePn[i]===null) displayBool = false;
@@ -64,19 +65,35 @@ function displayAlternatePn(littleFuseData,littleFusePn){
         }
     }
 }
+// onchange
+function loadDataSheet(manufacturer){
+    const pnObject = [$("#belfusePn").val(),$("#bussmannPn").val(),$("#littlefusePn").val()];
+    let series;
+    if(manufacturer==="littlefuse") series = pnObject[2].substring(0,3);
+    else if (manufacturer==="belfuse") series = pnObject[0].substring(0,2);
+    else if (manufacturer==="bussmann") series = pnObject[1].substring(0,4);
+    let dataSheetPath = `/tedss/content/picoFuseData/${getDataSheetFileName(series.toLowerCase())}.pdf`;
+    $("#dataSheet").attr("href",dataSheetPath);
+}
+// work here-----------------
+function toggleDataSheetOptions(){
+    const pnObject = [$("#belfusePn").val(),$("#bussmannPn").val(),$("#littlefusePn").val()];
+    const optionsId = ["#belfuseOption","#bussmannOption"];
+    let displayBool,counter=0;
+    for(let i=0;i<pnObject.length-1;i++){
+        if(pnObject[i]!=="") displayBool=true;
+        else displayBool=false;
+        picoUtils.showHideJquery(displayBool,optionsId[counter++])
+    }
+}
 function getDataSheetFileName(series){
     if(series==="251"||series==="253") series="251-253";
     else if(series==="265"||series==="266"||series==="267") series="265-266-267"
     return  series+"Series";
 }
-// onchange
-function loadDataSheet(manufacturer,series,ampCode){
-    let partNumber = series+ampCode;
-    // let fileName = (manufacturer==="littlefuse")?getDataSheetExt(series):
-    //     (manufacturer==="belfuse") getDataSheetFileName() : ;
-    let path = `/tedss/content/picoFuseData/${fileName}.pdf`;
-    console.log(path)
-}
+// function loadImg(){
+
+// }
 const reset = (function(){
     $("#series").change(function(){
         let resetDropDownVal = $("#series").val();
