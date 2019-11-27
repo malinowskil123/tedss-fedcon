@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Subminiature Fuses</title>
-    <!-- Change -->
     <meta name="description" content="Learn more about subminiature fuses"/>        
     <meta name="keywords" content=""/>    
     <link href="/tedss/content/images/favicon.ico" rel="shortcut icon" type="image/x-icon" />
@@ -67,7 +66,17 @@
                     </li>
                 </ul>
             </div>
-        </nav>        
+        </nav>
+        <div id="popup" class="popup container-popup hidden">
+            <div class="popup-content">
+                <div class="popup-header">
+                    <h2>Incorrect Data Sheet</h2>
+                </div>
+                <div class="popup-body text-center">
+                    <p>Please select a manufacturer from the dropdown and click on the data sheet button to view it.</p>
+                </div>
+            </div>
+        </div>        
         <div class="framedArea my-2">
             <div class="lightColorBar mx-2 mt-1 pl-3 text-center text-center"><h1>Mosfet</h1></div>
             <div class="breadCrumbs text-uppercase mx-3 mt-2"><a href="/">HOME</a> > <a href="/LearnMore">RESOURCES</a> > Subminiature Fuses</div>
@@ -85,7 +94,6 @@
                         <select id="series" class="form-control" onchange="loadValuesDropDown(series.value);validate();">
                             <option value="">Select Series</option>
                             <option value="251">0251</option>
-                            <option value="253">0253</option>
                             <option value="253">0253</option>
                             <option value="265">0265</option>
                             <option value="266">0266</option>
@@ -175,15 +183,19 @@
                                         </div>
                                     </div>
                                     <div class="col-md-6">
-                                        <label for="">Data Sheet</label>
-                                        <select id="dataSheetDropDown" class="form-control" onchange="loadDataSheet(dataSheetDropDown.value);">
-                                            <option value="">Select Data Sheet</option>
-                                            <option value="littlefuse">LittleFuse</option>
-                                            <option id="belfuseOption" class="hidden" value="belfuse">BelFuse</option>
-                                            <option id="bussmannOption" class="hidden" value="bussmann">Bussmann</option>
-                                        </select>
+                                       <div id="divDataSheet" class="hidden">
+                                            <label for="dataSheetDropDown">Data Sheet</label>
+                                            <select id="dataSheetDropDown" class="form-control">
+                                                <option value="">Select Data Sheet</option>
+                                                <option value="littlefuse">LittleFuse</option>
+                                                <option id="belfuseOption" class="hidden" value="belfuse">BelFuse</option>
+                                                <option id="bussmannOption" class="hidden" value="bussmann">Bussmann</option>
+                                            </select>
+                                       </div>
                                         <div class="text-center">
-                                            <a id="dataSheet" href="" alt="datasheet link" target="_blank"><input type="button" value="Data Sheet" class="btn btn-lg btn-dark mt-2 mt-md-3"></a>
+                                            <a id="dataSheet" href="#" alt="datasheet link" target="_blank" onclick="loadDataSheet(dataSheetDropDown.value);">
+                                                <input type="button" value="Data Sheet" class="btn btn-lg btn-dark mt-2 mt-md-3">
+                                            </a>
                                             <a id="terminal" href="#" class="fancybox"><input type="button" value="Terminal" class="btn btn-lg btn btn-dark mt-2 mt-md-3"></a>
                                         </div>
                                     </div>
