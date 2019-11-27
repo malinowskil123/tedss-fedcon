@@ -2,26 +2,28 @@ const utilsMilF19207 = new Utils();
 function validateMilF19207(partNumber) {
     partNumber = formatPartNumber(partNumber);
     let fuseHolderObject = utilsMilF19207.getObject("milFuseHolderArr", partNumber, "governmentDesignation");
-    if (fuseHolderObject == null) {
+    let displayBool;
+    if (fuseHolderObject===null) {
         (function () {
-            utilsMilF19207.showHideJs(true, "popupMilF19207");
-            let msg = (partNumber.length>=8)? "Part Number Too Long!" : `Incorrect Part Number "${partNumber}"`;
-            $("#popupText").text(msg);
+            displayBool = false
+            utilsMilF19207.showHideJs(true,"popupMilF19207");
+            $("#popupText").text(function(){return (partNumber.length>=8)? "Part Number Too Long!" : `Incorrect Part Number "${partNumber}"`});
             $('body').css("overflow", "hidden");
             const popupArea = document.getElementById("popupMilF19207");
             $(window).click(function (event) {
                 if (event.target == popupArea) {
-                    utilsMilF19207.showHideJs(false, "popupMilF19207");
+                    utilsMilF19207.showHideJs(false,"popupMilF19207");
                     $('body').css("overflow", "visible");
                 }
             });
         })();
     } else {
-        utilsMilF19207.showHideJs(true, "resourcesMilF19207");
+        displayBool = true;
         displayTableMilF19207(fuseHolderObject);
         displayPartNumberBreakdownMilF19207(partNumber);
         loadResourcesMilF19207(fuseHolderObject);
     }
+    utilsMilF19207.showHideJs(displayBool,"resourcesMilF19207");
 }
 function formatPartNumber(partNumber){
     while(partNumber.includes("-")){
@@ -52,9 +54,10 @@ function displayTableMilF19207(fuseHolderObject){
     }  
 }
 function loadResourcesMilF19207(fuseHolderObject) {
-    let imgFileName = utilsMilF19207.remove(fuseHolderObject.militarySpecification,12);
-    let imgPath = `/fedcon/content/images/fuseHolders/${imgFileName}.jpg`;
-    $("#diagramMilF19207").attr("href",imgPath);
+    $("#diagramMilF19207").attr("href", function () {
+        let imgFileName = utilsMilF19207.remove(fuseHolderObject.militarySpecification, 12);
+        return `/fedcon/content/images/fuseHolders/${imgFileName}.jpg`;
+    });
 }
 function displayPartNumberBreakdownMilF19207(partNumber) {
     const partNumberIdMilF19207 = ["#characteristic", "#construction", "#enclosure", "#style"]

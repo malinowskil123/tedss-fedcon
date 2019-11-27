@@ -2,10 +2,18 @@ const utilsM39015 = new Utils();
 function validateM39015(){
     const dropDownId = ["#style","#terminal","#resistance","#failureRate"];
     let valuesArr = utilsM39015.getSelectedFields(dropDownId);
-    validateResistance(valuesArr[2]);
     if(!hideFailureRate(valuesArr[0]))valuesArr[3]=null;
-    displayData(valuesArr);
-    let displayBool = (valuesArr.includes(""))? false : true;
+    let displayBool;
+    if(valuesArr.includes("")===false){
+        let resistanceInputValidation = validateResistance(valuesArr[0],valuesArr[2]);
+        if(resistanceInputValidation===false) {
+            valuesArr[2]=""
+            displayBool = false;
+        } else {
+            displayData(valuesArr);
+            displayBool = true;
+        }
+    } else displayBool = false;
     utilsM39015.showHideJs(displayBool,"resources");
 }
 //onchange
@@ -39,16 +47,14 @@ function populateResistanceM39015() {
         }
     }
 }
-function validateResistance(resistance){
-    const resistanceInputTest = new RegExp(/^([\d]{3})$/);
-    // resistance!=="" don't trigger on empty string
-    // add condition if code not part of table show popup
-    if(resistanceInputTest.test(resistance)!==true&&resistance!==""){
+function validateResistance(style,resistance){
+    style = (style.substring(0,2)==="RJ")? style ="RJ" : style;
+    let resistanceCheck = checkResistanceTable(style,resistance);
+    if(resistanceCheck===false){
         (function(){
             utilsM39015.showHideJs(true,"popup");
-            // add function to change resistance table img
-            let msg = (resistance.length>3)? "Resistance Code Too Long!" : `Incorrect Resistance Code "${resistance}"`;
-            $("#popupText").text(msg);
+            $("#popupText").text(function(){return (resistance.length>3)? "Resistance Code Too Long!" : `Incorrect Resistance Code "${resistance}"`;});
+            $("#popupImg").attr("src",function(){return `/fedcon/content/images/trimPots/resistanceTables/resistance${style}.png`;});
             $('body').css("overflow","hidden");
             const popupArea = document.getElementById("popup");
             $(window).click(function(event){
@@ -58,8 +64,19 @@ function validateResistance(resistance){
                 }
             });
         })();
-        $("#resistance").val("");
-    }
+        return false
+    } else return true;
+}
+function checkResistanceTable(style,resistance){
+    const resistanceTable = {};
+    resistanceTable["RT12"] = ["100","200","500","101","201","501","102","202","502","103","203"];
+    resistanceTable["RT22"] = ["500","101","201","501","102","202","502","103","203"];
+    resistanceTable["RTR22"] = ["501","102","202","502","103","203"];
+    resistanceTable["RT24"] = ["100","200","500","101","201","501","102","202","502","103"];
+    resistanceTable["RTR24"] = ["501","102","202","502","103"];
+    resistanceTable["RT26"] = ["100","200","500","101","201","501","102","202","502"];
+    resistanceTable["RJ"] = ["100","200","500","101","201","501","102","202","502","103","253","503","104","204","254","504","105"];
+    return resistanceTable[style].includes(resistance);
 }
 function hideFailureRate(style){
     const divId = ["#divStyle","#divTerminal","#divResistance","#divFailureRate"];
@@ -107,14 +124,16 @@ function displayData(valuesArr){
     }
 }
 function loadResources(style,partNumber){
-    const rjRegEx = new RegExp(/(RJ[\d]{2})/);    
-    partNumber = (rjRegEx.test(style))? partNumber.substring(0,6): partNumber.substring(0,7);
-    let terminalDiagram = `/fedcon/content/images/trimPots/terminals/${partNumber}.png`;
-    $("#terminalDiagram").attr('href',terminalDiagram);
-    const styleRegEx = new RegExp(/(R[T,J][\d]{2})/);    
-    if(styleRegEx.test(style)) style = utilsM39015.insert(style,2,"R");
-    let specSheetLink = `/fedcon/content/specsheet/trimPots/${style}.pdf`;
-    $("#specSheetLink").attr("href", specSheetLink);
+    $("#terminalDiagram").attr('href',function(){
+        const rjRegEx = new RegExp(/(RJ[\d]{2})/);    
+        partNumber = (rjRegEx.test(style))? partNumber.substring(0,6): partNumber.substring(0,7);
+        return `/fedcon/content/images/trimPots/terminals/${partNumber}.png`;
+    });
+    $("#specSheetLink").attr("href", function(){
+        const styleRegEx = new RegExp(/(R[T,J][\d]{2})/);    
+        style = (styleRegEx.test(style))?utilsM39015.insert(style,2,"R") : style;
+        return `/fedcon/content/specsheet/trimPots/${style}.pdf`;
+    });
 }
 const resetAppTrimPot = (function () {
     $("#style").change(function () {
