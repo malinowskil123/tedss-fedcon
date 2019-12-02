@@ -1,6 +1,10 @@
+//move this into scripts----------------------------
+// const enablePopover = (function (){
+//     $('[data-toggle="popover"]').popover()
+// });
+// window.onload = enablePopover;
 class Utils{
     constructor() {};
-    // general
     getSelectedFields(dropDownIdArr,attr) {
         let selectedFieldsVal = [];
         if(attr==="text"){
@@ -64,13 +68,13 @@ class Utils{
             console.log(err);
         }
     }
-    // Tedss
+    // Tedss------------------------
     resetAppTedss(formId,elementId){
         $(formId)[0].reset();
         this.showHideJquery(false,elementId)
     }
     showHideJquery(reset,id) {(reset === true)? $(id).show("slow"):$(id).hide("slow");}
-    // FedCon
+    // FedCon-----------------------
     resetFedCon(formId,elementId,cssDisplay){
         document.getElementById(formId).reset();
         this.showHideJs(false,elementId,cssDisplay)
@@ -81,9 +85,9 @@ class Utils{
         (reset===true)? elm.classList.remove("hidden"):elm.classList.add("hidden");
         elm.style.display = (reset === true)? cssDisplay:"none";
     }
-    //add new code here
+    //add new code here-------------
 }
-// fedcon
+// FedCon-----------------------
 class M22DataSpecs {
     constructor(milType,rpNumber,resistance,maxAmperage) {
         this.milType = milType;
@@ -120,7 +124,7 @@ class MilF19207{
         this.maxPanelThickness = maxPanelThickness;
     }
 }
-// tedss
+// Tedss------------------------
 class OrangeDropTerminal {
     constructor(typeCaseCode,length,terminalA,terminalB,terminalD) {
         this.typeCaseCode = typeCaseCode;
@@ -152,12 +156,6 @@ class SubminiFuse{
         this.action = action;
     }
 }
-//move this into scripts----------------------------
-// const enablePopover = (function (){
-//     $('[data-toggle="popover"]').popover()
-// });
-// window.onload = enablePopover;
-
 tables = {
     //fedcon
     "AN3155-25" : [

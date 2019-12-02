@@ -8,7 +8,7 @@ function validate(){
         displayTechnicalData(littleFuseData);
         displayRating(littleFuseData);
         displayAlternatePn(littleFuseData,valuesArr.join(""));
-        toggleDataSheetOptions();
+        showHideDataSheetOptions();
         displayBool = true;
     } else  displayBool = false;
     picoUtils.showHideJquery(displayBool,"#resourcesPicoApp");
@@ -65,14 +65,14 @@ function displayAlternatePn(littleFuseData,littleFusePn){
         }
     }
 }
-// onclick work here
+// datasheet-------------------------
 function loadDataSheet(manufacturer){
     const pnArr = [$("#littlefusePn").val(),$("#belfusePn").val(),$("#bussmannPn").val()];
     $("#dataSheet").attr("href",function(){
         if(manufacturer===""&&pnArr[1]===""&&pnArr[2]===""){
-
-        }
-        else if(manufacturer===""){
+            activateLink();
+            return getDataSheetPath("littlefuse",pnArr);
+        } else if(manufacturer===""){
             popup();
             return deactivateLink();
         } else {
@@ -86,8 +86,7 @@ function deactivateLink(){
     $("#dataSheet").attr("target","_self");
     return "javascript:void(0);";
 }
-// work on this
-function toggleDataSheetOptions(){
+function showHideDataSheetOptions(){
     const pnArr = [$("#littlefusePn").val(),$("#belfusePn").val(),$("#bussmannPn").val()];
     const optionsId = ["#belfuseOption","#bussmannOption"];
     let displayBool,counter=0;
@@ -108,7 +107,10 @@ function getDataSheetPath(manufacturer,pnArr){
         return  prefix.toLowerCase();
     })();
     let fileName = (function(){
-        let dataSheet = (series==="251"||series==="253")? "251-253Series" : (series==="265"||series==="266"||series==="267") ? "265-266-267Series" : series+"Series";
+        let dataSheet;
+        if(series==="251"||series==="253") dataSheet="251-253Series";
+        else if(series==="265"||series==="266"||series==="267")dataSheet="265-266-267Series";
+        else dataSheet = series+"Series";
         return dataSheet;
     })();
     return `/tedss/content/picoFuseData/${fileName}.pdf`;
@@ -124,6 +126,7 @@ function popup(){
         }
     });
 }
+// datasheet-------------------------
 const reset = (function(){
     $("#series").change(function(){
         let resetDropDownVal = $("#series").val();
