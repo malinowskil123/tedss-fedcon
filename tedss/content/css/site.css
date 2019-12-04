@@ -4,7 +4,7 @@ body
     font-family: Verdana, Geneva, Tahoma, sans-serif;    
     font-weight: normal;
     /* fix path */
-    background: url('/images/bgr.png') repeat-x 0px 0px;
+    background: url('/tedss/content/images/bgr.png') repeat-x 0px 0px;
     font-size: 14px;
     color: #666666;
     background-color: #e7f2f8;
@@ -97,7 +97,7 @@ input[type=text]:hover, input[type=password]:hover, select:hover, textarea:hover
 -webkit-border-radius: 5px;
 -moz-border-radius: 5px;
 /* fix path */
-  background:#ecf5f9 url('images/searchBgr.png') repeat-x 0px 0px;
+  background:#ecf5f9 url('/tedss/content/images/searchBgr.png') repeat-x 0px 0px;
 }
 /*Set some basic padding to keep content from hitting the edges*/
 .body-content 
@@ -136,7 +136,7 @@ input[type=text]:hover, input[type=password]:hover, select:hover, textarea:hover
   border-radius: 5px;
   -webkit-border-radius: 5px;
   -moz-border-radius: 5px;
-  background: url('images/searchBgr.png') repeat-x 0px 0px;
+  background: url('/tedss/content/images/searchBgr.png') repeat-x 0px 0px;
   background-color:#e7f2f8;
   box-shadow: 0 3px 5px 0 #d4e4f3;
   -webkit-box-shadow: 0 3px 5px 0 #d4e4f3;
@@ -156,7 +156,7 @@ input[type=text]:hover, input[type=password]:hover, select:hover, textarea:hover
   border-radius: 5px;
 	-webkit-border-radius: 5px;
 	-moz-border-radius: 5px;
-	background: url('images/searchBgr.png') repeat-x 0px 0px;
+	background: url('/tedss/content/images/searchBgr.png') repeat-x 0px 0px;
 	box-shadow: 0 3px 5px 0 #d4e4f3;
   -webkit-box-shadow: 0 3px 5px 0 #d4e4f3;
   font-family:NovecentowideBookRegular;
@@ -170,7 +170,7 @@ input[type=text]:hover, input[type=password]:hover, select:hover, textarea:hover
   border-radius: 5px;
   -webkit-border-radius: 5px;
   -moz-border-radius: 5px;
-  background: url(images/searchBgr.png) repeat-x 0px 0px;
+  background: url(/tedss/content/images/searchBgr.png) repeat-x 0px 0px;
   text-transform: uppercase;
   padding: 5px 0 5px 15px;
   margin: 3px 0 1px 0;
@@ -315,12 +315,11 @@ form label {white-space: nowrap; margin-bottom: 0.1rem; font-size: 0.8rem; text-
 /* Extra large devices (large desktops, 1200px and up) */
 @media (min-width: 1200px) { #mainMenu li {margin-right: 17px; font-size: 1.3em;}    
 }  
-
+x
 #inventoryBoxLineHeight {line-height: 2em}
 .hidden{
   display: none;
 }
-
 .popup {
   position: fixed;
   z-index: 1;
@@ -333,7 +332,6 @@ form label {white-space: nowrap; margin-bottom: 0.1rem; font-size: 0.8rem; text-
   background-color: rgb(0,0,0);
   background-color: rgba(0,0,0,0.4);
 }
-
 .popup-content {
   position: relative;
   background-color: #fefefe;
@@ -343,26 +341,21 @@ form label {white-space: nowrap; margin-bottom: 0.1rem; font-size: 0.8rem; text-
   width: 80%;
   box-shadow: 0 4px 8px 0 rgba(0,0,0,0.4),0 6px 20px 0 rgba(0,0,0,0.19);
 }
-
 @media only screen and (min-width: 992px) {
   .popup-content {
       width: 55%;
   }
 }
-
 .popup-header {
   padding: 2px 16px;
   background-color: #007BFF;
 }
-
 .popup-header h2 {
   color: #ffffff !important;
 }
-
 .popup-body {
   padding: 25px 16px;
 }
-
 .popup-content p {
   font-size: 20px;
 }

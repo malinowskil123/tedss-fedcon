@@ -80,20 +80,35 @@
         <div class="framedArea my-2">
             <div class="lightColorBar mx-2 mt-1 pl-3 text-center text-center"><h1>Pico Fuses</h1></div>
             <div class="breadCrumbs text-uppercase mx-3 mt-2"><a href="/">HOME</a> > <a href="/LearnMore">RESOURCES</a> > Subminiature/Pico Fuses</div>
+            <div class="col-sm-4 offset-sm-4">
+                <img src="/tedss/content/picoFuseData/logos/littelfuse-logo.png" alt="LittelFuse Logo" class="img-fluid">
+            </div>
         </div>
         <div class="framedArea my-2">              
             <div class="mx-2 mt-2 mx-md-3 mt-md-3 text-center"><h2>What is a Subminiature/Pico Fuse?</h2></div>
             <p class="m-2 ml-md-4">
-                The term Pico Fuse is trademarked by LittleFuse and it has become synonymous with subminiature fuse so much so that for the most part people refer to subminiature fuses as Pico Fuses.
-                A Pico fuse is a subminiature axial leaded fuse.
-                The only series from the Pico fuse line that comes with radial leads is 266 series which comes with bent leads from the factory but other than that it’s identical to the 265 series. 
-                Pico fuse are available in time lag, fast acting, and very fast action function types. 
+                A Pico fuse is a subminiature axial leaded fuse designed for <strong>PCB</strong>(Printed Circuit Board) use.
+                The term Pico Fuse is trademarked by LittelFuse and it has become synonymous with subminiature fuses so much so that for the most part people refer to subminiature fuses as Pico Fuses. 
+                The most common lead style for Pico Fuses is axial although LittelFuse does manufacturer a radial leaded version that comes with bent leads from the factory <strong>(266 Series)</strong>. 
+                Any Pico fuse can made into a radial leaded fuse by simply bending the leads downward.
+                Pico fuse are available in time lag, fast acting, and very fast acting function types. 
                 The standard voltage range for Pico fuses ranges from 32VAC all the way up to 250VAC. 
                 However the most commonly used part numbers are rated at 125VAC. 
-                A few select Pico fuse series are QPL approved for military and government use like the 253 and 267 series. 
-                Bussmann and BelFuse both offer alternatives to Pico Fuses, 
-                you can use our part number breakdown app below to cross reference LittleFuse part numbers to Bussmann and BelFuse part numbers.
+                A few select Pico fuse series are QPL approved for military and government use like the <strong>253</strong> and <strong>267</strong> series. 
+                Bussmann and BelFuse both offer an alternative part numbers to Pico Fuses, 
+                you can use our part number breakdown app below to cross reference LittelFuse part numbers to Bussmann and BelFuse part numbers.
             </p>
+            <div class="row text-center">
+                <div class="col-md-6">
+                    <img src="/tedss/content/picoFuseData/picoLeads/picoAxial.jpg" alt="Pico Fuse Axial" class="img-fluid">
+                    <h5>Axial</h5>
+                </div>
+                <div class="col-md-6">
+                    <img src="/tedss/content/picoFuseData/picoLeads/picoRadial.jpg" alt="Pico Fuse Radial" class="img-fluid">
+                    <h5>Radial</h5>
+                    <p><strong>(266 Series)</strong></p>
+                </div>
+            </div>
         </div>
         <div class="framedArea my-2">
            <form id="picoApp">
@@ -120,11 +135,11 @@
                     </div>
                 </div>
                 <div id="resourcesPicoApp" class="hidden">
-                    <div class="row">
+                    <div class="row pl-2 pr-2">
                         <div class="col-md-10 offset-md-1">
                             <h3 class="text-center">Technical Information</h3>
                             <hr>
-                            <div class="table-responsive pl-2 pr-2">
+                            <div class="table-responsive">
                                 <table class="table table-striped">
                                     <thead class="thead-dark">
                                         <tr>
@@ -148,10 +163,10 @@
                             </div>
                         </div>
                     </div>
-                    <div class="row">
+                    <div class="row pl-2 pr-2">
                         <div class="col-md-4 offset-md-1">
                             <h3 class="text-center">Ratings</h3><hr>
-                            <div class="table-responsive pr-2 pl-2">
+                            <div class="table-responsive">
                                 <table class="table table-striped">
                                     <thead class="thead-dark">
                                         <tr>
@@ -162,33 +177,33 @@
                                     <tbody>
                                         <tr id="rcLogo" class="hidden">
                                             <th>Recognized Component</th>
-                                            <td><img src="/tedss/content/picoFuseData/rc-logo.png" alt="recognized component logo" class="img-fluid"></td>
+                                            <td><img src="/tedss/content/picoFuseData/logos/rc-logo.png" alt="recognized component logo" class="img-fluid"></td>
                                         </tr>
                                         <tr id="csaLogo" class="hidden"> 
                                             <th>CSA</th>
-                                            <td><img src="/tedss/content/picoFuseData/csa.png" alt="csa logo" class="img-fluid"></td>
+                                            <td><img src="/tedss/content/picoFuseData/logos/csa-logo.png" alt="csa logo" class="img-fluid"></td>
                                         </tr>
                                         <tr id="pseLogo" class="hidden">
                                             <th>PSE</th>
-                                            <td><img src="/tedss/content/picoFuseData/pse-logo.png" alt="pse logo" class="img-fluid"></td>
+                                            <td><img src="/tedss/content/picoFuseData/logos/pse-logo.png" alt="pse logo" class="img-fluid"></td>
                                         </tr>
                                     </tbody>
                                 </table>
                             </div>
                         </div>
                         <div class="col-md-6">
-                            <h3 class="text-center">Resources</h3><hr>
                             <div class="pl-2 pr-2">
+                                <h3 class="text-center">Resources</h3><hr>
                                 <div class="row">
                                     <div class="col-md-6">
-                                        <label for="littlefusePn"><strong>OLD</strong> LittleFuse</label>
-                                        <input id="littlefusePn" class="form-control" disabled>
+                                        <label for="littelfusePn">LittelFuse <strong>OBSOLETE PN</strong></label>
+                                        <input id="littelfusePn" class="form-control" disabled>
                                         <div id="divBelfuse" class="hidden">
-                                            <label for="belfusePn">Belfuse</label>
+                                            <label for="belfusePn">Belfuse <span id="belfusePnLabel" class="redColor hidden">Not QPL Approved</span></label>
                                             <input id="belfusePn" class="form-control" disabled>
                                         </div>
                                         <div id="divBussmann" class="hidden">
-                                            <label for="bussmannPn">Bussmann</label>
+                                            <label for="bussmannPn">Bussmann <span id="bussmannPnLabel" class="redColor hidden">Not QPL Approved</span></label>
                                             <input id="bussmannPn" class="form-control" disabled>
                                         </div>
                                     </div>
@@ -197,7 +212,7 @@
                                             <label for="dataSheetDropDown">Data Sheet</label>
                                             <select id="dataSheetDropDown" class="form-control">
                                                 <option value="">Select Data Sheet</option>
-                                                <option value="littlefuse">LittleFuse</option>
+                                                <option value="littelfuse">LittelFuse</option>
                                                 <option id="belfuseOption" class="hidden" value="belfuse">BelFuse</option>
                                                 <option id="bussmannOption" class="hidden" value="bussmann">Bussmann</option>
                                             </select>
@@ -223,7 +238,7 @@
             <div class="text-center"><h2>Resources</h2></div>
             <div class="alert alert-primary mt-2 mt-md-3 text-center biggerBlueTxt w-75 mx-auto" role="alert">
                 <!-- pico fuses -->
-                <a href="https://www.tedss.com/Fuses/Browse/axial-leads-pico-fuse" target="_blank">Click here to browse our <strong>Subminiature</strong> Fuse inventory.</a><br>
+                <a href="https://www.tedss.com/Fuses/Browse/axial-leads-pico-fuse" target="_blank">Click here to browse our <strong>Subminiature</strong> Fuses inventory.</a><br>
             </div>
         </div>       
         <div class="mb-2">

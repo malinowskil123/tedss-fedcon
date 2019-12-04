@@ -4,11 +4,12 @@ function validate(){
     let valuesArr = picoUtils.getSelectedFields(dropdownId);
     let displayBool;
     if(valuesArr.includes("")!=true){
-        let littleFuseData = picoUtils.getObject(valuesArr[0],valuesArr[1],"ampCode");
-        displayTechnicalData(littleFuseData);
-        displayRating(littleFuseData);
-        displayAlternatePn(littleFuseData,valuesArr.join(""));
+        let littelFuseData = picoUtils.getObject(valuesArr[0],valuesArr[1],"ampCode");
+        displayTechnicalData(littelFuseData);
+        displayRating(littelFuseData);
+        displayAlternatePn(littelFuseData,valuesArr.join(""));
         showHideDataSheetOptions();
+        loadTerminalImg(valuesArr[0]);
         displayBool = true;
     } else  displayBool = false;
     picoUtils.showHideJquery(displayBool,"#resourcesPicoApp");
@@ -29,51 +30,56 @@ function loadValuesDropDown(series){
         }
     }
 }
-function displayTechnicalData(littleFuseData){
+function displayTechnicalData(littelFuseData){
     const tableId = ["#amperageRating","#maxVoltage","#interruptingRating","#action","#application"];
     let counter = 0;
-    for(let i in littleFuseData){
+    for(let i in littelFuseData){
         if(i==="amperageRating"||i==="maxVoltage"||i==="interruptingRating"||i==="action"||i==="application") {
-            if(i==="amperageRating") $(tableId[counter++]).text(littleFuseData[i]+"A");
-            else if(i==="maxVoltage") $(tableId[counter++]).text(littleFuseData[i]+"V")
-            else $(tableId[counter++]).text(littleFuseData[i]);
+            if(i==="amperageRating") $(tableId[counter++]).text(littelFuseData[i]+"A");
+            else if(i==="maxVoltage") $(tableId[counter++]).text(littelFuseData[i]+"V")
+            else $(tableId[counter++]).text(littelFuseData[i]);
         } else ;
     }  
 }
-function displayRating(littleFuseData){
+function displayRating(littelFuseData){
     const tableId = ["#rcLogo","#csaLogo","#pseLogo"];
     let counter = 0;
-    for(let i in littleFuseData){
+    for(let i in littelFuseData){
         if(i==="rcRating"||i==="csaRating"||i==="pseRating"){
-            if(littleFuseData[i]===false) $(tableId[counter++]).hide("slow");
-            if(littleFuseData[i]===true) $(tableId[counter++]).show("fast");
+            if(littelFuseData[i]===false) $(tableId[counter++]).hide("slow");
+            if(littelFuseData[i]===true) $(tableId[counter++]).show("fast");
         } else ;
     }  
 }
-function displayAlternatePn(littleFuseData,littleFusePn){
-    if(littleFuseData!==null){
-        const divId = ["#divBelfuse","#divBussmann"];
-        const alternatePn = [belfuseConversion(littleFuseData),bussmannConversion(littleFuseData)];
-        $("#littlefusePn").val(littleFusePn);
-        $("#belfusePn").val(belfuseConversion(littleFuseData));
-        $("#bussmannPn").val(bussmannConversion(littleFuseData));
-        let displayBool;
-        for(let i=0; i<alternatePn.length; i++){
-            if(alternatePn[i]===null) displayBool = false;
-            else displayBool = true;
-            picoUtils.showHideJquery(displayBool,divId[i]);
+function displayAlternatePn(littelFuseData,littelFusePn){
+    if(littelFuseData!==null){
+        $("#littelfusePn").val(littelFusePn);
+        const obj = {
+            belfuse:(function(){return belfuseConversion(littelFuseData);})(),
+            bussmann:(function(){return bussmannConversion(littelFuseData);})(),
+            divID : ["#divBelfuse","#divBussmann"],
+            labelID : ["#belfusePnLabel","#bussmannPnLabel"],
+            alternatePnID : ["#belfusePn","#bussmannPn"]
+        };
+        const alternatePN = Object.values(obj);
+        for(let i=0; i<obj.divID.length; i++){
+            let displayBoolPN,displayBoolQPL;
+            const displayBool =[ displayBoolPN = (alternatePN[i]===null)? false : true,displayBoolQPL = (littelFuseData.application!=="military")? false : true];
+            const displayID = [obj.divID,obj.labelID]
+            for(let j=0; j<displayBool.length; j++) picoUtils.showHideJquery(displayBool[j],displayID[j][i]);
+            $(obj.alternatePnID[i]).val(alternatePN[i]);
         }
     }
 }
 // datasheet-------------------------
 function loadDataSheet(manufacturer){
-    const pnArr = [$("#littlefusePn").val(),$("#belfusePn").val(),$("#bussmannPn").val()];
+    const pnArr = [$("#littelfusePn").val(),$("#belfusePn").val(),$("#bussmannPn").val()];
     $("#dataSheet").attr("href",function(){
         if(manufacturer===""&&pnArr[1]===""&&pnArr[2]===""){
             activateLink();
-            return getDataSheetPath("littlefuse",pnArr);
+            return getDataSheetPath("littelfuse",pnArr);
         } else if(manufacturer===""){
-            popup();
+            popupDataSheetValidation();
             return deactivateLink();
         } else {
             activateLink();
@@ -87,21 +93,22 @@ function deactivateLink(){
     return "javascript:void(0);";
 }
 function showHideDataSheetOptions(){
-    const pnArr = [$("#littlefusePn").val(),$("#belfusePn").val(),$("#bussmannPn").val()];
+    const pnArr = [$("#belfusePn").val(),$("#bussmannPn").val()];
     const optionsId = ["#belfuseOption","#bussmannOption"];
-    let displayBool,counter=0;
-    for(let i=0;i<pnArr.length-1;i++){
-        if(pnArr[i]!=="") displayBool=true;
-        else displayBool=false;
-        picoUtils.showHideJquery(displayBool,optionsId[counter++])
+    let displayBool;
+    for(let i=0;i<pnArr.length;i++){
+        if(pnArr[i]==="") displayBool=false;
+        else displayBool=true;
+        picoUtils.showHideJquery(displayBool,optionsId[i])
     }
-    let blah = (pnArr[1]===""&&pnArr[2]==="")? false : true;
-    picoUtils.showHideJquery(blah,"#divDataSheet");
+    // hide dropdown if no alternate pn
+    let dropDownVisibility = (pnArr[0]===""&&pnArr[1]==="")? false : true;
+    picoUtils.showHideJquery(dropDownVisibility,"#divDataSheet");
 }
 function getDataSheetPath(manufacturer,pnArr){
     let series = (function(){
         let prefix;
-        if(manufacturer==="littlefuse")prefix=pnArr[0].substring(0,3);
+        if(manufacturer==="littelfuse")prefix=pnArr[0].substring(0,3);
         else if (manufacturer==="belfuse")prefix=pnArr[1].substring(0,2);
         else if (manufacturer==="bussmann")prefix=pnArr[2].substring(0,4);
         return  prefix.toLowerCase();
@@ -113,9 +120,9 @@ function getDataSheetPath(manufacturer,pnArr){
         else dataSheet = series+"Series";
         return dataSheet;
     })();
-    return `/tedss/content/picoFuseData/${fileName}.pdf`;
+    return `/tedss/content/picoFuseData/picoFuseDataSheet/${fileName}.pdf`;
 }
-function popup(){
+function popupDataSheetValidation(){
     picoUtils.showHideJquery(true,"#popup");
     $('body').css("overflow","hidden");
     const popupArea = document.getElementById("popup");
@@ -127,6 +134,11 @@ function popup(){
     });
 }
 // datasheet-------------------------
+function loadTerminalImg(series){
+    $("#terminal").attr("href",function(){
+        return `/tedss/content/picoFuseData/picoFuseTerminals/${series+"Series"}.jpg`;
+    });
+}
 const reset = (function(){
     $("#series").change(function(){
         let resetDropDownVal = $("#series").val();
@@ -137,16 +149,16 @@ const reset = (function(){
     });
 })();
 window.onload = reset;
-function belfuseConversion(littleFuseData) {
-    if(littleFuseData.maxVoltage===125){
-        let belFuseSeries = (littleFuseData.action==="fast-acting")? "MQ" : "MS";
-        let belfuseNumber = picoUtils.getObject(belFuseSeries,littleFuseData.amperageRating,"amperageRating");
+function belfuseConversion(littelFuseData) {
+    if(littelFuseData.maxVoltage===125){
+        let belFuseSeries = (littelFuseData.action==="fast-acting")? "MQ" : "MS";
+        let belfuseNumber = picoUtils.getObject(belFuseSeries,littelFuseData.amperageRating,"amperageRating");
         return (belfuseNumber===null)? null : belfuseNumber.partNumber;
     } else return null;
 }
-function bussmannConversion(littleFuseData){
-    if(littleFuseData.maxVoltage===125&&littleFuseData.action==="fast-acting"){
-        let bussmannPartNumber = picoUtils.getObject("MCRW",littleFuseData.amperageRating,"amperageRating");
+function bussmannConversion(littelFuseData){
+    if(littelFuseData.maxVoltage===125&&littelFuseData.action==="fast-acting"){
+        let bussmannPartNumber = picoUtils.getObject("MCRW",littelFuseData.amperageRating,"amperageRating");
         return (bussmannPartNumber===null)? null :bussmannPartNumber.partNumber;
     } else return null
 }
