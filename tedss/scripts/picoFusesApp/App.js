@@ -120,7 +120,7 @@ function getDataSheetPath(manufacturer,pnArr){
         else dataSheet = series+"Series";
         return dataSheet;
     })();
-    return `/tedss/content/picoFuseData/picoFuseDataSheet/${fileName}.pdf`;
+    return `/tedss/content/specsheet/picoFuse/${fileName}.pdf`;
 }
 function popupDataSheetValidation(){
     picoUtils.showHideJquery(true,"#popup");
@@ -136,7 +136,7 @@ function popupDataSheetValidation(){
 // datasheet-------------------------
 function loadTerminalImg(series){
     $("#terminal").attr("href",function(){
-        return `/tedss/content/picoFuseData/picoFuseTerminals/${series+"Series"}.jpg`;
+        return `/tedss/content/images/picoFuse/terminal/${series+"Series"}.jpg`;
     });
 }
 const reset = (function(){

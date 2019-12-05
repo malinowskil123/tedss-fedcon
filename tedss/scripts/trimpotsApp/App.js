@@ -1,145 +1,201 @@
-let utilsM39015 = new Utils();
-let globalJqueryM39015 = new GlobalJquery();
-let dropDownIdArrM39015 = ["#inputM1","#inputT1","#inputR1","#inputF1",]
-let htmlElementsIdM39015 = ["#outputRTR","#outputRT","#viewTerminalM39015", "#outputR1","#outputT1","#outputF1","#resourcesM39015","#productLinkM39015RT", "#productLinkM39015RTR"];
-let dropDownValuesTerminalArrM39015 = [
-    ["RTR22","L|L","P|P","W|W","X|X"],
-    ["RTR24","P|P","W|W","X|X"]
-];
-let dropDownValuesResistanceArrM39015 = [
-    ["RTR22","501|003","102|004","202|005","502|006","103|007","203|008"],
-    ["RTR24","501|006","102|007","202|008","502|009","103|101"],
-];
-
-function validateConversionM39015App() {
-    let valueArr = utilsM39015.getSelectedFields(dropDownIdArrM39015);
-    $(htmlElementsIdM39015[1]).val(utilsM39015.returnRtRtrPartNumber(valueArr));    
-    selectedTerminalM39015(valueArr[0],valueArr[1]);
-    selectedResistanceRtrRjrM39015(valueArr[2]);
-    selectedFailureRateRtrRjrM39015(valueArr[3]);
-    let showHideBoolConversionApp = (valueArr.includes(" ")==false)? true : false;
-    globalJqueryM39015.fadeInFadeOut(showHideBoolConversionApp,htmlElementsIdM39015[6]);
-    $(htmlElementsIdM39015[0]).val(utilsM39015.returnRtRtrPartNumber(valueArr));
-    $(htmlElementsIdM39015[8]).attr("href", utilsM39015.setProductLink(utilsM39015.returnRtRtrPartNumber(valueArr,"TRIMPOT")));
-    valueArr[0] = valueArr[0].replace("RTR","RT");
-    valueArr.pop();
-    $(htmlElementsIdM39015[1]).val(utilsM39015.returnRtRtrPartNumber(valueArr));
-    $(htmlElementsIdM39015[7]).attr("href", utilsM39015.setProductLink(utilsM39015.returnRtRtrPartNumber(valueArr),"TRIMPOT"));
-}
-function resetConversionM39015App(){
-    document.getElementById("M39015").reset();
-    globalJqueryM39015.fadeInFadeOut(false,htmlElementsIdM39015[6]);
-}
-function selectedMilDesignationM39015(style){
-    utilsM39015.resetDynamicDropDown(dropDownIdArrM39015[1]);
-    utilsM39015.resetDynamicDropDown(dropDownIdArrM39015[2]);
-    if(style==" "){
-        resetConversionM39015App();
-    }
-    else{
-        utilsM39015.populateDropDown(style,dropDownIdArrM39015[1],dropDownValuesTerminalArrM39015);
-        utilsM39015.populateDropDown(style,dropDownIdArrM39015[2],dropDownValuesResistanceArrM39015);
-    }
-}
-function selectedTerminalM39015(style,terminal){    
-    let link = "https://www.tedss.com/stock/Learnmore/rt-rj-trimpots/"
-    $(htmlElementsIdM39015[2]).attr("href",utilsM39015.getItemFromDirectory(link,utilsM39015.insert(style+terminal,5,"D"),".png",true));
-    $(htmlElementsIdM39015[4]).val(utilsM39015.returnTerminal(terminal));
-}
-function selectedResistanceRtrRjrM39015(resistance){
-    $(htmlElementsIdM39015[3]).val(utilsM39015.threeDigitCodeCalculator(resistance,-3,"Ω","KΩ"));
-}
-function selectedFailureRateRtrRjrM39015(failureRate){
-    $(htmlElementsIdM39015[5]).val(utilsM39015.returnFailureRate(failureRate));
-}
-
-let utilsRtrRjr = new Utils();
-let globalJqueryRtrRjr = new GlobalJquery();
-let dropDownIdRtrRjr = ["#inputStyle","#inputTerminal","#inputResistance","#inputFailureRate"]
-let htmlElementsIdRtrRjr = ["#resourcesRtrRjr","#outputCharacteristic","#outputResistance","#outputFailureRate","#outputPartNumber","#failureRateGroup","#productLinkRtrRjr","#viewTerminalRtrRjr"];
-let dropDownValuesRtrRjr = [
-    ["RT12","L|L","P|P","Y|Y"],
-    ["RT22/RTR22/RJ22/RJ24/RJR24","P|P","W|W","X|X","L|L"],
-    ["RT24/RTR24","X|X","P|P","W|W"],
-    ["RT26","X|X","W|W"],
-    ["RJ12","P|P","Y|Y"],
-    ["RJ26/RJR26","P|P","W|W","X|X","A|A","B|B"],
-    ["RJ50/RJR50","P|P"]
-];
-
-$(function(){
-    globalJqueryM39015.hideElement(htmlElementsIdM39015[6]);
-    globalJqueryRtrRjr.hideElement([htmlElementsIdRtrRjr[0],htmlElementsIdRtrRjr[5]]);
-});
-
-function validateRtrRjr(){
-    let valuesArr = utilsRtrRjr.getSelectedFields(dropDownIdRtrRjr);
-    let resistanceInputTest = new RegExp(/^([0-9]{3})$/);
-    let showHideBoolFailureRate;
-    let showHideBoolResources;
-    if(resistanceInputTest.test(valuesArr[2])==false){
-        valuesArr[2]="";
-    }
-    else{
-        selectedResistanceRtrRjr(valuesArr[2]);
-    }
-    let checkStyle = valuesArr[0].substring(0,3);
-    if(checkStyle=="RTR"||checkStyle=="RJR"){
-        showHideBoolFailureRate = true;
-        if(valuesArr.includes(" ")==false&&valuesArr[2]!=""){
-            showHideBoolResources = true;
-
+const utilsM39015 = new Utils();
+function validateM39015(){
+    const dropDownId = ["#style","#terminal","#resistance","#failureRate"];
+    let valuesArr = utilsM39015.getSelectedFields(dropDownId);
+    if(!hideFailureRate(valuesArr[0]))valuesArr[3]=null;
+    let displayBool;
+    if(valuesArr.includes("")===false){
+        let resistanceInputValidation = validateResistance(valuesArr[0],valuesArr[2]);
+        if(resistanceInputValidation===false) {
+            valuesArr[2]=""
+            displayBool = false;
+        } else {
+            displayData(valuesArr);
+            displayBool = true;
         }
-        else{
-            showHideBoolResources = false;
+    } else displayBool = false;
+    utilsM39015.showHideJquery(displayBool,"#resources");
+}
+//onchange
+function populateResistanceM39015() {
+    let terminals = {};
+        terminals["RT12"] = ["L","P","Y"];
+        terminals["RT22"] = ["P","W","X","L"];
+        terminals["RTR22"] = ["P","W","X","L"];
+        terminals["RJ22"] = ["P","W","X","L"];
+        terminals["RJ24"] = ["P","W","X","L"];
+        terminals["RJR24"] = ["P","W","X","L"];
+        terminals["RT24"] = ["X","P","W"];
+        terminals["RTR24"] = ["X","P","W"];
+        terminals["RT26"] = ["X","W"];
+        terminals["RJ12"] = ["P","Y"];
+        terminals["RJ26"] = ["P","W","X","A","B"];
+        terminals["RJR26"] = ["P","W","X","A","B"];
+        terminals["RJ50"] = ["P"];
+        terminals["RJR50"] = ["P"];
+    const styleList = document.getElementById("style");
+    const terminalList = document.getElementById("terminal");
+    let selectedValue =  styleList.options[styleList.selectedIndex].value;
+    for(let j=terminalList.options.length-1; j>=1; j--){
+        terminalList.remove(j);
+    }
+    let dropdownOptions = terminals[selectedValue];
+    if(dropdownOptions){
+        for(let i=0; i<dropdownOptions.length; i++){
+            let value = new Option(dropdownOptions[i],dropdownOptions[i]);
+            terminalList.options.add(value);
         }
     }
-    else{
-        showHideBoolFailureRate = false;
-        valuesArr.pop();
-        if(valuesArr.includes(" ")==false&&valuesArr[2]!=""){
-            showHideBoolResources = true;
+}
+function validateResistance(style,resistance){
+    style = (style.substring(0,2)==="RJ")? style ="RJ" : style;
+    let resistanceCheck = checkResistanceTable(style,resistance);
+    if(resistanceCheck===false){
+        (function(){
+            utilsM39015.showHideJquery(true,"#popup");
+            $("#popupText").text(function(){return (resistance.length>3)? "Resistance Code Too Long!" : `Incorrect Resistance Code "${resistance}"`;});
+            $("#popupImg").attr("src",function(){
+                let displayBool = (resistance.length>3)? false : true;
+                utilsM39015.showHideJquery(displayBool,"#popupImg");
+                return `/tedss/content/images/trimPots/resistanceTables/resistance${style}.png`;
+            });
+            $('body').css("overflow","hidden");
+            const popupArea = document.getElementById("popup");
+            $(window).click(function(event){
+                if(event.target==popupArea) {
+                    utilsM39015.showHideJquery(false,"#popup")
+                    $('body').css("overflow","visible");
+                }
+            });
+        })();
+        return false
+    } else return true;
+}
+function checkResistanceTable(style,resistance){
+    const resistanceTable = {};
+    resistanceTable["RT12"] = ["100","200","500","101","201","501","102","202","502","103","203"];
+    resistanceTable["RT22"] = ["500","101","201","501","102","202","502","103","203"];
+    resistanceTable["RTR22"] = ["501","102","202","502","103","203"];
+    resistanceTable["RT24"] = ["100","200","500","101","201","501","102","202","502","103"];
+    resistanceTable["RTR24"] = ["501","102","202","502","103"];
+    resistanceTable["RT26"] = ["100","200","500","101","201","501","102","202","502"];
+    resistanceTable["RJ"] = ["100","200","500","101","201","501","102","202","502","103","253","503","104","204","254","504","105"];
+    return resistanceTable[style].includes(resistance);
+}
+function hideFailureRate(style){
+    const divId = ["#divStyle","#divTerminal","#divResistance","#divFailureRate"];
+    const styleRegEx = new RegExp(/(R[T,J][\d]{2})/);
+    let displayBool = (styleRegEx.test(style))? false:true;
+    utilsM39015.showHideJquery(displayBool,"#divFailureRate");
+    (function(){
+        for(let i=0; i<divId.length-1; i++){
+            let remove = (styleRegEx.test(style))? "col-md-3":"col-md-4";
+            let add = (styleRegEx.test(style))? "col-md-4":"col-md-3";
+            if($(divId[i]).attr("class")!=add){
+                $(divId[i]).removeClass(remove); 
+                $(divId[i]).toggleClass(add); 
+            }
+        }  
+    })();
+    return displayBool;       
+}
+function hideAlternatePn(partNumber){
+    const divId = ["#divCharacteristic","#divAlternatePartNumber"];
+    let displayBool = (partNumber===null)? false:true;
+    utilsM39015.showHideJquery(displayBool,"#divAlternatePartNumber");
+    (function(){
+        for(let i=0; i<divId.length-1; i++){
+            let remove = (partNumber===null)? "col-md-6":"col-md-6 col-md-offset-3";
+            let add = (partNumber===null)? "col-md-6 col-md-offset-3":"col-md-6";
+            if($(divId[i]).attr("class")!=add){
+                $(divId[i]).removeClass(remove); 
+                $(divId[i]).toggleClass(add); 
+            }
+        }  
+    })();
+}
+function displayData(valuesArr){
+    if(!valuesArr.includes("")){
+        let partNumber = returnPartNumber(valuesArr.join(""));;
+        $("#showPartNumber").val(partNumber);
+        $("#showCharacteristic").val(showCharacteristic(partNumber));
+        $("#showResistance").val(utilsM39015.threeDigitCodeCalculator(valuesArr[2],-3,"Ω","KΩ"));
+        $("#showFailureRate").val(returnFailureRate(partNumber));
+        let partNumberM39015 = convertToM39015(valuesArr);
+        hideAlternatePn(partNumberM39015);
+        if(partNumberM39015!==null) $("#showM39015").val(partNumberM39015);
+        loadResources(valuesArr[0],partNumber);
+    }
+}
+function loadResources(style,partNumber){
+    $("#terminalDiagram").attr('href',function(){
+        const rjRegEx = new RegExp(/(RJ[\d]{2})/);    
+        partNumber = (rjRegEx.test(style))? partNumber.substring(0,6): partNumber.substring(0,7);
+        return `/tedss/content/images/trimPots/terminals/${partNumber}.png`;
+    });
+    $("#specSheetLink").attr("href", function(){
+        const styleRegEx = new RegExp(/(R[T,J][\d]{2})/);    
+        style = (styleRegEx.test(style))?utilsM39015.insert(style,2,"R") : style;
+        return `/tedss/content/specsheet/trimPots/${style}.pdf`;
+    });
+}
+const resetAppTrimPot = (function () {
+    $("#style").change(function () {
+        if ($("#style").val()==="") utilsM39015.resetFedCon("form","resources");
+    });
+    $("#resetButton").click(function () {
+        hideFailureRate("");
+        utilsM39015.resetFedCon("form","resources");
+    });
+})();
+window.onload = resetAppTrimPot;
+function returnPartNumber(partNumber){
+    const styleRegEx = new RegExp(/(R[T,J][\d]{2})/);
+    let characteristic;
+    if(styleRegEx.test(partNumber.substring(0,4))){
+        characteristic = (partNumber.substring(1,2)==="T")? "C2" : "F";
+        partNumber = utilsM39015.insert(partNumber,4,characteristic);
+    } else{
+        characteristic = (partNumber.substring(0,3)==="RTR")? "D" : "F";
+        partNumber = utilsM39015.insert(partNumber,5,characteristic);
+    } return partNumber;
+}
+function showCharacteristic(partNumber){
+    if(partNumber.includes("D")) return "D = ±50ppm/°C Temp. Coeff. Max.";
+    else if(partNumber.includes("C2")) return "C = ±50ppm/°C Temp. Coeff. Max. 2 = 85°C-150°C Operating Temp.";
+    else return "F = ±100ppm/°C Temp. Coeff. Max.";
+}
+function returnFailureRate(partNumber){
+    let failureRate = partNumber.substring(partNumber.length-1);
+    switch(failureRate){
+        case "M" : failureRate +=" = 1.0%";
+        break;
+        case "P" : failureRate += " = 0.1%";
+        break;
+        case "R" : failureRate += " = 0.01%";
+        break;
+        default: failureRate = "1.0%";
+        break;
+    }
+    return failureRate;
+}
+function convertToM39015(valuesArr){
+    const resistanceTable = {};
+        resistanceTable["RT22"] = [["501","003"],["102","004"],["202","005"],["502","006"],["103","007"],["203","008"]];
+        resistanceTable["RTR22"] = [["501","003"],["102","004"],["202","005"],["502","006"],["103","007"],["203","008"]];
+        resistanceTable["RT24"] = [["501","006"],["102","007"],["202","008"],["502","009"],["103","101"]];
+        resistanceTable["RTR24"] = [["501","006"],["102","007"],["202","008"],["502","009"],["103","101"]];
+    let resistance = (function(){
+        let tempArr = resistanceTable[valuesArr[0]];
+        if(tempArr===undefined) return undefined;
+        for(let i=0; i<tempArr.length; i++){
+            if(tempArr[i][0]==valuesArr[2]) return tempArr[i][1];
         }
-        else{
-            showHideBoolResources = false;
-
-        }
-    }
-    globalJqueryRtrRjr.fadeInFadeOut(showHideBoolFailureRate,htmlElementsIdRtrRjr[5]);
-    globalJqueryRtrRjr.fadeInFadeOut(showHideBoolResources,htmlElementsIdRtrRjr[0]);
-    selectedTerminalRtrRjr(valuesArr);
-    selectedFailureRateRtrRjr(valuesArr[0],valuesArr[3]);
-    $(htmlElementsIdRtrRjr[4]).val(utilsRtrRjr.returnRtRtrPartNumber(valuesArr));
-    $(htmlElementsIdRtrRjr[6]).attr("href",utilsRtrRjr.setProductLink(utilsRtrRjr.returnRtRtrPartNumber(valuesArr),"TRIMPOT"))
-}
-function resetRtrRjr(){
-    document.getElementById("RtrRjr").reset();
-    globalJqueryRtrRjr.fadeInFadeOut(false,[htmlElementsIdRtrRjr[0],htmlElementsIdRtrRjr[5]]);
-}
-function selectedStyleRtrRjr(style){
-    utilsRtrRjr.resetDynamicDropDown(dropDownIdRtrRjr[1]);
-    if(style==" "){
-        resetRtrRjr();
-    }
-    else{
-        $(htmlElementsIdRtrRjr[1]).val(utilsRtrRjr.showCharacteristic(style));
-        utilsRtrRjr.populateDropDown(style,dropDownIdRtrRjr[1],dropDownValuesRtrRjr);
-    }
-}
-function selectedTerminalRtrRjr(partNumber){
-    let link = "https://www.tedss.com/stock/Learnmore/rt-rj-trimpots/"
-    let regexRJ = new RegExp(/\b(\w*RJ[0-9]\w*)\b/g);
-    let checkStyle = partNumber[0].substring(0,3);
-    let imgID = utilsRtrRjr.returnRtRtrPartNumber(partNumber);
-    imgID = (regexRJ.test(checkStyle))?imgID.substring(0,6):imgID.substring(0,7);
-    $(htmlElementsIdRtrRjr[7]).attr("href",utilsRtrRjr.getItemFromDirectory(link,imgID,".png",true));
-}
-function selectedResistanceRtrRjr(resistance){
-    $(htmlElementsIdRtrRjr[2]).val(utilsRtrRjr.threeDigitCodeCalculator(resistance,-3,"Ω","KΩ"))
-}
-function selectedFailureRateRtrRjr(style,failureRate){
-    let failureRateText;
-    let condition = style.charAt(2);
-    ($.isNumeric(condition)==true) ? failureRateText = utilsRtrRjr.returnFailureRate("M") : failureRateText =utilsRtrRjr.returnFailureRate(failureRate);
-    $(htmlElementsIdRtrRjr[3]).val(failureRateText);
+    })();
+    const styleRegEx = new RegExp(/(RT|RTR)([22,24]{2})/);
+    if(styleRegEx.test(valuesArr[0])&&resistance!==undefined){
+        let specNumber = (valuesArr[0].includes("22"))? "2" : "3"; 
+        let failureRate = (valuesArr[3]===null)? "M" : valuesArr[3];
+        return `M39015/${specNumber}-${resistance}${valuesArr[1]}${failureRate}`;
+    } else return null;
 }

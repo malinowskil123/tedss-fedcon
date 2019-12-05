@@ -54,7 +54,11 @@ function validateResistance(style,resistance){
         (function(){
             utilsM39015.showHideJs(true,"popup");
             $("#popupText").text(function(){return (resistance.length>3)? "Resistance Code Too Long!" : `Incorrect Resistance Code "${resistance}"`;});
-            $("#popupImg").attr("src",function(){return `/fedcon/content/images/trimPots/resistanceTables/resistance${style}.png`;});
+            $("#popupImg").attr("src",function(){
+                let displayBool = (resistance.length>3)? false : true;
+                utilsM39015.showHideJquery(displayBool,"#popupImg");
+                return `/fedcon/content/images/trimPots/resistanceTables/resistance${style}.png`;
+            });
             $('body').css("overflow","hidden");
             const popupArea = document.getElementById("popup");
             $(window).click(function(event){
