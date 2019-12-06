@@ -1,55 +1,124 @@
-const utilsMetalFilmCaps = new Utils();
-const globalJqueryMetalFilmCaps = new GlobalJquery();
-const dropDownIdArrMetalFilmCaps = ["#inputType","#inputVoltage","#inputCapacitance","#inputTolerance",]
-const elementIdArrMetalFilmCaps = ["#outputVoltage","#outputCapacitance","#outputTolerance", "#outputPartNumber"];
-const dropDownValuesVoltageArrMetalFilmCaps = [
-    ["625B/625C/625D/650B/650C/650D/652A/653A","A|A","B|B","C|C","D|D","E|E","F|F"],
-    ["MC12","D|D","F|F","J|J"]
-];
-
-function validateConversionMetalFilmCapsApp() {
-    let valuesArr = utilsMetalFilmCaps.getSelectedFields(dropDownIdArrMetalFilmCaps);
-    selectedVoltageMetalFilmCaps(valuesArr[0],valuesArr[1]);
-    let capacitanceInputTest = new RegExp(/^([0-9]{3})$/);
-    if(capacitanceInputTest.test(valuesArr[2])==false){
-        valuesArr[2]="";
+const utils = new Utils();
+function validate() {
+    const dropDownID = ["#inputType","#inputVoltage","#inputCapacitance","#inputTolerance",]
+    let dropDownValues = utils.getSelectedFields(dropDownID);
+    let displayBool;
+    if(!dropDownValues.includes("")&&validateCapacitance(dropDownValues[2])){
+        displayData(dropDownValues);
+        displayBool = true;
+    } else displayBool = false;
+    utils.showHideJquery(displayBool,"#resourcesMetalFilmCaps");
+}
+function loadVoltageDropDown(){
+    const voltage = {};
+        voltage["default"] = ["A","B","C","D","E","F"];
+        voltage["MC12"] = ["D","F","J"];
+    const defaultType = ["625B","625C","625D","650B","650C","650D","652A","653A"];
+    const typeList = document.getElementById("inputType");
+    const voltageList = document.getElementById("inputVoltage");
+    let selectedValue = (defaultType.includes(typeList.options[typeList.selectedIndex].value))
+        ? "default"
+        : "MC12";
+    for(let j=voltageList.options.length-1; j>=1; j--){
+        voltageList.remove(j);
     }
+    let dropdownOptions = voltage[selectedValue];
+    if(dropdownOptions){
+        for(let i=0; i<dropdownOptions.length; i++){
+            let value = new Option(dropdownOptions[i],dropdownOptions[i]);
+            voltageList.options.add(value);
+        }
+    }
+}
+function validateCapacitance(capacitance){
+    let regex = new RegExp(/^[\d]{3}$/);
+    if(regex.test(capacitance)) return true;
     else{
-        selectedCapacitanceMetalFilmCaps(valuesArr[2]);
+        (function(){
+            utils.showHideJquery(true,"#popup");
+            $("#popupText").text(function(){return "Capacitance Code Too Long!"});
+            $('body').css("overflow","hidden");
+            const popupArea = document.getElementById("popup");
+            $(window).click(function(event){
+                if(event.target==popupArea) {
+                    utils.showHideJquery(false,"#popup")
+                    $('body').css("overflow","visible");
+                }
+            });
+        })();
+        return false
     }
-    selectedToleranceMetalFilmCaps(valuesArr[3]);
-    let fullPartNumber = utilsMetalFilmCaps.returnMetalFilmCapsPartNumber(valuesArr);
-    $(elementIdArrMetalFilmCaps[3]).val(fullPartNumber);
-    let itemLlink = utilsMetalFilmCaps.setProductLink(fullPartNumber,`FILM > METALLIZED POLYCARBONATE > ${(valuesArr[0]=="652A")? "RADIAL" : "AXIAL"}`);
-    $("#productLinkMetalFilmCaps").attr("href", itemLlink);
-    let showHideBool = (valuesArr.includes(" ")==false)? true : false;
-    globalJqueryMetalFilmCaps.fadeInFadeOut(showHideBool,"#resourcesMetalFilmCaps");
-
 }
-function selectedTypeMetalFilmCaps(type){
-    utilsMetalFilmCaps.resetDynamicDropDown(dropDownIdArrMetalFilmCaps[1]);
-    if(type!=" "){
-        utilsMetalFilmCaps.populateDropDown(type,dropDownIdArrMetalFilmCaps[1],dropDownValuesVoltageArrMetalFilmCaps);
-    }    
+function displayData(dropDownValues){
+    const elementID = ["#outputVoltage","#outputCapacitance","#outputTolerance", "#outputPartNumber"];
+    const obj = {
+        voltage:(function(){return returnVoltage(dropDownValues[0],dropDownValues[1]);})(),
+        capacitance:(function(){return utils.threeDigitCodeCalculator(dropDownValues[2],-6,"pF","µf");})(),
+        tolerance:(function(){return returnTolerance(dropDownValues[3]);})(),
+        partNumber:(function(){return returnPartNumber(dropDownValues);})()
+    };
+    const returnedValues = Object.values(obj);
+    for(let i=0; i<elementID.length; i++){
+        $(elementID[i]).val(returnedValues[i]);
+    }
 }
-function selectedVoltageMetalFilmCaps(type,voltage){    
-    $(elementIdArrMetalFilmCaps[0]).val(utilsMetalFilmCaps.returnVoltage(type,voltage));
-}
-function selectedCapacitanceMetalFilmCaps(capacitance){
-    $(elementIdArrMetalFilmCaps[1]).val(utilsMetalFilmCaps.threeDigitCodeCalculator(capacitance,-6,"pF","µf"));
-}
-function selectedToleranceMetalFilmCaps(tolerance){
-    $(elementIdArrMetalFilmCaps[2]).val(utilsMetalFilmCaps.returnToleranceMetalFilmCaps(tolerance));
-}
-
-const pageLoadFunctions = (function(){
-    globalJqueryMetalFilmCaps.hideElement("#resourcesMetalFilmCaps");
-    $(dropDownIdArrMetalFilmCaps[0]).change(function(){
-        if($(dropDownIdArrMetalFilmCaps[0]).val()==" ") $("#metalFilmCaps").trigger('reset');
+const enablePopover = (function (){
+    $('[data-toggle="popover"]').popover()
+})();
+window.onload = enablePopover;
+const reset = (function(){
+    $("#series").change(function(){
+        let resetDropDownVal = $("#inputType").val();
+        if(resetDropDownVal==="") utils.resetAppTedss("#metalFilmCapsApp","#resourcesMetalFilmCaps");
     });
-    $("#resetBtn").click(function(){
-        globalJqueryMetalFilmCaps.hideElement("#resourcesMetalFilmCaps");
-        $("#metalFilmCaps").trigger('reset');
+    $("#resetApp").click(function(){
+        utils.resetAppTedss("#metalFilmCapsApp","#resourcesMetalFilmCaps");
     });
-});
-window.onload = pageLoadFunctions;
+})();
+window.onload = reset;
+function returnVoltage(type,voltage){
+    if(type=="MC12"){
+        switch(voltage){
+            case "D" : voltage += " = 100 VDC";
+            break;
+            case "F" : voltage += " = 200 VDC";
+            break;
+            case "J" : voltage += " = 400 VDC";
+            break;
+        }
+    } else{
+        switch(voltage){
+            case "A" : voltage += " = 50 VDC";
+            break;
+            case "B" : voltage += " = 100 VDC";
+            break;
+            case "C" : voltage += " = 200 VDC";
+            break;
+            case "D" : voltage += " = 300 VDC";
+            break;
+            case "E" : voltage += " = 400 VDC";
+            break;
+            case "F" : voltage += " = 600 VDC";
+            break;
+        }
+    } return voltage;
+}
+function returnTolerance(tolerance){
+    switch(tolerance){
+        case "M" : tolerance += " = ±20%";
+        break;
+        case "K" : tolerance += " = ±10%";
+        break;
+        case "J" : tolerance += " = ±5%";
+        break;
+        case "G" : tolerance += " = ±2%";
+        break;
+        case "F" : tolerance += " = ±1%";
+        break;    
+    }
+    return tolerance;
+}
+function returnPartNumber(dropDownValues){
+    let partNumber = dropDownValues.join("");
+    return (dropDownValues[0]!="MC12")? partNumber = utils.insert(partNumber,4,"1") : partNumber;
+}

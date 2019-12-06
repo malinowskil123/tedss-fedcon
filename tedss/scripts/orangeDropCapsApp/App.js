@@ -1,5 +1,4 @@
-let utilsOrangeDropCaps = new Utils();
-let globalJqueryOrangeDropCaps = new GlobalJquery();
+let utils = new Utils();
 let dropDownIdArrOrangeDropCaps = ["#inputType","#inputCapacitance","#inputTolerance","#inputVoltage","#inputCaseCode","#inputTerminal","#inputLeadLength"];
 let elementIdArrOrangeDropCaps = ["#outputCapacitance","#outputTolerance","#outputVoltage","#outputPartNumber","#productLinkOrangeDropCaps","#terminalImgButton","#resourcesOrangeDropCaps"];
 let terminalTableId = ["#caseLength","#terminalSpacing","#terminalLeadLength","#caseLengthVal","#terminalSpacingVal","#terminalLeadLengthVal"];
@@ -7,10 +6,6 @@ let dropDownValuesOrangeDropCaps = [
     ["418P/716P","0|0","9|9","5|5"],
     ["715P","9|9","5|5","2|2"],
 ];
-
-$(function(){
-    globalJqueryOrangeDropCaps.hideElement([elementIdArrOrangeDropCaps[6],terminalTableId[0],terminalTableId[1],terminalTableId[2]]);
-});
 
 function validateOrangeDropCapsApp(){
     let valuesArr = utilsOrangeDropCaps.getSelectedFields(dropDownIdArrOrangeDropCaps);
@@ -43,6 +38,10 @@ function resetOrangeDropCapsApp(){
     globalJqueryOrangeDropCaps.fadeInFadeOut(false,elementIdArrOrangeDropCaps[6]);
     terminalTableOrangeDropCaps(" "," "," "," ",);
 }
+const enablePopover = (function (){
+    $('[data-toggle="popover"]').popover()
+});
+window.onload = enablePopover;
 function selectedTypeOrangeDropCaps(type){
     utilsOrangeDropCaps.resetDynamicDropDown(dropDownIdArrOrangeDropCaps[2]);
     if(type==" "){

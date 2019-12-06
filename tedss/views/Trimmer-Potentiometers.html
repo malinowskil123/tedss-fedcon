@@ -73,7 +73,7 @@
                     <h2>Incorrect Input</h2>
                 </div>
                 <div class="popup-body text-center">
-                    <img id="popupImg" src="#" alt="resistance table" class="ri">
+                    <img id="popupImg" src="#" alt="resistance table" class="img-fluid">
                     <p id="popupText"></p>
                     <p>Please Try Again.</p>
                 </div>
@@ -136,7 +136,7 @@
                     <div id="divStyle" class="col-md-3">
                         <div class="well size-s">
                             <label for="style">Military Spec.</label>
-                            <select id="style" class="form-control" onchange="populateResistanceM39015();validateM39015();">
+                            <select id="style" class="form-control" onchange="populateResistance();validate();">
                                 <option value="">Select Spec Number</option>
                                 <option value="RT12">RT12</option>
                                 <option value="RT22">RT22</option>
@@ -158,7 +158,7 @@
                     <div id="divTerminal" class="col-md-3">
                         <div class="well size-s">
                             <label for="terminal">Terminal</label>
-                            <select id="terminal" class="form-control" onchange="validateM39015();">
+                            <select id="terminal" class="form-control" onchange="validate();">
                                 <option value="">Select Terminal</option>
                             </select>
                         </div>
@@ -166,13 +166,14 @@
                     <div id="divResistance" class="col-md-3">
                         <div class="well size-s">
                             <label for="resistance">Resistance</label>
-                            <input id="resistance" type="number" class="form-control" placeholder="Enter Three Digit Code '103'" onchange="validateM39015();">                        
+                            <input id="resistance" type="number" class="form-control" placeholder="103" onchange="validate();"
+                             data-container="body" data-toggle="popover"  data-trigger="hover" data-placement="top" data-content="Enter a Three Digit Number!">                        
                         </div>
                     </div>
                     <div id="divFailureRate" class="col-md-3">
                         <div class="well size-s">
                             <label for="failureRate">Failure Rate</label>
-                            <select id="failureRate" class="form-control" onchange="validateM39015();">
+                            <select id="failureRate" class="form-control" onchange="validate();">
                                 <option value="">Select Failure Rate</option>
                                 <option value="M">M</option>
                                 <option value="P">P</option>

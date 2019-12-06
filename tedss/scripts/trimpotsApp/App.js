@@ -1,7 +1,7 @@
-const utilsM39015 = new Utils();
-function validateM39015(){
+const utils = new Utils();
+function validate(){
     const dropDownId = ["#style","#terminal","#resistance","#failureRate"];
-    let valuesArr = utilsM39015.getSelectedFields(dropDownId);
+    let valuesArr = utils.getSelectedFields(dropDownId);
     if(!hideFailureRate(valuesArr[0]))valuesArr[3]=null;
     let displayBool;
     if(valuesArr.includes("")===false){
@@ -14,11 +14,11 @@ function validateM39015(){
             displayBool = true;
         }
     } else displayBool = false;
-    utilsM39015.showHideJquery(displayBool,"#resources");
+    utils.showHideJquery(displayBool,"#resources");
 }
 //onchange
-function populateResistanceM39015() {
-    let terminals = {};
+function populateResistance() {
+    const terminals = {};
         terminals["RT12"] = ["L","P","Y"];
         terminals["RT22"] = ["P","W","X","L"];
         terminals["RTR22"] = ["P","W","X","L"];
@@ -52,18 +52,18 @@ function validateResistance(style,resistance){
     let resistanceCheck = checkResistanceTable(style,resistance);
     if(resistanceCheck===false){
         (function(){
-            utilsM39015.showHideJquery(true,"#popup");
+            utils.showHideJquery(true,"#popup");
             $("#popupText").text(function(){return (resistance.length>3)? "Resistance Code Too Long!" : `Incorrect Resistance Code "${resistance}"`;});
             $("#popupImg").attr("src",function(){
                 let displayBool = (resistance.length>3)? false : true;
-                utilsM39015.showHideJquery(displayBool,"#popupImg");
+                utils.showHideJquery(displayBool,"#popupImg");
                 return `/tedss/content/images/trimPots/resistanceTables/resistance${style}.png`;
             });
             $('body').css("overflow","hidden");
             const popupArea = document.getElementById("popup");
             $(window).click(function(event){
                 if(event.target==popupArea) {
-                    utilsM39015.showHideJquery(false,"#popup")
+                    utils.showHideJquery(false,"#popup")
                     $('body').css("overflow","visible");
                 }
             });
@@ -85,8 +85,8 @@ function checkResistanceTable(style,resistance){
 function hideFailureRate(style){
     const divId = ["#divStyle","#divTerminal","#divResistance","#divFailureRate"];
     const styleRegEx = new RegExp(/(R[T,J][\d]{2})/);
-    let displayBool = (styleRegEx.test(style))? false:true;
-    utilsM39015.showHideJquery(displayBool,"#divFailureRate");
+    if(styleRegEx.test(style))utils.showHideJs(false,"divFailureRate");
+    else utils.showHideJquery(true,"#divFailureRate");
     (function(){
         for(let i=0; i<divId.length-1; i++){
             let remove = (styleRegEx.test(style))? "col-md-3":"col-md-4";
@@ -97,12 +97,12 @@ function hideFailureRate(style){
             }
         }  
     })();
-    return displayBool;       
+    return (styleRegEx.test(style))? false : true;       
 }
 function hideAlternatePn(partNumber){
     const divId = ["#divCharacteristic","#divAlternatePartNumber"];
     let displayBool = (partNumber===null)? false:true;
-    utilsM39015.showHideJquery(displayBool,"#divAlternatePartNumber");
+    utils.showHideJquery(displayBool,"#divAlternatePartNumber");
     (function(){
         for(let i=0; i<divId.length-1; i++){
             let remove = (partNumber===null)? "col-md-6":"col-md-6 col-md-offset-3";
@@ -119,7 +119,7 @@ function displayData(valuesArr){
         let partNumber = returnPartNumber(valuesArr.join(""));;
         $("#showPartNumber").val(partNumber);
         $("#showCharacteristic").val(showCharacteristic(partNumber));
-        $("#showResistance").val(utilsM39015.threeDigitCodeCalculator(valuesArr[2],-3,"Ω","KΩ"));
+        $("#showResistance").val(utils.threeDigitCodeCalculator(valuesArr[2],-3,"Ω","KΩ"));
         $("#showFailureRate").val(returnFailureRate(partNumber));
         let partNumberM39015 = convertToM39015(valuesArr);
         hideAlternatePn(partNumberM39015);
@@ -134,30 +134,33 @@ function loadResources(style,partNumber){
         return `/tedss/content/images/trimPots/terminals/${partNumber}.png`;
     });
     $("#specSheetLink").attr("href", function(){
-        const styleRegEx = new RegExp(/(R[T,J][\d]{2})/);    
-        style = (styleRegEx.test(style))?utilsM39015.insert(style,2,"R") : style;
+        style = (style.substring(2,3)==="R")? utils.remove(style,3) : style;
         return `/tedss/content/specsheet/trimPots/${style}.pdf`;
     });
 }
 const resetAppTrimPot = (function () {
     $("#style").change(function () {
-        if ($("#style").val()==="") utilsM39015.resetFedCon("form","resources");
+        if ($("#style").val()==="") utils.resetFedCon("form","resources");
     });
     $("#resetButton").click(function () {
         hideFailureRate("");
-        utilsM39015.resetFedCon("form","resources");
+        utils.resetFedCon("form","resources");
     });
 })();
 window.onload = resetAppTrimPot;
+const enablePopover = (function (){
+    $('[data-toggle="popover"]').popover()
+});
+window.onload = enablePopover;
 function returnPartNumber(partNumber){
     const styleRegEx = new RegExp(/(R[T,J][\d]{2})/);
     let characteristic;
     if(styleRegEx.test(partNumber.substring(0,4))){
         characteristic = (partNumber.substring(1,2)==="T")? "C2" : "F";
-        partNumber = utilsM39015.insert(partNumber,4,characteristic);
+        partNumber = utils.insert(partNumber,4,characteristic);
     } else{
         characteristic = (partNumber.substring(0,3)==="RTR")? "D" : "F";
-        partNumber = utilsM39015.insert(partNumber,5,characteristic);
+        partNumber = utils.insert(partNumber,5,characteristic);
     } return partNumber;
 }
 function showCharacteristic(partNumber){

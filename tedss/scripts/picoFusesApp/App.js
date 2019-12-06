@@ -1,10 +1,10 @@
-const picoUtils = new Utils();
+const utils = new Utils();
 function validate(){
     const dropdownId = ["#series","#ampCode"];
-    let valuesArr = picoUtils.getSelectedFields(dropdownId);
+    let valuesArr = utils.getSelectedFields(dropdownId);
     let displayBool;
     if(valuesArr.includes("")!=true){
-        let littelFuseData = picoUtils.getObject(valuesArr[0],valuesArr[1],"ampCode");
+        let littelFuseData = utils.getObject(valuesArr[0],valuesArr[1],"ampCode");
         displayTechnicalData(littelFuseData);
         displayRating(littelFuseData);
         displayAlternatePn(littelFuseData,valuesArr.join(""));
@@ -12,7 +12,7 @@ function validate(){
         loadTerminalImg(valuesArr[0]);
         displayBool = true;
     } else  displayBool = false;
-    picoUtils.showHideJquery(displayBool,"#resourcesPicoApp");
+    utils.showHideJquery(displayBool,"#resourcesPicoApp");
 }
 // onchange trigger
 function loadValuesDropDown(series){
@@ -22,7 +22,7 @@ function loadValuesDropDown(series){
     for(let j=terminalList.options.length-1; j>=1; j--){
         terminalList.remove(j);
     }
-    let dropdownOptions = picoUtils.getDropDownValues(series,"ampCode");
+    let dropdownOptions = utils.getDropDownValues(series,"ampCode");
     if(dropdownOptions){
         for(let i=0; i<dropdownOptions.length; i++){
             let value = new Option(dropdownOptions[i],dropdownOptions[i]);
@@ -66,7 +66,7 @@ function displayAlternatePn(littelFuseData,littelFusePn){
             let displayBoolPN,displayBoolQPL;
             const displayBool =[ displayBoolPN = (alternatePN[i]===null)? false : true,displayBoolQPL = (littelFuseData.application!=="military")? false : true];
             const displayID = [obj.divID,obj.labelID]
-            for(let j=0; j<displayBool.length; j++) picoUtils.showHideJquery(displayBool[j],displayID[j][i]);
+            for(let j=0; j<displayBool.length; j++) utils.showHideJquery(displayBool[j],displayID[j][i]);
             $(obj.alternatePnID[i]).val(alternatePN[i]);
         }
     }
@@ -99,11 +99,11 @@ function showHideDataSheetOptions(){
     for(let i=0;i<pnArr.length;i++){
         if(pnArr[i]==="") displayBool=false;
         else displayBool=true;
-        picoUtils.showHideJquery(displayBool,optionsId[i])
+        utils.showHideJquery(displayBool,optionsId[i])
     }
     // hide dropdown if no alternate pn
     let dropDownVisibility = (pnArr[0]===""&&pnArr[1]==="")? false : true;
-    picoUtils.showHideJquery(dropDownVisibility,"#divDataSheet");
+    utils.showHideJquery(dropDownVisibility,"#divDataSheet");
 }
 function getDataSheetPath(manufacturer,pnArr){
     let series = (function(){
@@ -123,12 +123,12 @@ function getDataSheetPath(manufacturer,pnArr){
     return `/tedss/content/specsheet/picoFuse/${fileName}.pdf`;
 }
 function popupDataSheetValidation(){
-    picoUtils.showHideJquery(true,"#popup");
+    utils.showHideJquery(true,"#popup");
     $('body').css("overflow","hidden");
     const popupArea = document.getElementById("popup");
     $(window).click(function(event){
         if(event.target==popupArea) {
-            picoUtils.showHideJquery(false,"#popup")
+            utils.showHideJquery(false,"#popup")
             $('body').css("overflow","visible");
         }
     });
@@ -142,23 +142,23 @@ function loadTerminalImg(series){
 const reset = (function(){
     $("#series").change(function(){
         let resetDropDownVal = $("#series").val();
-        if(resetDropDownVal=="") picoUtils.resetAppTedss("#picoApp","#resourcesPicoApp");
+        if(resetDropDownVal=="") utils.resetAppTedss("#picoApp","#resourcesPicoApp");
     });
     $("#resetApp").click(function(){
-        picoUtils.resetAppTedss("#picoApp","#resourcesPicoApp");
+        utils.resetAppTedss("#picoApp","#resourcesPicoApp");
     });
 })();
 window.onload = reset;
 function belfuseConversion(littelFuseData) {
     if(littelFuseData.maxVoltage===125){
         let belFuseSeries = (littelFuseData.action==="fast-acting")? "MQ" : "MS";
-        let belfuseNumber = picoUtils.getObject(belFuseSeries,littelFuseData.amperageRating,"amperageRating");
+        let belfuseNumber = utils.getObject(belFuseSeries,littelFuseData.amperageRating,"amperageRating");
         return (belfuseNumber===null)? null : belfuseNumber.partNumber;
     } else return null;
 }
 function bussmannConversion(littelFuseData){
     if(littelFuseData.maxVoltage===125&&littelFuseData.action==="fast-acting"){
-        let bussmannPartNumber = picoUtils.getObject("MCRW",littelFuseData.amperageRating,"amperageRating");
+        let bussmannPartNumber = utils.getObject("MCRW",littelFuseData.amperageRating,"amperageRating");
         return (bussmannPartNumber===null)? null :bussmannPartNumber.partNumber;
     } else return null
 }

@@ -18,7 +18,7 @@ function validateM39015(){
 }
 //onchange
 function populateResistanceM39015() {
-    let terminals = {};
+    const terminals = {};
         terminals["RT12"] = ["L","P","Y"];
         terminals["RT22"] = ["P","W","X","L"];
         terminals["RTR22"] = ["P","W","X","L"];
@@ -134,8 +134,7 @@ function loadResources(style,partNumber){
         return `/fedcon/content/images/trimPots/terminals/${partNumber}.png`;
     });
     $("#specSheetLink").attr("href", function(){
-        const styleRegEx = new RegExp(/(R[T,J][\d]{2})/);    
-        style = (styleRegEx.test(style))?utilsM39015.insert(style,2,"R") : style;
+        style = (style.substring(2,3)==="R")? utils.remove(style,3) : style;
         return `/fedcon/content/specsheet/trimPots/${style}.pdf`;
     });
 }

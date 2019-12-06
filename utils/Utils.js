@@ -1,8 +1,3 @@
-//move this into scripts----------------------------
-// const enablePopover = (function (){
-//     $('[data-toggle="popover"]').popover()
-// });
-// window.onload = enablePopover;
 class Utils{
     constructor() {};
     getSelectedFields(dropDownIdArr,attr) {
