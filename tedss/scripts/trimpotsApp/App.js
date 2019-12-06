@@ -140,11 +140,11 @@ function loadResources(style,partNumber){
 }
 const resetAppTrimPot = (function () {
     $("#style").change(function () {
-        if ($("#style").val()==="") utils.resetFedCon("form","resources");
+        if ($("#style").val()==="") utils.resetTedss("form","#resources");
     });
     $("#resetButton").click(function () {
         hideFailureRate("");
-        utils.resetFedCon("form","resources");
+        utils.resetTedss("form","#resources");
     });
 })();
 window.onload = resetAppTrimPot;

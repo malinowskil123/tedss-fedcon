@@ -31,12 +31,12 @@ function loadVoltageDropDown(){
     }
 }
 function validateCapacitance(capacitance){
-    let regex = new RegExp(/^[\d]{3}$/);
+    let regex = new RegExp(/^[1-9]{1}[\d]{2}$/);
     if(regex.test(capacitance)) return true;
     else{
         (function(){
             utils.showHideJquery(true,"#popup");
-            $("#popupText").text(function(){return "Capacitance Code Too Long!"});
+            $("#popupText").text(function(){return (capacitance.substring(0,1)==="0")? "Capacitance Code Can't Start With 0" : "Capacitance Code Too Long!"});
             $('body').css("overflow","hidden");
             const popupArea = document.getElementById("popup");
             $(window).click(function(event){

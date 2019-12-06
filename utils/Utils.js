@@ -64,7 +64,7 @@ class Utils{
         }
     }
     // Tedss------------------------
-    resetAppTedss(formId,elementId){
+    resetTedss(formId,elementId){
         $(formId)[0].reset();
         this.showHideJquery(false,elementId)
     }
