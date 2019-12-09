@@ -1,94 +1,166 @@
 let utils = new Utils();
-let dropDownIdArrOrangeDropCaps = ["#inputType","#inputCapacitance","#inputTolerance","#inputVoltage","#inputCaseCode","#inputTerminal","#inputLeadLength"];
-let elementIdArrOrangeDropCaps = ["#outputCapacitance","#outputTolerance","#outputVoltage","#outputPartNumber","#productLinkOrangeDropCaps","#terminalImgButton","#resourcesOrangeDropCaps"];
-let terminalTableId = ["#caseLength","#terminalSpacing","#terminalLeadLength","#caseLengthVal","#terminalSpacingVal","#terminalLeadLengthVal"];
-let dropDownValuesOrangeDropCaps = [
-    ["418P/716P","0|0","9|9","5|5"],
-    ["715P","9|9","5|5","2|2"],
-];
-
-function validateOrangeDropCapsApp(){
-    let valuesArr = utilsOrangeDropCaps.getSelectedFields(dropDownIdArrOrangeDropCaps);
-    let capacitanceInputTest = new RegExp(/^([0-9]{3})$/);
-    if(capacitanceInputTest.test(valuesArr[1])==false){
-        valuesArr[1]="";
-    }
-    else{
-        selectedCapacitanceOrangeDropCaps(valuesArr[1]);
-    }
-    let voltageInputTest = (valuesArr[3].length==2)? new RegExp(/^([R]{1})([0-9]{1})$/) : new RegExp(/^([0-9]{1})$/);
-    if(voltageInputTest.test(valuesArr[3])==false){
-        valuesArr[3]="";
-    }
-    else{
-        selectedVoltageOrangeDropCaps(valuesArr[3]);
-    }
-    selectedToleranceOrangeDropCaps(valuesArr[2]);
-    selectedTerminalOrangeDropCaps(valuesArr[0],valuesArr[5]);
-    terminalTableOrangeDropCaps(valuesArr[0],valuesArr[4],valuesArr[5],valuesArr[6]);
-    let partNumber = valuesArr.join("");
-    let linkCategory = (valuesArr[0]=="418P")? "FILM > POLYESTER > RADIAL" : "FILM > POLYPROPYLENE > RADIAL";
-    $(elementIdArrOrangeDropCaps[3]).val(partNumber);
-    $(elementIdArrOrangeDropCaps[4]).attr("href",utilsOrangeDropCaps.setProductLink(partNumber,linkCategory));
-    let showHideBool = (valuesArr.includes(" ")==false && valuesArr[1]!=" " && valuesArr[3]!=" ")? true : false; 
-    globalJqueryOrangeDropCaps.fadeInFadeOut(showHideBool,elementIdArrOrangeDropCaps[6]);
+function validate(){
+    const dropDownIdArrOrangeDropCaps = ["#inputType","#inputCapacitance","#inputTolerance","#inputVoltage","#inputCaseCode","#inputTerminal","#inputLeadLength"];
+    const dropDownValues = utils.getSelectedFields(dropDownIdArrOrangeDropCaps);
+    let displayBool;
+    if(!dropDownValues.includes("")&&validateCapacitance(dropDownValues[0],dropDownValues[3],dropDownValues[1])){
+        loadData(dropDownValues);
+        loadTerminal(dropDownValues[0],dropDownValues[5]);
+        displayBool = true;
+    }else displayBool = false;
+    utils.showHideJquery(displayBool,"#resources");
 }
-function resetOrangeDropCapsApp(){
-    document.getElementById("orangeDropCapsApp").reset();
-    globalJqueryOrangeDropCaps.fadeInFadeOut(false,elementIdArrOrangeDropCaps[6]);
-    terminalTableOrangeDropCaps(" "," "," "," ",);
+function loadToleranceDropDown(){
+    const tolerance = {};
+        tolerance["default"] = ["0","5","9"];
+        tolerance["715P"] = ["2","9","5"];
+    const defaultType = ["418P","716P"];
+    const typeList = document.getElementById("inputType");
+    const toleranceList = document.getElementById("inputTolerance");
+    let selectedValue = (defaultType.includes(typeList.options[typeList.selectedIndex].value))
+        ? "default"
+        : "715P";
+    for(let j=toleranceList.options.length-1; j>=1; j--){
+        toleranceList.remove(j);
+    }
+    let dropdownOptions = tolerance[selectedValue];
+    if(dropdownOptions){
+        for(let i=0; i<dropdownOptions.length; i++){
+            let value = new Option(dropdownOptions[i],dropdownOptions[i]);
+            toleranceList.options.add(value);
+        }
+    }
+}
+function loadVoltageDropDown(){
+    const tolerance = {};
+        tolerance["default"] = ["200","400","600","800","1200","1600"];
+        tolerance["418P"] = ["100","200","400","600","1000"];
+    const defaultType = ["715P","716P"];
+    const typeList = document.getElementById("inputType");
+    const toleranceList = document.getElementById("inputVoltage");
+    let selectedValue = (defaultType.includes(typeList.options[typeList.selectedIndex].value))
+        ? "default"
+        : "418P";
+    for(let j=toleranceList.options.length-1; j>=1; j--){
+        toleranceList.remove(j);
+    }
+    let dropdownOptions = tolerance[selectedValue];
+    if(dropdownOptions){
+        for(let i=0; i<dropdownOptions.length; i++){
+            let value = new Option(dropdownOptions[i],dropdownOptions[i]);
+            toleranceList.options.add(value);
+        }
+}
+}
+// split into two functions  make this organized and neat
+function validateCapacitance(type,voltage,capacitanceCode){
+    const regex = new RegExp(/^[1-9]{1}[\d]{2}$/);
+    if(capacitanceCode!==""){
+        if(regex.test(capacitanceCode)&&capacitanceBool) return true;
+        else{
+            (function(){
+                utils.showHideJquery(true,"#popup");
+                $("#popupText").text(function()
+                    {return (capacitanceCode.substring(0,1)==="0")
+                        ? "Capacitance Code Can't Start With 0"
+                        : "Capacitance Code Too Long!"});
+                $('body').css("overflow","hidden");
+                const popupArea = document.getElementById("popup");
+                $(window).click(function(event){
+                    if(event.target==popupArea) {
+                        utils.showHideJquery(false,"#popup")
+                        $('body').css("overflow","visible");
+                    }
+                });
+            })();
+            return false
+        }
+    } else return false
+}
+function checkCapacitanceTable(capacitanceCode){
+    const capacitanceTable = {
+        "418P" : {
+            "100" : [.27,.033,.047,.082,.1,.15,.22,.33,.47,.68,.082,1.0],
+            "200" : [.0056,.0068,.01,.015,.018,.022,.033,.039,.047,.056,.068,.082,.1,.15,.22,.27,.33,.47],
+            "400" : [.001,.0015,.0022,.0033,.0047,.0068,.0082,.01,.015,.018,.022,.033,.047,.056,.068,.082,.1,.15,.18,.22,.27,.33,.39,.47],
+            "600" : [.001,.0012,.0015,.0018,.0022,.0027,.0033,.0039,.0047,.0056,.0068,.0082,.01,.12,.18,.22,.25],
+            "1000" : [.001,.0015,.0018,.0022,.0033,.0047,.0056,.0068,.0082,.01,.015,.018,.022,.027,.033,.039,.047,.056,.068,.082,.1]
+        },
+        "715P" : {
+            "200" : [.01,.012,.015,.018,.022,.027,.033,.039,.047,.056,.068,.082,.10,.12,.15,.18,.22,.27,.33,.39,.47,.56,.68,.82,1.0],
+            "400" : [.0039,.0047,.0056,.0068,.0082,.01,.012,.015,.018,.022,.027,.033,.039,.047,.056,.068,.082,.1,.12,.15,.18,.22,.27,.33,.39,.47],
+            "600" : [.001,.0012,.0015,.0018,.0022,.0027,.0033,.0039,.0047,.0056,.0068,.0082,.01,.012,.015,.018,.022,.027,.033,.039,.047,.056,.068,.082,.1,.12,.15,.18,.22],
+            "800" : [.0056,.0068,.0082,.01,.012,.015,.018,.022,.027,.033,.039,.047,.056,.068,.082,.1],
+            "1200" : [.0027,.0033,.0039,.0047,.0056,.0068,.0082,.01,.012,.015,.018,.022,.027,.033,.039,.047],
+            "1600" : [.0018,.0022,.0027,.0033,.0039,.0047,.0056,.0068,.0082,.01,.012,.015,.018,.022,.027,.033]
+        },
+        "716P" : {
+            "200" : [.01,.012,.015,.018,.022,.027,.033,.039,.047,.056,.068,.082,.10,.12,.15,.18,.22,.27,.33,.39,.47,.56,.68,.82,1.0],
+            "400" : [.0039,.0047,.0056,.0068,.0082,.01,.012,.015,.018,.022,.027,.033,.039,.047,.056,.068,.082,.10,.12,.15,.18,.22,.27,.33,.39,.47],
+            "600" : [.001,.0012,.0015,.0018,.0022,.0027,.0033,.0039,.0047,.0056,.0068,.0082,.01,.012,.015,.018,.022,.027,.033,.039,.047,.056,.068,.082,.10,.12,.15,.18,.22],
+            "800" : [.0056,.0068,.0082,.01,.012,.015,.018,.022,.027,.033,.039,.047,.056,.068,.082,.10,.12,.14],
+            "1200" : [.0027,.0033,.0039,.0047,.0056,.0068,.0082,.01,.012,.015,.018,.022,.027,.033,.039,.047,.056],
+            "1600" : [.001,.0012,.0015,.0018,.0022,.0027,.0033,.0039,.0047,.0056,.0068,.0082,.01,.012,.015,.018,.022,.027,.033]
+        }
+    };
+    let capacitanceValue = utils.threeDigitCodeCalculator(capacitanceCode,-6,"pF","µf")
+    return capacitanceTable[type][voltage].includes(parseFloat(capacitanceValue));
+}
+function loadData(dropDownValues){
+    const elementID = ["#outputCapacitance","#outputTolerance","#outputVoltage","#outputLeadLength","#outputPartNumber"];
+    const obj = {
+        capacitance : (function(){return utils.threeDigitCodeCalculator(dropDownValues[1],-6,"pF","µf")})(),
+        tolerance : (function(){return returnTolerance(dropDownValues[2])})(),
+        voltage :  dropDownValues[3]+"VDC",
+        leadLength : (function(){return returnLeadLength(dropDownValues[6])})(),
+        partNumber : (function(){
+            dropDownValues[3] = (dropDownValues[3].length===4)? dropDownValues[3].substring(0,2) : dropDownValues[3].substring(0,1);
+            return dropDownValues.join("");
+        })()
+    }
+    let returnData = Object.values(obj);
+    for(let i=0; i<returnData.length; i++){
+        $(elementID[i]).val(returnData[i])
+    }
+}
+function loadTerminal(type,terminal){
+    $("#terminal").attr("href",function(){
+        return `/tedss/content/images/orangeDropCaps/terminals/${type+terminal}.jpg`
+    });
 }
 const enablePopover = (function (){
     $('[data-toggle="popover"]').popover()
 });
 window.onload = enablePopover;
-function selectedTypeOrangeDropCaps(type){
-    utilsOrangeDropCaps.resetDynamicDropDown(dropDownIdArrOrangeDropCaps[2]);
-    if(type==" "){
-        resetOrangeDropCapsApp();
-    }
-    else{
-        utilsOrangeDropCaps.populateDropDown(type,dropDownIdArrOrangeDropCaps[2],dropDownValuesOrangeDropCaps);
-    }
+const reset = (function(){
+    $("#inputType").change(function(){
+        let resetDropDownVal = $("#inputType").val();
+        if(resetDropDownVal==="") utils.resetTedss("#orangeDropApp","#resources");
+    });
+    $("#resetApp").click(function(){
+        utils.resetTedss("#orangeDropApp","#resources");
+    });
+})();
+window.onload = reset;
+function returnTolerance(tolerance){
+    switch(tolerance){
+        case "0": tolerance += " = ±20%" ;
+        break;
+        case "9": tolerance += " = ±10%" ;
+        break;
+        case "5": tolerance += " = ±5%" ;
+        break;
+        case "2": tolerance += " = ±2%" ;
+        break;
+    } return tolerance;
 }
-function selectedCapacitanceOrangeDropCaps(capacitance){
-    $(elementIdArrOrangeDropCaps[0]).val(utilsOrangeDropCaps.threeDigitCodeCalculator(capacitance,-6,"pF","µf"));
-}
-function selectedToleranceOrangeDropCaps(tolerance){
-    $(elementIdArrOrangeDropCaps[1]).val(utilsOrangeDropCaps.returnToleranceOrangeDropCaps(tolerance));
-}
-function selectedVoltageOrangeDropCaps(voltage){
-    $(elementIdArrOrangeDropCaps[2]).val(utilsOrangeDropCaps.calculateVoltage(voltage));
-}
-function selectedTerminalOrangeDropCaps(type,terminal){
-    let picId = type + terminal;
-    let link = "https://www.tedss.com/stock/Learnmore/orangeDropsTerminals/"
-    $(elementIdArrOrangeDropCaps[5]).attr("href",utilsOrangeDropCaps.getItemFromDirectory(link,picId,".jpg",false));
-}
-function terminalTableOrangeDropCaps(type,caseCode,terminal,leadLength){
-    let terminalData;
-    let objectProperty;
-    if(type!=" " && caseCode!=" "){
-        terminalData = utilsOrangeDropCaps.getDataFromStorage("orangeDropTerminalArr",type+caseCode,"typeCaseCode");
-        $(terminalTableId[3]).text(terminalData.length);
-        globalJqueryOrangeDropCaps.fadeInFadeOut(true,terminalTableId[0]);
-        if(terminal!=" "){
-            objectProperty = "terminal"+terminal;
-            $(terminalTableId[4]).text(terminalData[objectProperty]);
-            globalJqueryOrangeDropCaps.fadeInFadeOut(true,terminalTableId[1]);
-        }
-        else{
-            globalJqueryOrangeDropCaps.fadeInFadeOut(false,terminalTableId[1]);
-        }
-        if(leadLength!=" "){
-            $(terminalTableId[5]).text(utilsOrangeDropCaps.returnLeadLength(leadLength));
-            globalJqueryOrangeDropCaps.fadeInFadeOut(true,terminalTableId[2]);
-        }
-        else{
-            globalJqueryOrangeDropCaps.fadeInFadeOut(false,terminalTableId[2]);
-        }
-    }
-    else{
-        globalJqueryOrangeDropCaps.fadeInFadeOut(false,[terminalTableId[0],terminalTableId[1],terminalTableId[2]]);
-    }
+function returnLeadLength(leadLength){
+    switch(leadLength){
+        case "3": leadLength = " 1.250[31.750]";
+        break; 
+        case "2": leadLength = " 0.250[6.350]";
+        break;
+        case "1": leadLength = " 0.187[4.750]";
+        break;
+    } return leadLength;
 }

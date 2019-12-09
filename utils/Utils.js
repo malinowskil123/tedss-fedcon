@@ -23,9 +23,8 @@ class Utils{
         select.options.length = 1;
     }
     insert(str,index,value) {return str.substr(0,index) + value+str.substr(index);}
-    remove(str,index){return str.substring(0,index-1)+str.substring(index);}  
+    remove(str,index){return str.substring(0,index-1)+str.substring(index);}
     threeDigitCodeCalculator(code,exponent,lowerValueSymbol,higherValueSymbol){
-        // storing var might be a problem -when pushing to the server 
         let result = (function(){
             let loopControl = parseInt(code.substring(2));
             let value = code.substring(0,2);
@@ -37,7 +36,7 @@ class Utils{
         if(result<=1000) result = result+lowerValueSymbol;
         else{
             result = (result*Math.pow(10,exponent));
-            if(result<0.9) result = result.toFixed(3);
+            if(result<0.9) result = result.toFixed(4);
             result = result+higherValueSymbol;
         }
         return result;
@@ -120,15 +119,6 @@ class MilF19207{
     }
 }
 // Tedss------------------------
-class OrangeDropTerminal {
-    constructor(typeCaseCode,length,terminalA,terminalB,terminalD) {
-        this.typeCaseCode = typeCaseCode;
-        this.length = length;
-        this.terminalA = terminalA;
-        this.terminalB = terminalB;
-        this.terminalD = terminalD;
-    }
-}
 class LittleFuse{
     constructor(amperageRating,ampCode,maxVoltage,interruptingRating,
         action,application,rcRating,csaRating,pseRating){
@@ -291,20 +281,6 @@ tables = {
         new MilF19207("MIL-F-19207/38","FHL57G","-","15A,125V","F77A","Clear,Neon,Flat-Sided Knob",2,"1/8\"")
     ],
     // tedss
-    "orangeDropTerminalArr" :  [
-        new OrangeDropTerminal("418PJ","0.70[17.78]","0.500[12.700]","0.500[12.700]","0.375[9.525]"),
-        new OrangeDropTerminal("418PK","0.90[22.86]","0.688[17.475]","0.688[17.475]","0.375[9.525]"),
-        new OrangeDropTerminal("418PL","1.20[30.48]","0.969[24.613]","0.969[24.613]","0.719[18.263]"),
-        new OrangeDropTerminal("418PM","1.60[40.64]","1.344[34.138]","1.344[34.138]","1.094[27.788]"),
-        new OrangeDropTerminal("715PJ","0.75[19.050]","0.500[12.700]","0.500[12.700]","0.375[9.525]"),
-        new OrangeDropTerminal("715PK","0.95[24.130]","0.688[17.475]","0.688[17.475]","0.375[9.525]"),
-        new OrangeDropTerminal("715PL","1.30[33.020]","1.031[26.187]","0.969[24.613]","0.719[18.263]"),
-        new OrangeDropTerminal("715PM","1.70[43.180]","1.406[35.712]","1.344[34.138]","1.094[27.788]"),
-        new OrangeDropTerminal("715PJ","0.75[19.050]","0.500[12.700]","0.500[12.700]","0.375[9.525]"),
-        new OrangeDropTerminal("715PK","0.95[24.130]","0.688[17.475]","0.688[17.475]","0.375[9.525]"),
-        new OrangeDropTerminal("715PL","1.30[33.020]","1.031[26.187]","0.969[24.613]","0.719[18.263]"),
-        new OrangeDropTerminal("715PM","1.70[43.180]","1.406[35.712]","1.344[34.138]","1.094[27.788]")
-    ],
     "251" : [
         new LittleFuse(.062,".062",125,"300A@125VDC \n 50A@125VAC","fast-acting","commercial" ,true,true,false),
         new LittleFuse(.125,".125",125,"300A@125VDC \n 50A@125VAC","fast-acting","commercial" ,true,true,false),

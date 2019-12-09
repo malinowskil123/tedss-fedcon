@@ -31,7 +31,7 @@ function loadVoltageDropDown(){
     }
 }
 function validateCapacitance(capacitance){
-    let regex = new RegExp(/^[1-9]{1}[\d]{2}$/);
+    const regex = new RegExp(/^[1-9]{1}[\d]{2}$/);
     if(regex.test(capacitance)) return true;
     else{
         (function(){
@@ -69,10 +69,10 @@ window.onload = enablePopover;
 const reset = (function(){
     $("#series").change(function(){
         let resetDropDownVal = $("#inputType").val();
-        if(resetDropDownVal==="") utils.resetAppTedss("#metalFilmCapsApp","#resourcesMetalFilmCaps");
+        if(resetDropDownVal==="") utils.resetTedss("#metalFilmCapsApp","#resourcesMetalFilmCaps");
     });
     $("#resetApp").click(function(){
-        utils.resetAppTedss("#metalFilmCapsApp","#resourcesMetalFilmCaps");
+        utils.resetTedss("#metalFilmCapsApp","#resourcesMetalFilmCaps");
     });
 })();
 window.onload = reset;

@@ -9,19 +9,11 @@
     <meta name="description" content="Learn more about Orange Drop Capacitors."/>    
     <meta name="keywords" content=""/>    
 
-  <!--css-->
-  <link href="/css/images/favicon.ico" rel="shortcut icon" type="image/x-icon" />
-  <link href="/css/bootstrap-4.0.0/css/bootstrap.min.css" rel="stylesheet">
-  <link href="/css/site.css" rel="stylesheet">
-  <link href="/css/basket.css" rel="stylesheet">
-  <link href="/css/fancybox/jquery.fancybox.css" rel="stylesheet" type="text/css" media="screen"/>
-  <!--scripts-->
-  <script src="/scripts/stock/common.js" type="text/javascript"></script>    
-  <script src="/scripts/jquery/jquery-1.8.3.min.js" type="text/javascript"></script>
-  <script src="/scripts/jquery/jquery.unobtrusive-ajax.min.js" type="text/javascript"></script>
-  <script src="/scripts/jquery/jquery.validate.min.js" type="text/javascript"></script>
-  <script src="/scripts/jquery/jquery.validate.unobtrusive.min.js" type="text/javascript"></script>
-  <script src="/scripts/stock/scrollUp.js" type="text/javascript"></script>
+    <link href="/tedss/content/images/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+    <link href="/libraries/css/bootstrap-4.0.0/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/tedss/content/css/site.css" rel="stylesheet">
+    <link href="/libraries/css/fancybox/jquery.fancybox.css" rel="stylesheet" type="text/css" media="screen"/>
+    <script src="/libraries/javascript/jquery/jquery-1.8.3.min.js" type="text/javascript"></script>
 </head>
 <body id="top">
     <!--container***************************************-->
@@ -30,11 +22,11 @@
             <div class="col-lg-6" id="header2">
                 <div class="media">
                     <div class="media-left d-none d-lg-block"  id="mLogo">
-                        <a class="media-object" href="/"><img alt="Tedss.com logo." src="/css/images/tedssDotComLogo.png" /></a>
+                        <a class="media-object" href="/"><img alt="Tedss.com logo." src="/tedss/content/images/tedssDotComLogo.png" /></a>
                     </div>
                     <div class="media-body  d-flex flex-column">
                         <div class="media-heading text-center"><h2 class="noWrap">Discount Electronic Components</h2></div>
-                        <div class="order-first order-lg-2 text-center"><a href="/"><img class="img-fluid text-center" src="/css/images/tedssNamePic.png" width="415" height="38" alt="Tedss.com text."/></a></div>			
+                        <div class="order-first order-lg-2 text-center"><a href="/"><img class="img-fluid text-center" src="/tedss/content/images/tedssNamePic.png" width="415" height="38" alt="Tedss.com text."/></a></div>			
                     </div>
                 </div>
             </div>  
@@ -76,7 +68,18 @@
                     </li>
                 </ul>
             </div>
-        </nav>  
+        </nav>
+        <div id="popup" class="popup container-popup hidden">
+            <div class="popup-content">
+                <div class="popup-header">
+                    <h2>Incorrect Input</h2>
+                </div>
+                <div class="popup-body text-center">
+                    <p id="popupText"></p>
+                    <p>Please Try Again.</p>
+                </div>
+            </div>
+        </div>        
         <div class="framedArea my-2">
             <div class="lightColorBar mx-2 mt-1 pl-3 text-center"><h1>Orange Drop Capacitors</h1></div>
             <div class="breadCrumbs text-uppercase mx-3 mt-2"><a href="/">HOME</a> > <a href="/LearnMore">RESOURCES</a> > Orange Drop Capacitors</div>
@@ -96,7 +99,7 @@
                     </p> 
                 </div>
                 <div class="col-lg-4 text-center my-5 my-md-4 ">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/6/69/Robert_C._Sprague_%28Spargue_Electric_Founder%29.jpg" alt="Robert Sprague Pic" class="img-fluid img-thumbnail" width="50%">
+                    <img src="/tedss/content/images/orangeDropCaps/Robert_C._Sprague_(Spargue_Electric_Founder).jpg" alt="Robert Sprague" class="img-fluid img-thumbnail" width="50%">
                 </div>
             </div>    
         </div>
@@ -114,11 +117,11 @@
                 <div class="col-md-6">
                     <div class="row">
                         <div class="col-lg-6 text-center">
-                            <img src="https://www.tedss.com/stock/images/1173/1173003461.jpg" alt="Picture of Round Orange Drop Capacitor." class="img-fluid"/>
+                            <img src="/tedss/content/images/orangeDropCaps/1173003461.jpg" alt="Picture of Round Orange Drop Capacitor." class="img-fluid"/>
                             <p>Round</p>            
                         </div>
                         <div class="col-lg-6 text-center">
-                            <img src="https://www.tedss.com/stock/images/1173/1173000384.jpg" alt="Picture of Flat Orange Drop Capacitor." class="img-fluid"/>
+                            <img src="/tedss/content/images/orangeDropCaps/1173000384.jpg" alt="Picture of Flat Orange Drop Capacitor." class="img-fluid"/>
                             <p>Flat</p>
                         </div>
                     </div>
@@ -307,39 +310,39 @@
             </div>     
         </div>
         <div class="framedArea my-2 pt-4 pb-4 mb-2">
-            <form id="orangeDropCapsApp" name="orangeDropCapsApp" class="mx-2 mx-md-3">
+            <form id="orangeDropApp" class="mx-2 mx-md-3">
                 <h2 class="text-center pb-2">Part Number Breakdown for Orange Drop Capacitors</h2>
-                <h2>input</h2><hr>
                 <div class="row">
                     <div class="col-md-3">
                         <label for="inputType">type</label>
-                        <select class="form-control" id="inputType" name="inputType" onchange="selectedTypeOrangeDropCaps(inputType.value);validateOrangeDropCapsApp();">
-                            <option value=" "></option>
+                        <select class="form-control" id="inputType" onchange="validate();loadToleranceDropDown();loadVoltageDropDown();">
+                            <option value="">Please Select Type</option>
                             <option value="418P">418P</option>
                             <option value="715P">715P</option>
                             <option value="716P">716P</option>
                         </select>
                     </div>
                     <div class="col-md-3">
+                        <label for="inputVoltage">voltage</label>
+                        <select class="form-control" id="inputVoltage" onchange="validate();"><option value="">Please Select Voltage</option></select>
+                    </div>
+                    <div class="col-md-3">
                         <label for="inputCapacitance">
                             capacitance
                         </label> 
-                        <input id="inputCapacitance" type="number" class="form-control" onchange="validateOrangeDropCapsApp();"  data-container="body" data-toggle="popover"  data-trigger="hover" data-placement="top" data-content="Enter a Three Digit Number!">
+                        <input id="inputCapacitance" type="number" class="form-control" onchange="validate();" placeholder="103"
+                            data-container="body" data-toggle="popover"  data-trigger="hover" data-placement="top" data-content="Enter a Three Digit Number!">
                     </div>
                     <div class="col-md-3">
                         <label for="inputTolerance">tolerance</label>
-                        <select class="form-control" id="inputTolerance" name="inputTolerance" onchange="validateOrangeDropCapsApp();"><option value=" "></option></select>
-                    </div>
-                    <div class="col-md-3">
-                        <label for="inputVoltage">voltage</label>
-                        <input id="inputVoltage" type="text" class="form-control" onchange="validateOrangeDropCapsApp();" data-container="body" data-toggle="popover" data-placement="top" data-trigger="hover" data-content="Enter a Single Digit Number! A 'R' May Proceed The Number To Denote A Lower Voltage">
+                        <select class="form-control" id="inputTolerance" onchange="validate();"><option value="">Please Select Tolerance</option></select>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-md-4">
                         <label for="inputCaseCode">case code</label>
-                        <select class="form-control" id="inputCaseCode" name="inputCaseCode" onchange="validateOrangeDropCapsApp();">
-                            <option value=" "></option>
+                        <select class="form-control" id="inputCaseCode" onchange="validate();">
+                            <option value="">Please Select Case Code</option>
                             <option value="J">J</option>
                             <option value="K">K</option>
                             <option value="L">L</option>
@@ -348,8 +351,8 @@
                     </div>
                     <div class="col-md-4">
                         <label for="inputTerminal">terminal</label>
-                        <select class="form-control" id="inputTerminal" name="inputTerminal" onchange="validateOrangeDropCapsApp();">
-                            <option value=" "></option>
+                        <select class="form-control" id="inputTerminal" onchange="validate();">
+                            <option value="">Please Select Terminal</option>
                             <option value="A">A</option>
                             <option value="B">B</option>
                             <option value="D">D</option>
@@ -357,60 +360,47 @@
                     </div>
                     <div class="col-md-4">
                         <label for="inputLeadLength">lead length</label>
-                        <select class="form-control" id="inputLeadLength" name="inputLeadLength" onchange="validateOrangeDropCapsApp();">
-                            <option value=" "></option>
+                        <select class="form-control" id="inputLeadLength" onchange="validate();">
+                            <option value="">Please Select Lead Length</option>
                             <option value="1">1</option>
                             <option value="2">2</option>
                             <option value="3">3</option>
                         </select>
                     </div>
                 </div>
-                <div id="terminalInformation" class="pt-4">
-                   <div class="text-center col-8 offset-md-2">
-                        <div class="table-responsive">
-                            <table id="terminalDimensionsTable" class="table table-striped text-center">
-                                <tbody>
-                                    <tr id="caseLength">
-                                        <th>LENGTH</th>
-                                        <td id="caseLengthVal"></td>
-                                    </tr>
-                                    <tr id="terminalSpacing">
-                                        <th>TERMINAL SPACING</th>
-                                        <td id="terminalSpacingVal"></td>
-                                    </tr>
-                                    <tr id="terminalLeadLength">
-                                        <th>LEAD LENGTH</th>
-                                        <td id="terminalLeadLengthVal"></td>
-                                    </tr>
-                                </tbody>       
-                            </table>
+                <div id="resources" class="hidden"> 
+                    <h2>part number explanation</h2><hr>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <label for="outputCapacitance">capacitance</label>
+                            <input class="form-control"type="text" id="outputCapacitance" disabled>
                         </div>
-                   </div>
-                </div>  
-                <h2>part number explanation</h2><hr>
-                <div class="row">
-                    <div class="col-md-6">
-                        <label for="outputCapacitance">capacitance</label>
-                        <input class="form-control"type="text" id="outputCapacitance" disabled>
-                        <label for="outputTolerance">tolerance</label>
-                        <input class="form-control" type="text" id="outputTolerance" disabled>
+                        <div class="col-md-4">
+                            <label for="outputTolerance">tolerance</label>
+                            <input class="form-control" type="text" id="outputTolerance" disabled>
+                        </div>
+                        <div class="col-md-4">
+                            <label for="outputTolerance">voltage</label>
+                            <input class="form-control" type="text" id="outputVoltage" disabled>
+                        </div>
                     </div>
-                    <div class="col-md-6">
-                        <label for="outputVoltage">voltage</label>
-                        <input class="form-control"type="text" id="outputVoltage" disabled> 
-                        <label for="outputPartNumber">part number</label>
-                        <input class="form-control"type="text" id="outputPartNumber" disabled>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label for="outputVoltage">lead length in[mm]</label>
+                            <input class="form-control"type="text" id="outputLeadLength" disabled> 
+                        </div>
+                        <div class="col-md-6">
+                            <label for="outputPartNumber">part number</label>
+                            <input class="form-control"type="text" id="outputPartNumber" disabled>
+                        </div>
                     </div>
-                </div>
-                <div id="resourcesOrangeDropCaps" class="row text-center pt-5">
-                    <div class="col-md-4">
-                        <input type="reset" value="Reset Values" class="btn btn-lg btn-dark mt-2 mb-4" onclick="resetOrangeDropCapsApp();">
-                    </div>
-                    <div class="col-md-4">
-                        <a id="terminalImgButton" href="#" class="fancybox"><input type="button" value="View Terminal" class="btn btn-lg btn-dark mt-2 mb-4"></a>
-                    </div>
-                    <div class="col-md-4">
-                        <a id="productLinkOrangeDropCaps" name="productLinkOrangeDropCaps" href="#" target="_blank"><input type="button" value="Search PNB" class="btn btn-lg btn-dark mt-2 mb-4"></a>
+                    <div class="row text-center pt-5">
+                        <div class="col-md-6">
+                            <input id="resetApp" type="reset" value="Reset Values" class="btn btn-lg btn-dark mt-2 mb-4">
+                        </div>
+                        <div class="col-md-6">
+                            <a id="terminal" href="#" class="fancybox"><input type="button" value="View Terminal" class="btn btn-lg btn-dark mt-2 mb-4"></a>
+                        </div>
                     </div>
                 </div>  
             </form>
@@ -441,22 +431,22 @@
                             <tbody class="table-bordered">
                                 <tr>
                                     <th>Polyester</th>
-                                    <td><a target="spec" href="https://www.tedss.com/DataSheets/2020/225P-Orange-Drop-Capacitors.pdf"><img src="https://cdn4.iconfinder.com/data/icons/file-extensions-1/64/pdfs-512.png" class="my-2" width="60" height="70"/><p>225P</p></a></td>
-                                    <td><a target="spec" href="https://www.tedss.com/DataSheets/2020/418P-Orange-Drop-Capacitors.pdf"><img src="https://cdn4.iconfinder.com/data/icons/file-extensions-1/64/pdfs-512.png" class="my-2" width="60" height="70"/><p>418P</p></a></td>    
+                                    <td><a target="spec" href="/tedss/content/specsheet/orangeDropCaps/225P-Orange-Drop-Capacitors.pdf"><img src="/tedss/content/images/pdfIcon.png" class="my-2"/><p>225P</p></a></td>
+                                    <td><a target="spec" href="/tedss/content/specsheet/orangeDropCaps/418P-Orange-Drop-Capacitors.pdf"><img src="/tedss/content/images/pdfIcon.png" class="my-2"/><p>418P</p></a></td>    
                                 </tr>
                                 <tr>
                                     <th>Polyester/Polypropylene</th>
-                                    <td><a target="spec" href="https://www.tedss.com/DataSheets/2020/PS-Orange-Drop-Capacitors.pdf"><img src="https://cdn4.iconfinder.com/data/icons/file-extensions-1/64/pdfs-512.png" class="my-2" width="60" height="70"/><p>PS</p></a></td>
+                                    <td><a target="spec" href="/tedss/content/specsheet/orangeDropCaps/PS-Orange-Drop-Capacitors.pdf"><img src="/tedss/content/images/pdfIcon.png" class="my-2"/><p>PS</p></a></td>
                                     <td>&nbsp;</td>
                                 </tr>
                                 <tr>
                                     <th>Polypropylene</th>
-                                    <td><a target="spec" href="https://www.tedss.com/DataSheets/2020/715P-Orange-Drop-Capacitors.pdf"><img src="https://cdn4.iconfinder.com/data/icons/file-extensions-1/64/pdfs-512.png" class="my-2" width="60" height="70"/><p>715P</p></a></td>
-                                    <td><a target="spec" href="https://www.tedss.com/DataSheets/2020/716P-Orange-Drop-Capacitors.pdf"><img src="https://cdn4.iconfinder.com/data/icons/file-extensions-1/64/pdfs-512.png" class="my-2" width="60" height="70"/><p>716P</p></a></td>
+                                    <td><a target="spec" href="/tedss/content/specsheet/orangeDropCaps/715P-Orange-Drop-Capacitors.pdf"><img src="/tedss/content/images/pdfIcon.png" class="my-2"/><p>715P</p></a></td>
+                                    <td><a target="spec" href="/tedss/content/specsheet/orangeDropCaps/716P-Orange-Drop-Capacitors.pdf"><img src="/tedss/content/images/pdfIcon.png" class="my-2"/><p>716P</p></a></td>
                                 </tr>
                                 <tr>
                                     <th>Polystyrene</th>
-                                    <td><a target="spec" href="https://www.tedss.com/DataSheets/2020/287P-Orange-Drop-Capacitors.pdf"><img src="https://cdn4.iconfinder.com/data/icons/file-extensions-1/64/pdfs-512.png" class="my-2" width="60" height="70"/><p>287P</p></a></td>
+                                    <td><a target="spec" href="/tedss/content/specsheet/orangeDropCaps/287P-Orange-Drop-Capacitors.pdf"><img src="/tedss/content/images/pdfIcon.png" class="my-2"/><p>287P</p></a></td>
                                     <td>&nbsp;</td>
                                 </tr>
                             </tbody>       
@@ -545,15 +535,12 @@
         <!-- *FOOTER**************************************************************** -->
     <!--container-->
     </div>
-    <script src="/scripts/bootstrap-4.0.0/jQuery.3.3.1/jquery-3.3.1.min.js" type="text/javascript"></script>
-    <script src="/scripts/bootstrap-4.0.0/popper.js.1.12.9/content/Scripts/umd/popper.min.js" type="text/javascript"></script>
-    <script src="/scripts/bootstrap-4.0.0/js/bootstrap.min.js" type="text/javascript"></script>
-    <!--from bootstrap info -->
-    <!--fancybox js-->
-    <script src="/scripts/fancybox/jquery.fancybox.pack.js"></script> 
-    <script src="/scripts/fancybox/fancybox.js" type="text/javascript"></script>
-    <script src="/scripts/utils/DataTables.js" type="text/javascript"></script>
-    <script src="/scripts/utils/Utils.js" type="text/javascript"></script>
-    <script src="/scripts/orangeDropCapsApp/App.js" type="text/javascript"></script>
+    <script src="/libraries/javascript/bootstrap-4.0.0/jQuery.3.3.1/jquery-3.3.1.min.js" type="text/javascript"></script>
+    <script src="/libraries/javascript/bootstrap-4.0.0/popper.js.1.12.9/content/Scripts/umd/popper.min.js" type="text/javascript"></script>
+    <script src="/libraries/javascript/bootstrap-4.0.0/js/bootstrap.min.js" type="text/javascript"></script>
+    <script src="/libraries/javascript/fancybox/jquery.fancybox.pack.js" type="text/javascript"></script> 
+    <script src="/libraries/javascript/fancybox/fancybox.js" type="text/javascript"></script>
+    <script src="/utils/Utils.js" text="text/javascript"></script>
+    <script src="/tedss/scripts/orangeDropCapsApp/App.js" type="text/javascript"></script>
 </body>
 </html>
