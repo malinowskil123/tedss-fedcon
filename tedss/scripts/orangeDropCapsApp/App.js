@@ -52,18 +52,20 @@ function loadVoltageDropDown(){
         }
 }
 }
-// split into two functions  make this organized and neat
 function validateCapacitance(type,voltage,capacitanceCode){
     const regex = new RegExp(/^[1-9]{1}[\d]{2}$/);
+    let checkCapacitanceVal = checkCapacitanceTable(type,voltage,capacitanceCode);
     if(capacitanceCode!==""){
-        if(regex.test(capacitanceCode)&&capacitanceBool) return true;
+        if(regex.test(capacitanceCode)&&checkCapacitanceVal.contains) return true;
         else{
             (function(){
                 utils.showHideJquery(true,"#popup");
                 $("#popupText").text(function()
                     {return (capacitanceCode.substring(0,1)==="0")
                         ? "Capacitance Code Can't Start With 0"
-                        : "Capacitance Code Too Long!"});
+                        : (!checkCapacitanceVal.contains)
+                        ?  checkCapacitanceVal.msg
+                        : "Capacitance Code Too Long!"});;
                 $('body').css("overflow","hidden");
                 const popupArea = document.getElementById("popup");
                 $(window).click(function(event){
@@ -77,17 +79,17 @@ function validateCapacitance(type,voltage,capacitanceCode){
         }
     } else return false
 }
-function checkCapacitanceTable(capacitanceCode){
+function checkCapacitanceTable(type,voltage,capacitanceCode){
     const capacitanceTable = {
         "418P" : {
-            "100" : [.27,.033,.047,.082,.1,.15,.22,.33,.47,.68,.082,1.0],
+            "100" : [.027,.033,.047,.082,.1,.15,.22,.33,.47,.68,.082,1.0],
             "200" : [.0056,.0068,.01,.015,.018,.022,.033,.039,.047,.056,.068,.082,.1,.15,.22,.27,.33,.47],
             "400" : [.001,.0015,.0022,.0033,.0047,.0068,.0082,.01,.015,.018,.022,.033,.047,.056,.068,.082,.1,.15,.18,.22,.27,.33,.39,.47],
             "600" : [.001,.0012,.0015,.0018,.0022,.0027,.0033,.0039,.0047,.0056,.0068,.0082,.01,.12,.18,.22,.25],
             "1000" : [.001,.0015,.0018,.0022,.0033,.0047,.0056,.0068,.0082,.01,.015,.018,.022,.027,.033,.039,.047,.056,.068,.082,.1]
         },
         "715P" : {
-            "200" : [.01,.012,.015,.018,.022,.027,.033,.039,.047,.056,.068,.082,.10,.12,.15,.18,.22,.27,.33,.39,.47,.56,.68,.82,1.0],
+            "200" : [.012,.015,.018,.022,.027,.033,.039,.047,.056,.068,.082,.10,.12,.15,.18,.22,.27,.33,.39,.47,.56,.68,.82,1.0],
             "400" : [.0039,.0047,.0056,.0068,.0082,.01,.012,.015,.018,.022,.027,.033,.039,.047,.056,.068,.082,.1,.12,.15,.18,.22,.27,.33,.39,.47],
             "600" : [.001,.0012,.0015,.0018,.0022,.0027,.0033,.0039,.0047,.0056,.0068,.0082,.01,.012,.015,.018,.022,.027,.033,.039,.047,.056,.068,.082,.1,.12,.15,.18,.22],
             "800" : [.0056,.0068,.0082,.01,.012,.015,.018,.022,.027,.033,.039,.047,.056,.068,.082,.1],
@@ -103,8 +105,15 @@ function checkCapacitanceTable(capacitanceCode){
             "1600" : [.001,.0012,.0015,.0018,.0022,.0027,.0033,.0039,.0047,.0056,.0068,.0082,.01,.012,.015,.018,.022,.027,.033]
         }
     };
-    let capacitanceValue = utils.threeDigitCodeCalculator(capacitanceCode,-6,"pF","µf")
-    return capacitanceTable[type][voltage].includes(parseFloat(capacitanceValue));
+    let capacitanceValue = utils.threeDigitCodeCalculator(capacitanceCode,-6,"pF","µf");
+    let tokenArr = capacitanceTable[type][voltage];
+    let containsBool = tokenArr.includes(parseFloat(capacitanceValue));
+    let invalidValMsg = `Valid voltage range for ${type} type at ${voltage}VDC \n${Math.min.apply(Math,tokenArr)}µf - ${Math.max.apply(Math,tokenArr)}µf`;
+    let obj = {
+        contains : containsBool,
+        msg : (!containsBool)? invalidValMsg : "",
+    };
+    return obj;
 }
 function loadData(dropDownValues){
     const elementID = ["#outputCapacitance","#outputTolerance","#outputVoltage","#outputLeadLength","#outputPartNumber"];
