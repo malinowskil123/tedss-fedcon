@@ -2,16 +2,10 @@ class Utils{
     constructor() {};
     getSelectedFields(dropDownIdArr,attr) {
         let selectedFieldsVal = [];
-        if(attr==="text"){
-            for (let i = 0; i < dropDownIdArr.length; i++) {
-                selectedFieldsVal[i] = $(dropDownIdArr[i]+" option:selected").text();
-            }
-        } else{
-            for (let i = 0; i < dropDownIdArr.length; i++) {
-                selectedFieldsVal[i] = $(dropDownIdArr[i]).val();
-            }
-        }
-        return selectedFieldsVal;
+        for (let i = 0; i < dropDownIdArr.length; i++) {
+            if(attr==="text")selectedFieldsVal[i] = $(dropDownIdArr[i]+" option:selected").text();
+            else selectedFieldsVal[i] = $(dropDownIdArr[i]).val();
+        } return selectedFieldsVal;
     }
     clearText(selectIdArr) {
         for (let a = 0; a < selectIdArr.length; a++) {

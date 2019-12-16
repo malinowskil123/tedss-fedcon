@@ -143,6 +143,115 @@ img.extra-small {
     width: 20%;
 }
 
+/* resistor table classes */
+.resTable{
+    background-color: #603A27; 
+    table-layout: auto;
+    width:100%; 
+    margin-top: 25px;
+    margin-bottom: 25px;
+}
+.resBlack{
+    background-color: black; 
+}
+.resBrown{
+    background-color: brown; 
+}
+.resRed{
+    background-color: red; 
+}
+.resOrange{
+    background-color: orangered; 
+}
+.resYellow{
+    background-color: yellow; 
+}
+.resGreen{
+    background-color: green; 
+}
+.resBlue{
+    background-color: blue; 
+}
+.resViolet{
+    background-color: violet; 
+
+}
+.resGray{
+    background-color: gray; 
+}
+.resWhite{
+    background-color: white; 
+}
+.resGold{
+    background-color: gold; 
+}
+.resSilver{
+    background-color: silver; 
+}
+.resNoColor{
+    background-color: #603A27; 
+}
+@media only screen and (max-width: 576px){
+    .resTable {
+        height: 100px;
+    }
+    #band1{
+        border-right: solid #603A27 20px; 
+        border-left: solid #603A27 20px;
+    } 
+    #band2,#band3,#band4,#band5{
+        border-right: solid #603a27 20px;
+    } 
+}
+@media only screen and (min-width: 577px){
+    .resTable {
+        height: 150px;
+    }
+    #band1{
+        border-right: solid #603A27 50px; 
+        border-left: solid #603A27 50px;
+    } 
+    #band2,#band3,#band4,#band5{
+        border-right: solid #603a27 50px;
+    } 
+}
+@media only screen and (min-width: 768px) {
+    .resTable{
+        height: 150px;
+    }
+    #band1{
+        border-right: solid #603A27 25px; 
+        border-left: solid #603A27 25px;
+    } 
+    #band2,#band3,#band4,#band5{
+        border-right: solid #603a27 25px;
+    }
+}
+@media only screen and (min-width: 992px) {
+    .resTable{
+        height: 150px;
+    }
+    #band1{
+        border-right: solid #603A27 35px; 
+        border-left: solid #603A27 35px;
+    } 
+    #band2,#band3,#band4,#band5{
+        border-right: solid #603a27 35px;
+    }
+}
+@media only screen and (min-width: 1200px){
+    .resTable{
+        height: 150px; 
+    }
+    #band1{
+        border-right: solid #603A27 50px; 
+        border-left: solid #603A27 50px;
+    } 
+    #band2,#band3,#band4,#band5{
+        border-right: solid #603A27 50px;
+    }
+}
+/* don't touch classes below------------------------------------ */
 /*Set widths on the form inputs since otherwise they're 100% wide*/
 .input,.select,.textarea {
     max-width: 280px;
