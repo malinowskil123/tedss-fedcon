@@ -57,7 +57,9 @@ function getFailureRate(failureRate){
         break;
     } return failureRate;
 }
-// work here  
+// work here reset colors 
+// add no color to the last band 
+// hide tolerance input html elm when last band no color; 
 const resetResCalc = (function(){
     utilsRes.resetFedCon(false, );
 })();
