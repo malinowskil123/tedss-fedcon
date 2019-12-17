@@ -30,7 +30,7 @@ function displayColorCodeData(valuesArr){
     for(let i=0; i<obj.length;i++) $(outputID[i]).val(obj[i]);
 }
 function colorBandToNumber(color){
-    const table = {"black":0,"brown":1,"red":2,"orange":3,"yellow":4,"green":5,"blue":6,"violet":7,"gray":8,"white":9};
+    const table = {"black":0,"brown":1,"red":2,"orange":3,"yellow":4,"green":5,"blue":6,"violet":7,"gray":8,"white":9,"golf":0.1};
     return table[color.toLowerCase()];
 }
 function getTolerance(tolerance){

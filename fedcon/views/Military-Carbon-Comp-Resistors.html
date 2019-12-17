@@ -55,15 +55,20 @@
                             <table class="resTable">
                                 <tbody>
                                     <tr>
-                                        <td id="band1" width="20%">&nbsp;</td>
-                                        <td id="band2" width="20%">&nbsp;</td>
-                                        <td id="band3" width="20%">&nbsp;</td>
-                                        <td id="band4" width="20%">&nbsp;</td>
-                                        <td id="band5" width="20%">&nbsp;</td>
+                                        <td id="band1" width="25%">&nbsp;</td>
+                                        <td id="band2" width="19%">&nbsp;</td>
+                                        <td id="band3" width="19%">&nbsp;</td>
+                                        <td id="band4" width="19%">&nbsp;</td>
+                                        <td id="band5" width="19%">&nbsp;</td>
                                     </tr>
                                 </tbody>
                             </table>
                         </div>
+                    </div>
+                    <div class="text-center">
+                        <a href="/fedcon/content/images/carbonCompRes/resCalcTutorial.gif" class="fancybox">
+                            <input id="resetColorCode" type="button" value="Help" class="btn button-color btn-lg">
+                        </a>
                     </div>
                     <div class="row">
                         <div class="col-md-2 col-md-offset-1">
@@ -132,30 +137,30 @@
                             </select>
                         </div>
                     </div>
+                    <div id="colorCodeOutput" class="hidden">
+                        <div class="well body-content">
+                             <div class="row">
+                                 <div class="col-md-4">
+                                     <label for="resColorCodeResistance">Resistance</label>
+                                     <input id="resColorCodeResistance" type="text" class="form-control" disabled>
+                                 </div>
+                                 <div class="col-md-4">
+                                     <label for="resColorCodeTolerance">Tolerance</label>
+                                     <input id="resColorCodeTolerance" type="text" class="form-control" disabled>
+                                 </div>
+                                 <div class="col-md-4">
+                                     <label for="resColorCodeFailureRate">Failure Rate</label>
+                                     <input id="resColorCodeFailureRate" type="text" class="form-control" disabled>
+                                 </div>
+                             </div>
+                        </div>
+                        <div class="text-center">
+                            <!-- work here -->
+                             <input id="resetColorCode" type="reset" value="Reset" class="btn button-color btn-lg">
+                        </div>
+                    </div>       
                 </form>
             </div>
-            <div id="colorCodeOutput" class="hidden">
-               <div class="well body-content">
-                    <div class="row">
-                        <div class="col-md-4">
-                            <label for="resColorCodeResistance">Resistance</label>
-                            <input id="resColorCodeResistance" type="text" class="form-control" disabled>
-                        </div>
-                        <div class="col-md-4">
-                            <label for="resColorCodeTolerance">Tolerance</label>
-                            <input id="resColorCodeTolerance" type="text" class="form-control" disabled>
-                        </div>
-                        <div class="col-md-4">
-                            <label for="resColorCodeFailureRate">Failure Rate (Testing Per 1000 Hours)</label>
-                            <input id="resColorCodeFailureRate" type="text" class="form-control" disabled>
-                        </div>
-                    </div>
-               </div>
-               <div class="text-center">
-                   <!-- work here -->
-                    <input id="resetColorCode" type="reset" value="Reset" class="btn button-color btn-lg">
-               </div>
-            </div>       
         </div>
     </div>
     <div class="well body-content">
