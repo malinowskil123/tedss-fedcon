@@ -57,3 +57,9 @@ function getFailureRate(failureRate){
         break;
     } return failureRate;
 }
+// work here  
+const resetResCalc = (function(){
+    utilsRes.resetFedCon(false, );
+})();
+window.onload = resetResCalc;
+
