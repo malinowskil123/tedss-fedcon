@@ -18,22 +18,32 @@ class Utils{
     }
     insert(str,index,value) {return str.substr(0,index) + value+str.substr(index);}
     remove(str,index){return str.substring(0,index-1)+str.substring(index);}
-    threeDigitCodeCalculator(code,exponent,lowerValueSymbol,higherValueSymbol){
-        let result = (function(){
-            let loopControl = parseInt(code.substring(2));
+    threeDigitCodeCalculator(code){
+        let value = (function(){
+            let loopControl = parseInt(code.substring(code.length-1));
             let value = code.substring(0,2);
             for(let i=0; i<loopControl; i++){
                 value = value+"0";
-            }
-            return value;
-        })(); 
-        if(result<=1000) result = result+lowerValueSymbol;
+            } return value;
+        })(); return value;
+    }
+    roundValueLowerHigher(unit,value,exponent,decimal){
+        const symbols = [["pf","µf"],["Ω","KΩ"]];
+        unit = unit.toLowerCase();
+        let lowerValueSymbol = (unit==="farads")? symbols[0][0] : symbols[1][0];
+        let higherValueSymbol = (unit==="farads")? symbols[0][1] : symbols[1][1];
+        if(value<=1000) return value+lowerValueSymbol;
         else{
-            result = (result*Math.pow(10,exponent));
-            if(result<0.9) result = result.toFixed(4);
-            result = result+higherValueSymbol;
+            value = (value*Math.pow(10,exponent));
+            return((value - Math.floor(value))!==0)? value.toFixed(decimal)+higherValueSymbol:value+higherValueSymbol;
         }
-        return result;
+    }
+    roundValue(unit,value,exponent,decimal){
+        const symbols = ["µf","KΩ"];
+        unit = unit.toLowerCase();
+        let symbol = (unit==="farads")?symbols[0]:symbols[1];
+        value = (value*Math.pow(10,exponent));
+        return((value - Math.floor(value))!==0)? value.toFixed(decimal)+symbol : value+symbols;
     }
     getObject(tableKey,rowKey,matchObjectProperty) {
         if(tableKey==="")return null;
@@ -53,7 +63,7 @@ class Utils{
             }
             return dropdownVal;
         } catch(err){
-            console.log(err);
+            throw err;
         }
     }
     // Tedss------------------------

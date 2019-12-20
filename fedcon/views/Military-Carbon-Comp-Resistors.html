@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Military Fuse Holders</title>
+    <title>Military Carbon Comp Resistors</title>
     <link href="/fedcon/content/css/site.css" rel="stylesheet">
     <link href="/libraries/css/bootstrap-3/bootstrap.min.css" rel="stylesheet">
     <link href="/libraries/css/fancybox/jquery.fancybox.css" rel="stylesheet">
@@ -33,8 +33,8 @@
     <div class="panel panel-default">
         <div class="panel-heading text-center"><h2>Military Resistor App</h2></div>
         <div class="panel-body body-content">
-            <form id="formMilF19207" onsubmit="return false;">
-                <!-- swtich between color calc and PNB -->
+            <form id="formResColorCode" onsubmit="return false;">
+                <!-- switch between color calc and PNB -->
                 <div class="well body-content">
                     <div class="row">
                         <div class="col-md-4 col-md-offset-4">
@@ -49,10 +49,10 @@
                     <h3 class="text-center">Color Code Calculator</h3>
                     <div class="row">
                         <div class="col-sm-6 col-sm-offset-3">
-                            <table class="resTable">
+                            <table id="resTable" class="resTable">
                                 <tbody>
                                     <tr>
-                                        <td id="band1" width="25%">&nbsp;</td>
+                                        <td id="band1" width="25%" class="resDefault">&nbsp;</td>
                                         <td id="band2" width="19%">&nbsp;</td>
                                         <td id="band3" width="19%">&nbsp;</td>
                                         <td id="band4" width="19%">&nbsp;</td>
@@ -64,14 +64,14 @@
                     </div>
                     <div class="text-center">
                         <a href="/fedcon/content/images/carbonCompRes/resCalcTutorial.gif" class="fancybox">
-                            <input id="resetColorCode" type="button" value="Help" class="btn button-color btn-lg">
+                            <input type="button" value="Help" class="btn button-color btn-lg">
                         </a>
                     </div>
                     <div class="row">
                         <div class="col-md-2 col-md-offset-1">
                             <label for="colorBandDropDown1">1nd Color Band</label>
-                            <select id="colorBandDropDown1" class="form-control" onchange="validateResColorCode();changeColorBand(this.id,colorBandDropDown1.value);">
-                                <option value="NoColor">Select Color</option>
+                            <select id="colorBandDropDown1" class="form-control" onchange="validateResColorCode();changeColorBand('band1',colorBandDropDown1.value);">
+                                <option value="">Select Color</option>
                                 <option value="Brown">Brown</option>
                                 <option value="Red">Red</option>
                                 <option value="Orange">Orange</option>
@@ -85,8 +85,8 @@
                         </div>
                         <div class="col-md-2">
                             <label for="colorBandDropDown2">2nd Color Band</label>
-                            <select id="colorBandDropDown2" class="form-control" onchange="validateResColorCode();changeColorBand(this.id,colorBandDropDown2.value);">
-                                <option value="NoColor">Select Color</option>
+                            <select id="colorBandDropDown2" class="form-control" onchange="validateResColorCode();changeColorBand('band2',colorBandDropDown2.value);">
+                                <option value="">Select Color</option>
                                 <option value="Black">Black</option>
                                 <option value="Brown">Brown</option>
                                 <option value="Red">Red</option>
@@ -101,8 +101,8 @@
                         </div>
                         <div class="col-md-2">
                             <label for="colorBandDropDown3">3rd Color Band</label>
-                            <select id="colorBandDropDown3" class="form-control" onchange="validateResColorCode();changeColorBand(this.id,colorBandDropDown3.value);">
-                                <option value="NoColor">Select Color</option>
+                            <select id="colorBandDropDown3" class="form-control" onchange="validateResColorCode();changeColorBand('band3',colorBandDropDown3.value);">
+                                <option value="">Select Color</option>
                                 <option value="Black">Black</option>
                                 <option value="Brown">Brown</option>
                                 <option value="Red">Red</option>
@@ -116,21 +116,22 @@
                         </div>
                         <div class="col-md-2">
                             <label for="colorBandDropDown4">4th Color Band</label>
-                            <select id="colorBandDropDown4" class="form-control" onchange="validateResColorCode();changeColorBand(this.id,colorBandDropDown4.value);">
-                                <option value="NoColor">Select Color</option>
+                            <select id="colorBandDropDown4" class="form-control" onchange="validateResColorCode();changeColorBand('band4',colorBandDropDown4.value);">
+                                <option value="">Select Color</option>
                                 <option value="Gold">Gold</option>
                                 <option value="Silver">Silver</option>
-                                <option value="NoColor">No Color</option>
+                                <option value="Empty">No Color</option>
                             </select>
                         </div>
                         <div class="col-md-2">
                             <label for="colorBandDropDown5">5th Color Band</label>
-                            <select id="colorBandDropDown5" class="form-control" onchange="validateResColorCode();changeColorBand(this.id,colorBandDropDown5.value);">
+                            <select id="colorBandDropDown5" class="form-control" onchange="validateResColorCode();changeColorBand('band5',colorBandDropDown5.value);">
                                 <option value="NoColor">Select Color</option>
                                 <option value="Brown">Brown</option>
                                 <option value="Red">Red</option>
                                 <option value="Orange">Orange</option>
                                 <option value="Yellow">Yellow</option>
+                                <option value="Empty">No Color</option>
                             </select>
                         </div>
                     </div>      
@@ -153,7 +154,6 @@
                          </div>
                     </div>
                     <div class="text-center">
-                        <!-- work here -->
                          <input id="resetColorCode" type="reset" value="Reset" class="btn button-color btn-lg">
                     </div>
                 </div> 
@@ -166,7 +166,7 @@
                 <img src="/fedcon/content/images/shared/federalConnectorLogo.png" alt="FedConLogo" class="ri" />
             </div>
             <div class="col-md-9 text-center">
-                <h2><a href="https://federalconnectors.com/FuseHolders" target="_blank">Click here to browse our <strong>Fuse Holder</strong> inventory</a></h2>
+                <h2><a href="https://federalconnectors.com/CarbonCompositionResistors" target="_blank">Click here to browse our <strong>Carbon Composition</strong> Resistors inventory</a></h2>
                 <p class="text-justify">
                     <strong>Federal Connectors</strong> is a supplier of Military Connectors,
                     Military Fuses, Military Potentiometers, Military Resistors, Military Relays and other electronic components to the US government and various subcontractors.

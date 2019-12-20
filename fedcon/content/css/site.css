@@ -7,7 +7,13 @@ body {
     letter-spacing: 1px;
 }
 
-h1, h2, h3, h4, h5, h6, p {
+h1, 
+h2, 
+h3, 
+h4, 
+h5, 
+h6, 
+p {
     color: #333333 !important;
 }
 
@@ -143,173 +149,234 @@ img.extra-small {
     width: 20%;
 }
 
-/* resistor table classes */
-.resTable{
-    background-color: #603A27; 
-    table-layout: auto;
-    width:100%; 
-    margin-top: 25px;
-    margin-bottom: 25px;
+/* resistor table classes */ 
+.resTable {
+	background-color: #603A27;
+	table-layout: auto;
+	width: 100%;
+	margin-top: 25px;
+	margin-bottom: 25px;
 }
-.resBlack{
-    background-color: black; 
-}
-.resBrown{
-    background-color: brown; 
-}
-.resRed{
-    background-color: red; 
-}
-.resOrange{
-    background-color: orangered; 
-}
-.resYellow{
-    background-color: yellow; 
-}
-.resGreen{
-    background-color: green; 
-}
-.resBlue{
-    background-color: blue; 
-}
-.resViolet{
-    background-color: violet; 
 
+.resBlack {
+	background-color: black;
 }
-.resGray{
-    background-color: gray; 
+
+.resBrown {
+	background-color: brown;
 }
-.resWhite{
-    background-color: white; 
+
+.resRed {
+	background-color: red;
 }
-.resGold{
-    background-color: gold; 
+
+.resOrange {
+	background-color: orangered;
 }
-.resSilver{
-    background-color: silver; 
+
+.resYellow {
+	background-color: yellow;
 }
-.resNoColor{
-    background-color: #603A27; 
+
+.resGreen {
+	background-color: green;
 }
-@media only screen and (max-width: 576px){
-    .resTable {
-        height: 100px;
+
+.resBlue {
+	background-color: blue;
+}
+
+.resViolet {
+	background-color: violet;
+}
+
+.resGray {
+	background-color: gray;
+}
+
+.resWhite {
+	background-color: white;
+}
+
+.resGold {
+	background-color: gold;
+}
+
+.resSilver {
+	background-color: silver;
+}
+
+/* .resNoColor {
+	background-color: #603A27;
+} */
+
+.resDefault {
+    background-color: #808080;
+    animation: blinker 1.5s linear infinite;
+}
+@keyframes blinker {
+    50% {
+        opacity: 0;
     }
-    #band1{
-        border-right: solid #603A27 20px; 
-        border-left: solid #603A27 40px;
-    } 
-    #band2,#band3,#band4,#band5{
-        border-right: solid #603a27 20px;
-    } 
 }
-@media only screen and (min-width: 577px){
-    .resTable {
-        height: 150px;
-    }
-    #band1{
-        border-right: solid #603A27 50px; 
-        border-left: solid #603A27 100px;
-    } 
-    #band2,#band3,#band4,#band5{
-        border-right: solid #603a27 50px;
-    } 
+
+@media only screen and (max-width: 576px) {
+	.resTable {
+		height: 100px;
+	}
+	#band1 {
+		border-right: solid #603A27 20px;
+		border-left: solid #603A27 40px;
+	}
+	#band2,
+	#band3,
+	#band4,
+	#band5 {
+		border-right: solid #603a27 20px;
+	}
 }
+
+@media only screen and (min-width: 577px) {
+	.resTable {
+		height: 150px;
+	}
+	#band1 {
+		border-right: solid #603A27 50px;
+		border-left: solid #603A27 100px;
+	}
+	#band2,
+	#band3,
+	#band4,
+	#band5 {
+		border-right: solid #603a27 50px;
+	}
+}
+
 @media only screen and (min-width: 768px) {
-    .resTable{
-        height: 150px;
-    }
-    #band1{
-        border-right: solid #603A27 25px; 
-        border-left: solid #603A27 50px;
-    } 
-    #band2,#band3,#band4,#band5{
-        border-right: solid #603a27 25px;
-    }
+	.resTable {
+		height: 150px;
+	}
+	#band1 {
+		border-right: solid #603A27 25px;
+		border-left: solid #603A27 50px;
+	}
+	#band2,
+	#band3,
+	#band4,
+	#band5 {
+		border-right: solid #603a27 25px;
+	}
 }
+
 @media only screen and (min-width: 992px) {
-    .resTable{
-        height: 150px;
-    }
-    #band1{
-        border-right: solid #603A27 35px; 
-        border-left: solid #603A27 65px;
-    } 
-    #band2,#band3,#band4,#band5{
-        border-right: solid #603a27 35px;
-    }
+	.resTable {
+		height: 150px;
+	}
+	#band1 {
+		border-right: solid #603A27 35px;
+		border-left: solid #603A27 65px;
+	}
+	#band2,
+	#band3,
+	#band4,
+	#band5 {
+		border-right: solid #603a27 35px;
+	}
 }
-@media only screen and (min-width: 1200px){
-    .resTable{
-        height: 150px; 
-    }
-    #band1{
-        border-right: solid #603A27 50px; 
-        border-left: solid #603A27 100px;
-    } 
-    #band2,#band3,#band4,#band5{
-        border-right: solid #603A27 50px;
-    }
+
+@media only screen and (min-width: 1200px) {
+	.resTable {
+		height: 150px;
+	}
+	#band1 {
+		border-right: solid #603A27 50px;
+		border-left: solid #603A27 100px;
+	}
+	#band2,
+	#band3,
+	#band4,
+	#band5 {
+		border-right: solid #603A27 50px;
+	}
 }
+
+
 /* don't touch classes below------------------------------------ */
 /*Set widths on the form inputs since otherwise they're 100% wide*/
-.input,.select,.textarea {
-    max-width: 280px;
+
+.input,
+.select,
+.textarea {
+	max-width: 280px;
 }
+
 /*Move down content because we have a fixed navbar that is 50px tall*/
-.body-padding{
-    padding-top: 50px;
-    padding-bottom: 20px;
+
+.body-padding {
+	padding-top: 50px;
+	padding-bottom: 20px;
 }
+
 /*Wrapping element*/
 /*Set some basic padding to keep content from hitting the edges*/
+
 .body-content {
-    padding-left: 15px;
-    padding-right: 15px;
+	padding-left: 15px;
+	padding-right: 15px;
 }
+
 /*Responsive Screens*/
 /* Small devices (landscape phones, 576px and up) */
-@media only screen and (max-width: 576px){
-    .container {
-        margin-top: 10px;
-        margin-bottom: 10px;
-        margin-left: auto;
-        margin-right: auto;
-    }  
+
+@media only screen and (max-width: 576px) {
+	.container {
+		margin-top: 10px;
+		margin-bottom: 10px;
+		margin-left: auto;
+		margin-right: auto;
+	}
 }
+
 /* Medium devices (tablets, 768px and up) */
+
 @media only screen and (min-width: 768px) {
-    .container{
-        margin-top: 20px;
-        margin-bottom: 20px;
-        margin-left: auto;
-        margin-right: auto;
-    }
+	.container {
+		margin-top: 20px;
+		margin-bottom: 20px;
+		margin-left: auto;
+		margin-right: auto;
+	}
 }
+
 /* weird */
-@media  (max-width: 991px){
-    .container{
-        margin-top: 20px;
-        margin-bottom: 20px;
-        margin-left: auto;
-        margin-right: auto;
-    }
+
+@media (max-width: 991px) {
+	.container {
+		margin-top: 20px;
+		margin-bottom: 20px;
+		margin-left: auto;
+		margin-right: auto;
+	}
 }
+
 /* Large devices (desktops, 992px and up) */
+
 @media only screen and (min-width: 992px) {
-    .container{
-        margin-top: 20px;
-        margin-bottom: 20px;
-        margin-left: auto;
-        margin-right: auto;
-    }
+	.container {
+		margin-top: 20px;
+		margin-bottom: 20px;
+		margin-left: auto;
+		margin-right: auto;
+	}
 }
+
 /* Extra large devices (large desktops, 1200px and up) */
-@media only screen and (min-width: 1200px){
-    .container{
-        margin-top: 30px;
-        margin-bottom: 30px;
-        margin-left: auto;
-        margin-right: auto;
-    }
+
+@media only screen and (min-width: 1200px) {
+	.container {
+		margin-top: 30px;
+		margin-bottom: 30px;
+		margin-left: auto;
+		margin-right: auto;
+	}
 }

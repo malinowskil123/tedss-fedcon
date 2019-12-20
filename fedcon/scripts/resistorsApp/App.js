@@ -1,13 +1,20 @@
 const utilsRes = new Utils();
+// work here
 function changeColorBand(id,color){
-    id = id.replace("colorBandDropDown","#band"), color = "res" + color;
-    let removePrevColor = $(id).attr("class");
-    $(id).removeClass(removePrevColor);
-    $(id).addClass(color);
+    const tdID = ["#band1","#band2","#band3","#band4","#band5"];
+    let currentIndex = tdID.indexOf("#"+id),
+        nextIndex = currentIndex+1;
+    let prevColor = $(tdID[currentIndex]).attr("class");
+    // let nextElmColor = $(tdID[nextIndex]).attr("class")
+    $(tdID[currentIndex]).removeClass(prevColor);
+    if(color!=="")$(tdID[currentIndex]).addClass("res"+color);
+    $(tdID[nextIndex]).toggleClass("resDefault");
+    if(color===""&&currentIndex===tdID.length-1)$(tdID[currentIndex]).addClass("resDefault");
 }
+// write a function to disable drop downs;
 function validateResColorCode(){
-    const tdID = ["#colorBandDropDown1","#colorBandDropDown2","#colorBandDropDown3","#colorBandDropDown4","#colorBandDropDown5"];
-    let valuesArr = utilsRes.getSelectedFields(tdID,"text");
+    const dropDownID = ["#colorBandDropDown1","#colorBandDropDown2","#colorBandDropDown3","#colorBandDropDown4","#colorBandDropDown5"];
+    let valuesArr = utilsRes.getSelectedFields(dropDownID,"text");
     let displayBool;
     if(!valuesArr.includes("Select Color")){
         displayBool = true;
@@ -18,11 +25,7 @@ function validateResColorCode(){
 function displayColorCodeData(valuesArr){
     const outputID = ["#resColorCodeResistance","#resColorCodeTolerance","#resColorCodeFailureRate"];  
     let obj = {
-        resistance : (function(){
-            let resCode = "";
-            for(let i=0; i<3;i++) resCode+= colorBandToNumber(valuesArr[i]);
-            return utilsRes.threeDigitCodeCalculator(resCode,-3,"Ω","KΩ");
-        })(),
+        resistance : (function(){return getResistance(valuesArr.slice(0,3))})(),
         tolerance : (function(){return getTolerance(valuesArr[3]);})(),
         failureRate : (function(){return getFailureRate(valuesArr[4]);})()
     }
@@ -30,8 +33,20 @@ function displayColorCodeData(valuesArr){
     for(let i=0; i<obj.length;i++) $(outputID[i]).val(obj[i]);
 }
 function colorBandToNumber(color){
-    const table = {"black":0,"brown":1,"red":2,"orange":3,"yellow":4,"green":5,"blue":6,"violet":7,"gray":8,"white":9,"golf":0.1};
+    const table = {"black":0,"brown":1,"red":2,"orange":3,"yellow":4,"green":5,"blue":6,"violet":7,"gray":8,"white":9,"gold":0.1};
     return table[color.toLowerCase()];
+}
+function getResistance(colorCodeArr){
+    let resCode = "";
+    for(let i=0; i<colorCodeArr.length;i++) resCode+= colorBandToNumber(colorCodeArr[i]);
+    let rawResValue = (function(){
+        if(resCode.substring(resCode.length-3)==0.1){
+            resCode = resCode.substring(0,2)
+            return parseFloat(resCode)*0.1;
+        } else return utilsRes.threeDigitCodeCalculator(resCode);
+    })();
+    let resValue = utilsRes.roundValueLowerHigher("ohms",rawResValue,-3,2)
+    return resValue;
 }
 function getTolerance(tolerance){
     tolerance = tolerance.toLowerCase();
@@ -47,21 +62,29 @@ function getTolerance(tolerance){
 function getFailureRate(failureRate){
     failureRate = failureRate.toLowerCase();
     switch(failureRate){
-        case "black":  failureRate = "1.0%";
+        case "brown" :  failureRate = "1.0%";
         break;
-        case "brown":  failureRate = "0.1%";
+        case "no color" :  failureRate = "1.0%";
         break;
-        case "red":  failureRate = "0.01%";
+        case "red":  failureRate = "0.1%";
         break;
-        case "orange":  failureRate = "0.001%";
+        case "orange":  failureRate = "0.01%";
+        break;
+        case "yellow":  failureRate = "0.001%";
         break;
     } return failureRate;
 }
-// work here reset colors 
-// add no color to the last band 
-// hide tolerance input html elm when last band no color; 
+function resetResistorColors(){
+    let resColorID = $("#resTable td");
+    for(let i=0; i<resColorID.length; i++) {
+        $("#"+resColorID[i].id).removeAttr("class");
+        if(i===0) $("#"+resColorID[i].id).addClass("resDefault");
+    }
+} 
 const resetResCalc = (function(){
-    utilsRes.resetFedCon(false, );
+    $("#resetColorCode").click((function(){
+        utilsRes.resetFedCon("formResColorCode","colorCodeOutput");
+        resetResistorColors();
+    }));
 })();
 window.onload = resetResCalc;
-
