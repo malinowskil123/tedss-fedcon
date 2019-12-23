@@ -1,17 +1,25 @@
 const utilsRes = new Utils();
-// work here
-function changeColorBand(id,color){
+// onfocus
+function cursorBand(color){
+    let resColorID = $("#resTable td");
+    const dropDownID = ["#colorBandDropDown1","#colorBandDropDown2","#colorBandDropDown3","#colorBandDropDown4","#colorBandDropDown5"];
+    for(let i=0; i<dropDownID.length; i++){
+        if(color===""&&$(dropDownID[i]).is(":focus")) $("#"+resColorID[i].id).addClass("default");
+        else $("#"+resColorID[i].id).removeClass("default");
+    }
+}
+// onchange
+function changeColorBand(color,id){
     const tdID = ["#band1","#band2","#band3","#band4","#band5"];
+    const dropDownID = ["#colorBandDropDown1","#colorBandDropDown2","#colorBandDropDown3","#colorBandDropDown4","#colorBandDropDown5"];
     let currentIndex = tdID.indexOf("#"+id),
         nextIndex = currentIndex+1;
     let prevColor = $(tdID[currentIndex]).attr("class");
-    // let nextElmColor = $(tdID[nextIndex]).attr("class")
     $(tdID[currentIndex]).removeClass(prevColor);
-    if(color!=="")$(tdID[currentIndex]).addClass("res"+color);
-    $(tdID[nextIndex]).toggleClass("resDefault");
-    if(color===""&&currentIndex===tdID.length-1)$(tdID[currentIndex]).addClass("resDefault");
+    $(tdID[currentIndex]).addClass("res"+color);
+    if(nextIndex<=4)$(dropDownID[nextIndex]).focus();
 }
-// write a function to disable drop downs;
+// onchange
 function validateResColorCode(){
     const dropDownID = ["#colorBandDropDown1","#colorBandDropDown2","#colorBandDropDown3","#colorBandDropDown4","#colorBandDropDown5"];
     let valuesArr = utilsRes.getSelectedFields(dropDownID,"text");
@@ -78,13 +86,13 @@ function resetResistorColors(){
     let resColorID = $("#resTable td");
     for(let i=0; i<resColorID.length; i++) {
         $("#"+resColorID[i].id).removeAttr("class");
-        if(i===0) $("#"+resColorID[i].id).addClass("resDefault");
     }
 } 
 const resetResCalc = (function(){
     $("#resetColorCode").click((function(){
         utilsRes.resetFedCon("formResColorCode","colorCodeOutput");
         resetResistorColors();
+        $("#colorBandDropDown1").focus();
     }));
 })();
 window.onload = resetResCalc;

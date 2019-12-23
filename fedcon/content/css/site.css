@@ -210,7 +210,7 @@ img.extra-small {
 	background-color: #603A27;
 } */
 
-.resDefault {
+.default {
     background-color: #808080;
     animation: blinker 1.5s linear infinite;
 }

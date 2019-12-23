@@ -52,7 +52,7 @@
                             <table id="resTable" class="resTable">
                                 <tbody>
                                     <tr>
-                                        <td id="band1" width="25%" class="resDefault">&nbsp;</td>
+                                        <td id="band1" width="25%" class="default">&nbsp;</td>
                                         <td id="band2" width="19%">&nbsp;</td>
                                         <td id="band3" width="19%">&nbsp;</td>
                                         <td id="band4" width="19%">&nbsp;</td>
@@ -69,8 +69,9 @@
                     </div>
                     <div class="row">
                         <div class="col-md-2 col-md-offset-1">
-                            <label for="colorBandDropDown1">1nd Color Band</label>
-                            <select id="colorBandDropDown1" class="form-control" onchange="validateResColorCode();changeColorBand('band1',colorBandDropDown1.value);">
+                            <label for="colorBandDropDown1">1st Color Band</label>
+                            <select id="colorBandDropDown1" class="form-control" 
+                            onfocus="cursorBand(colorBandDropDown1.value);" onchange="validateResColorCode();changeColorBand(colorBandDropDown1.value,'band1');" autofocus>
                                 <option value="">Select Color</option>
                                 <option value="Brown">Brown</option>
                                 <option value="Red">Red</option>
@@ -85,7 +86,8 @@
                         </div>
                         <div class="col-md-2">
                             <label for="colorBandDropDown2">2nd Color Band</label>
-                            <select id="colorBandDropDown2" class="form-control" onchange="validateResColorCode();changeColorBand('band2',colorBandDropDown2.value);">
+                            <select id="colorBandDropDown2" class="form-control"
+                            onfocus="cursorBand(colorBandDropDown2.value);" onchange="validateResColorCode();changeColorBand(colorBandDropDown2.value,'band2');">
                                 <option value="">Select Color</option>
                                 <option value="Black">Black</option>
                                 <option value="Brown">Brown</option>
@@ -101,7 +103,8 @@
                         </div>
                         <div class="col-md-2">
                             <label for="colorBandDropDown3">3rd Color Band</label>
-                            <select id="colorBandDropDown3" class="form-control" onchange="validateResColorCode();changeColorBand('band3',colorBandDropDown3.value);">
+                            <select id="colorBandDropDown3" class="form-control" 
+                            onfocus="cursorBand(colorBandDropDown3.value);" onchange="validateResColorCode();changeColorBand(colorBandDropDown3.value,'band3');">
                                 <option value="">Select Color</option>
                                 <option value="Black">Black</option>
                                 <option value="Brown">Brown</option>
@@ -116,7 +119,8 @@
                         </div>
                         <div class="col-md-2">
                             <label for="colorBandDropDown4">4th Color Band</label>
-                            <select id="colorBandDropDown4" class="form-control" onchange="validateResColorCode();changeColorBand('band4',colorBandDropDown4.value);">
+                            <select id="colorBandDropDown4" class="form-control" 
+                            onfocus="cursorBand(colorBandDropDown4.value);" onchange="validateResColorCode();changeColorBand(colorBandDropDown4.value,'band4');">
                                 <option value="">Select Color</option>
                                 <option value="Gold">Gold</option>
                                 <option value="Silver">Silver</option>
@@ -125,8 +129,9 @@
                         </div>
                         <div class="col-md-2">
                             <label for="colorBandDropDown5">5th Color Band</label>
-                            <select id="colorBandDropDown5" class="form-control" onchange="validateResColorCode();changeColorBand('band5',colorBandDropDown5.value);">
-                                <option value="NoColor">Select Color</option>
+                            <select id="colorBandDropDown5" class="form-control"
+                            onfocus="cursorBand(colorBandDropDown5.value);" onchange="validateResColorCode();changeColorBand(colorBandDropDown5.value,'band5');">
+                                <option value="">Select Color</option>
                                 <option value="Brown">Brown</option>
                                 <option value="Red">Red</option>
                                 <option value="Orange">Orange</option>
