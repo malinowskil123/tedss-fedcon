@@ -49,11 +49,15 @@ function validateCapacitance(capacitance){
         return false
     }
 }
+//--------------------------------------------------------------------------------------------------------- 
 function displayData(dropDownValues){
     const elementID = ["#outputVoltage","#outputCapacitance","#outputTolerance", "#outputPartNumber"];
     const obj = {
         voltage:(function(){return returnVoltage(dropDownValues[0],dropDownValues[1]);})(),
-        capacitance:(function(){return utils.threeDigitCodeCalculator(dropDownValues[2],-6,"pF","µf");})(),
+        capacitance:(function(){
+            let capValRaw = utils.threeDigitCodeCalculator(dropDownValues[2]);
+            return utils.roundValue("farads",capValRaw,-6,4);
+        })(),
         tolerance:(function(){return returnTolerance(dropDownValues[3]);})(),
         partNumber:(function(){return returnPartNumber(dropDownValues);})()
     };
@@ -62,6 +66,7 @@ function displayData(dropDownValues){
         $(elementID[i]).val(returnedValues[i]);
     }
 }
+//--------------------------------------------------------------------------------------------------------- 
 const enablePopover = (function (){
     $('[data-toggle="popover"]').popover()
 })();

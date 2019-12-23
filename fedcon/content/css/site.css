@@ -206,17 +206,15 @@ img.extra-small {
 	background-color: silver;
 }
 
-/* .resNoColor {
-	background-color: #603A27;
-} */
 
 .default {
     background-color: #808080;
     animation: blinker 1.5s linear infinite;
 }
+/* ^^^ */
 @keyframes blinker {
     50% {
-        opacity: 0;
+        opacity: .2;
     }
 }
 

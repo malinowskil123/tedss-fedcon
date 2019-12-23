@@ -27,24 +27,26 @@ class Utils{
             } return value;
         })(); return value;
     }
+    //--------------------------------------------------------------------------------------------------------- 
     roundValueLowerHigher(unit,value,exponent,decimal){
-        const symbols = [["pf","µf"],["Ω","KΩ"]];
+        const symbolArr = [["pf","µf"],["Ω","KΩ"]];
         unit = unit.toLowerCase();
-        let lowerValueSymbol = (unit==="farads")? symbols[0][0] : symbols[1][0];
-        let higherValueSymbol = (unit==="farads")? symbols[0][1] : symbols[1][1];
-        if(value<=1000) return value+lowerValueSymbol;
+        let lowerUnits = (unit==="farads")? symbolArr[0][0] : symbolArr[1][0];
+        let higherUnits = (unit==="farads")? symbolArr[0][1] : symbolArr[1][1];
+        if(value<=1000) return value+lowerUnits;
         else{
             value = (value*Math.pow(10,exponent));
-            return((value - Math.floor(value))!==0)? value.toFixed(decimal)+higherValueSymbol:value+higherValueSymbol;
+            return((value - Math.floor(value))!==0)? value.toFixed(decimal)+higherUnits:value+higherUnits;
         }
     }
     roundValue(unit,value,exponent,decimal){
-        const symbols = ["µf","KΩ"];
+        const symbolArr = ["µf","KΩ"];
         unit = unit.toLowerCase();
-        let symbol = (unit==="farads")?symbols[0]:symbols[1];
+        let valueUnits = (unit==="farads")?symbolArr[0]:symbolArr[1];
         value = (value*Math.pow(10,exponent));
-        return((value - Math.floor(value))!==0)? value.toFixed(decimal)+symbol : value+symbols;
+        return((value - Math.floor(value))!==0)? value.toFixed(decimal)+valueUnits : value+valueUnits;
     }
+    //--------------------------------------------------------------------------------------------------------- 
     getObject(tableKey,rowKey,matchObjectProperty) {
         if(tableKey==="")return null;
         let tempArr = tables[tableKey];

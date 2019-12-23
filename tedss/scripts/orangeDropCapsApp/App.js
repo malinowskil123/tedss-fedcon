@@ -3,7 +3,14 @@ function validate(){
     const dropDownIdArrOrangeDropCaps = ["#inputType","#inputCapacitance","#inputTolerance","#inputVoltage","#inputCaseCode","#inputTerminal","#inputLeadLength"];
     const dropDownValues = utils.getSelectedFields(dropDownIdArrOrangeDropCaps);
     let displayBool;
-    if(!dropDownValues.includes("")&&validateCapacitance(dropDownValues[0],dropDownValues[3],dropDownValues[1])){
+    let capacitance = utils.roundValue("farads",utils.threeDigitCodeCalculator(dropDownValues[1]),-6,4);
+    let testCapObj;
+    if(dropDownValues[1]!=="") {
+        testCapObj = checkCapacitanceTable(dropDownValues[0],dropDownValues[3],capacitance);
+        showInvalidCapMsg(dropDownValues[1],testCapObj);
+    }
+    if(!dropDownValues.includes("")&&testCapObj.contains){
+        dropDownValues[1] = capacitance;
         loadData(dropDownValues);
         loadTerminal(dropDownValues[0],dropDownValues[5]);
         displayBool = true;
@@ -52,37 +59,28 @@ function loadVoltageDropDown(){
         }
     }
 }
-function validateCapacitance(type,voltage,capacitanceCode){
-    const regex = new RegExp(/^[1-9]{1}[\d]{2}$/);
-    let checkCapacitanceVal = checkCapacitanceTable(type,voltage,capacitanceCode);
-    if(capacitanceCode!==""){
-        if(regex.test(capacitanceCode)&&checkCapacitanceVal.contains) return true;
-        else{
-            (function(){
-                utils.showHideJquery(true,"#popup");
-                $("#popupText").text(function()
-                    {return (capacitanceCode.substring(0,1)==="0")
-                        ? "Capacitance Code Can't Start With 0"
-                        : (!checkCapacitanceVal.contains)
-                        ?  checkCapacitanceVal.msg
-                        : "Capacitance Code Too Long!"});;
-                $('body').css("overflow","hidden");
-                const popupArea = document.getElementById("popup");
-                $(window).click(function(event){
-                    if(event.target==popupArea) {
-                        utils.showHideJquery(false,"#popup")
-                        $('body').css("overflow","visible");
-                    }
-                });
-            })();
-            return false
-        }
-    } else return false
+function showInvalidCapMsg(capacitanceCode,testCapObj){
+    if(!testCapObj.contains){
+        (function(){
+            utils.showHideJquery(true,"#popup");
+            $("#popupText").text(function(){
+                return (capacitanceCode.substring(0,1)==="0") ? "Capacitance Code Can't Start With 0" : testCapObj.msg;
+            });
+            $('body').css("overflow","hidden");
+            const popupArea = document.getElementById("popup");
+            $(window).click(function(event){
+                if(event.target==popupArea) {
+                    utils.showHideJquery(false,"#popup")
+                    $('body').css("overflow","visible");
+                }
+            });
+        })(); 
+    }
 }
-function checkCapacitanceTable(type,voltage,capacitanceCode){
+function checkCapacitanceTable(type,voltage,capacitance){
     const capacitanceTable = {
         "418P" : {
-            "100" : [.027,.033,.047,.082,.1,.15,.22,.33,.47,.68,.082,1.0],
+            "100" : [0.027,.033,.047,.082,.1,.15,.22,.33,.47,.68,.082,1.0],
             "200" : [.0056,.0068,.01,.015,.018,.022,.033,.039,.047,.056,.068,.082,.1,.15,.22,.27,.33,.47],
             "400" : [.001,.0015,.0022,.0033,.0047,.0068,.0082,.01,.015,.018,.022,.033,.047,.056,.068,.082,.1,.15,.18,.22,.27,.33,.39,.47],
             "600" : [.001,.0012,.0015,.0018,.0022,.0027,.0033,.0039,.0047,.0056,.0068,.0082,.01,.12,.18,.22,.25],
@@ -105,9 +103,8 @@ function checkCapacitanceTable(type,voltage,capacitanceCode){
             "1600" : [.001,.0012,.0015,.0018,.0022,.0027,.0033,.0039,.0047,.0056,.0068,.0082,.01,.012,.015,.018,.022,.027,.033]
         }
     };
-    let capacitanceValue = utils.threeDigitCodeCalculator(capacitanceCode,-6,"pF","µf");
     let tokenArr = capacitanceTable[type][voltage];
-    let containsBool = tokenArr.includes(parseFloat(capacitanceValue));
+    let containsBool = tokenArr.includes(parseFloat(capacitance));
     let invalidValMsg = `Valid capacitance range ${Math.min.apply(Math,tokenArr)}µf - ${Math.max.apply(Math,tokenArr)}µf for ${type} type at ${voltage}VDC`;
     let obj = {
         contains : containsBool,
@@ -117,8 +114,9 @@ function checkCapacitanceTable(type,voltage,capacitanceCode){
 }
 function loadData(dropDownValues){
     const elementID = ["#outputCapacitance","#outputTolerance","#outputVoltage","#outputLeadLength","#outputPartNumber"];
+   
     const obj = {
-        capacitance : (function(){return utils.threeDigitCodeCalculator(dropDownValues[1],-6,"pF","µf")})(),
+        capacitance: dropDownValues[1],
         tolerance : (function(){return returnTolerance(dropDownValues[2])})(),
         voltage :  dropDownValues[3]+"VDC",
         leadLength : (function(){return returnLeadLength(dropDownValues[6])})(),

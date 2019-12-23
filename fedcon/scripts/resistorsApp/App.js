@@ -17,7 +17,8 @@ function changeColorBand(color,id){
     let prevColor = $(tdID[currentIndex]).attr("class");
     $(tdID[currentIndex]).removeClass(prevColor);
     $(tdID[currentIndex]).addClass("res"+color);
-    if(nextIndex<=4)$(dropDownID[nextIndex]).focus();
+    if(color==="") $(dropDownID[currentIndex]).focus();
+    else if(nextIndex<=4) $(dropDownID[nextIndex]).focus();
 }
 // onchange
 function validateResColorCode(){
