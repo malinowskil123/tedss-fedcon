@@ -49,7 +49,6 @@ function validateCapacitance(capacitance){
         return false
     }
 }
-//--------------------------------------------------------------------------------------------------------- 
 function displayData(dropDownValues){
     const elementID = ["#outputVoltage","#outputCapacitance","#outputTolerance", "#outputPartNumber"];
     const obj = {
@@ -66,7 +65,6 @@ function displayData(dropDownValues){
         $(elementID[i]).val(returnedValues[i]);
     }
 }
-//--------------------------------------------------------------------------------------------------------- 
 const enablePopover = (function (){
     $('[data-toggle="popover"]').popover()
 })();

@@ -27,7 +27,6 @@ class Utils{
             } return value;
         })(); return value;
     }
-    //--------------------------------------------------------------------------------------------------------- 
     roundValueLowerHigher(unit,value,exponent,decimal){
         const symbolArr = [["pf","µf"],["Ω","KΩ"]];
         unit = unit.toLowerCase();
@@ -46,7 +45,6 @@ class Utils{
         value = (value*Math.pow(10,exponent));
         return((value - Math.floor(value))!==0)? value.toFixed(decimal)+valueUnits : value+valueUnits;
     }
-    //--------------------------------------------------------------------------------------------------------- 
     getObject(tableKey,rowKey,matchObjectProperty) {
         if(tableKey==="")return null;
         let tempArr = tables[tableKey];

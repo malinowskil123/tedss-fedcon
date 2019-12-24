@@ -114,7 +114,6 @@ function checkCapacitanceTable(type,voltage,capacitance){
 }
 function loadData(dropDownValues){
     const elementID = ["#outputCapacitance","#outputTolerance","#outputVoltage","#outputLeadLength","#outputPartNumber"];
-   
     const obj = {
         capacitance: dropDownValues[1],
         tolerance : (function(){return returnTolerance(dropDownValues[2])})(),
