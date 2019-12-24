@@ -93,7 +93,7 @@ function hideFailureRate(style){
             let add = (styleRegEx.test(style))? "col-md-4":"col-md-3";
             if($(divId[i]).attr("class")!=add){
                 $(divId[i]).removeClass(remove); 
-                $(divId[i]).toggleClass(add); 
+                $(divId[i]).addClass(add); 
             }
         }  
     })();
@@ -109,7 +109,7 @@ function hideAlternatePn(partNumber){
             let add = (partNumber===null)? "col-md-6 col-md-offset-3":"col-md-6";
             if($(divId[i]).attr("class")!=add){
                 $(divId[i]).removeClass(remove); 
-                $(divId[i]).toggleClass(add); 
+                $(divId[i]).addClass(add);  
             }
         }  
     })();
