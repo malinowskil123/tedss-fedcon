@@ -1,5 +1,5 @@
 body {
-	width: 100%;
+    max-width: 100%;
 	overflow-x: hidden;
 	overflow-y: scroll;
 	background-image: linear-gradient(141deg,rgba(0, 51, 0,0), rgba(0, 51, 0,0.8));
@@ -32,10 +32,6 @@ hr {
     border-color: #51703b !important;
 }
 
-strong{
-	color: rgb(133, 14, 14) !important;
-}
-
 .body-content {
     padding-top: 25px;
     padding-bottom: 25px;
@@ -51,55 +47,6 @@ strong{
 
 .button-color:hover {
     background-color: #2D4D17;
-}
-
-.hidden{
-    display: none;
-}
-
-.div-parent {
-    height: 50px;
-    line-height: 50px;
-}
-
-.div-child {
-    vertical-align: middle;
-}
-
-.size-l {
-    height: 150px;
-    max-height: 150px;
-}
-
-.size-m {
-    height: 125px;
-    max-height: 125px;
-}
-
-.size-s {
-    height: 100px;
-    max-height: 100px;
-}
-
-img.ri {
-    max-width: 90%;
-    max-height: 90%;
-}
-
-img.large {
-    width: 80%;
-}
-
-img.medium {
-    width: 60%;
-}
-
-img.small {
-    width: 40%;
-}
-
-img.extra-small {
-    width: 20%;
 }
 
 .input {
@@ -153,19 +100,64 @@ img.extra-small {
 }
 
 .popup-content p {
-	font-size: 20px;
-	margin-top: 15px;
+    font-size: 20px;
+}
+
+.hidden{
+    display: none;
+}
+.div-parent {
+    height: 50px;
+    line-height: 50px;
+}
+
+.div-child {
+    vertical-align: middle;
+}
+
+.size-l {
+    height: 150px;
+    max-height: 150px;
+}
+
+.size-m {
+    height: 125px;
+    max-height: 125px;
+}
+
+.size-s {
+    height: 100px;
+    max-height: 100px;
+}
+
+img.ri {
+    max-width: 90%;
+    max-height: 90%;
+}
+
+img.large {
+    width: 80%;
+}
+
+img.medium {
+    width: 60%;
+}
+
+img.small {
+    width: 40%;
+}
+
+img.extra-small {
+    width: 20%;
 }
 
 /* resistor table classes */ 
 .resTable {
 	background-color: #603A27;
 	table-layout: auto;
-	width: 80%;
-	margin-top: 20px;
-	margin-bottom: 20px;
-	margin-left:auto; 
-    margin-right:auto;
+	width: 100%;
+	margin-top: 25px;
+	margin-bottom: 25px;
 }
 
 .resBlack {
@@ -233,34 +225,18 @@ img.extra-small {
 		height: 100px;
 	}
 	#band1 {
-		border-right: solid #603A27 15px;
-		border-left: solid #603A27 30px;
+		border-right: solid #603A27 20px;
+		border-left: solid #603A27 40px;
 	}
 	#band2,
 	#band3,
 	#band4,
 	#band5 {
-		border-right: solid #603a27 15px;
+		border-right: solid #603a27 20px;
 	}
 }
 
 @media only screen and (min-width: 577px) {
-	.resTable {
-		height: 150px;
-	}
-	#band1 {
-		border-right: solid #603A27 35px;
-		border-left: solid #603A27 60px;
-	}
-	#band2,
-	#band3,
-	#band4,
-	#band5 {
-		border-right: solid #603a27 35px;
-	}
-}
-
-@media only screen and (min-width: 768px) {
 	.resTable {
 		height: 150px;
 	}
@@ -276,9 +252,9 @@ img.extra-small {
 	}
 }
 
-@media only screen and (min-width: 992px) {
+@media only screen and (min-width: 768px) {
 	.resTable {
-		height: 200px;
+		height: 150px;
 	}
 	#band1 {
 		border-right: solid #603A27 25px;
@@ -290,21 +266,31 @@ img.extra-small {
 	#band5 {
 		border-right: solid #603a27 25px;
 	}
-	.page-cen-mid {
-		position: absolute;
-		left: 50%;
-		top: 50%;
-		transform: translate(-50%, -50%);
+}
+
+@media only screen and (min-width: 992px) {
+	.resTable {
+		height: 150px;
+	}
+	#band1 {
+		border-right: solid #603A27 35px;
+		border-left: solid #603A27 65px;
+	}
+	#band2,
+	#band3,
+	#band4,
+	#band5 {
+		border-right: solid #603a27 35px;
 	}
 }
 
 @media only screen and (min-width: 1200px) {
 	.resTable {
-		height: 250px;
+		height: 150px;
 	}
 	#band1 {
 		border-right: solid #603A27 50px;
-		border-left: solid #603A27 75px;
+		border-left: solid #603A27 100px;
 	}
 	#band2,
 	#band3,

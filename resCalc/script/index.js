@@ -41,23 +41,6 @@ function displayColorCodeData(valuesArr){
     obj = Object.values(obj);
     for(let i=0; i<obj.length;i++) $(outputID[i]).val(obj[i]);
 }
-// make this work for hiding failure rate
-function hideAlternatePn(partNumber){
-    const divId = ["#divCharacteristic","#divAlternatePartNumber"];
-    let displayBool = (partNumber===null)? false:true;
-    utils.showHideJquery(displayBool,"#divAlternatePartNumber");
-    (function(){
-        for(let i=0; i<divId.length-1; i++){
-            let remove = (partNumber===null)? "col-md-6":"col-md-6 col-md-offset-3";
-            let add = (partNumber===null)? "col-md-6 col-md-offset-3":"col-md-6";
-            if($(divId[i]).attr("class")!=add){
-                $(divId[i]).removeClass(remove); 
-                $(divId[i]).addClass(add);  
-            }
-        }  
-    })();
-}
-// 
 function colorBandToNumber(color){
     const table = {"black":0,"brown":1,"red":2,"orange":3,"yellow":4,"green":5,"blue":6,"violet":7,"gray":8,"white":9,"gold":0.1};
     return table[color.toLowerCase()];
