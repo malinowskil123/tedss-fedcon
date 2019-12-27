@@ -67,7 +67,7 @@ const enablePopover = (function (){
 })();
 window.onload = enablePopover;
 const reset = (function(){
-    $("#series").change(function(){
+    $("#inputType").change(function(){
         let resetDropDownVal = $("#inputType").val();
         if(resetDropDownVal==="") utils.resetTedss("#metalFilmCapsApp","#resourcesMetalFilmCaps");
     });

@@ -67,7 +67,7 @@ class Utils{
     }
     // Tedss------------------------
     resetTedss(formId,elementId){
-        $(formId)[0].reset();
+        $(formId).trigger("reset");
         this.showHideJquery(false,elementId)
     }
     showHideJquery(reset,id) {(reset === true)? $(id).show("slow"):$(id).hide("slow");}

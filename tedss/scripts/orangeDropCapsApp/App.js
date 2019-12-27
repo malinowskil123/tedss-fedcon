@@ -5,13 +5,12 @@ function validate(){
     let displayBool;
     let capacitance = utils.roundCapacitance(utils.threeDigitCodeCalculator(dropDownValues[1]),true);
     let testCapObj;
-    if(dropDownValues[1]!=="") {
+    if(dropDownValues[0]!==""&&dropDownValues[1]!==""){
         testCapObj = checkCapacitanceTable(dropDownValues[0],dropDownValues[3],capacitance);
         showInvalidCapMsg(dropDownValues[1],testCapObj);
     }
     if(!dropDownValues.includes("")&&testCapObj.contains){
-        dropDownValues[1] = capacitance;
-        loadData(dropDownValues);
+        loadData(dropDownValues, capacitance);
         loadTerminal(dropDownValues[0],dropDownValues[5]);
         displayBool = true;
     } else displayBool = false;
@@ -112,10 +111,10 @@ function checkCapacitanceTable(type,voltage,capacitance){
     };
     return obj;
 }
-function loadData(dropDownValues){
+function loadData(dropDownValues, capacitanceVal){
     const elementID = ["#outputCapacitance","#outputTolerance","#outputVoltage","#outputLeadLength","#outputPartNumber"];
     const obj = {
-        capacitance: dropDownValues[1],
+        capacitance: capacitanceVal,
         tolerance : (function(){return returnTolerance(dropDownValues[2])})(),
         voltage :  dropDownValues[3]+"VDC",
         leadLength : (function(){return returnLeadLength(dropDownValues[6])})(),
