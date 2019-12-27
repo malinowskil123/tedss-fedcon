@@ -54,17 +54,17 @@ function getResistance(colorCodeArr){
             return parseFloat(resCode)*0.1;
         } else return utilsRes.threeDigitCodeCalculator(resCode);
     })();
-    let resValue = utilsRes.roundValueLowerHigher("ohms",rawResValue,-3,2)
+    let resValue = utilsRes.roundResistance(rawResValue)
     return resValue;
 }
 function getTolerance(tolerance){
     tolerance = tolerance.toLowerCase();
     switch(tolerance){
-        case "gold":  tolerance = "5%";
+        case "gold":  tolerance = "±5%";
         break;
-        case "silver":  tolerance = "10%";
+        case "silver":  tolerance = "±10%";
         break;
-        case "no color":  tolerance = "20%";
+        case "no color":  tolerance = "±20%";
         break;
     } return tolerance;
 }
@@ -73,13 +73,13 @@ function getFailureRate(failureRate){
     switch(failureRate){
         case "brown" :  failureRate = "1.0%";
         break;
-        case "no color" :  failureRate = "No Failure Rate";
-        break;
         case "red":  failureRate = "0.1%";
         break;
         case "orange":  failureRate = "0.01%";
         break;
         case "yellow":  failureRate = "0.001%";
+        break;
+        case "no color" :  failureRate = "No Failure Rate";
         break;
     } return failureRate;
 }

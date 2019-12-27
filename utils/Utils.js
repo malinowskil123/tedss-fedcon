@@ -27,23 +27,22 @@ class Utils{
             } return value;
         })(); return value;
     }
-    roundValueLowerHigher(unit,value,exponent,decimal){
-        const symbolArr = [["pf","µf"],["Ω","KΩ"]];
-        unit = unit.toLowerCase();
-        let lowerUnits = (unit==="farads")? symbolArr[0][0] : symbolArr[1][0];
-        let higherUnits = (unit==="farads")? symbolArr[0][1] : symbolArr[1][1];
-        if(value<=1000) return value+lowerUnits;
-        else{
-            value = (value*Math.pow(10,exponent));
-            return((value - Math.floor(value))!==0)? value.toFixed(decimal)+higherUnits:value+higherUnits;
+    roundResistance(value){
+        if(value<=1000) return value+"Ω";
+        else if(value<=1000000){
+            value = (value*Math.pow(10,-3));
+            return((value - Math.floor(value))!==0)? value.toFixed(2)+"KΩ":value+"KΩ";
+        } else{
+            value = (value*Math.pow(10,-6));
+            return((value - Math.floor(value))!==0)? value.toFixed(2)+"MΩ":value+"MΩ";
         }
     }
-    roundValue(unit,value,exponent,decimal){
-        const symbolArr = ["µf","KΩ"];
-        unit = unit.toLowerCase();
-        let valueUnits = (unit==="farads")?symbolArr[0]:symbolArr[1];
-        value = (value*Math.pow(10,exponent));
-        return((value - Math.floor(value))!==0)? value.toFixed(decimal)+valueUnits : value+valueUnits;
+    roundCapacitance(value,getUfOnly){
+        if(value<=1000&&getUfOnly==false) return value+"pf";
+        else{
+            value = (value*Math.pow(10,-6));
+            return((value - Math.floor(value))!==0)? value.toFixed(4)+"µf":value+"µf";
+        }
     }
     getObject(tableKey,rowKey,matchObjectProperty) {
         if(tableKey==="")return null;

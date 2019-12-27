@@ -53,10 +53,7 @@ function displayData(dropDownValues){
     const elementID = ["#outputVoltage","#outputCapacitance","#outputTolerance", "#outputPartNumber"];
     const obj = {
         voltage:(function(){return returnVoltage(dropDownValues[0],dropDownValues[1]);})(),
-        capacitance:(function(){
-            let capValRaw = utils.threeDigitCodeCalculator(dropDownValues[2]);
-            return utils.roundValue("farads",capValRaw,-6,4);
-        })(),
+        capacitance:(function(){return utils.roundCapacitance(utils.threeDigitCodeCalculator(dropDownValues[2]),false);})(),
         tolerance:(function(){return returnTolerance(dropDownValues[3]);})(),
         partNumber:(function(){return returnPartNumber(dropDownValues);})()
     };

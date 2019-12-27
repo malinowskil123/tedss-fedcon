@@ -3,7 +3,7 @@ function validate(){
     const dropDownIdArrOrangeDropCaps = ["#inputType","#inputCapacitance","#inputTolerance","#inputVoltage","#inputCaseCode","#inputTerminal","#inputLeadLength"];
     const dropDownValues = utils.getSelectedFields(dropDownIdArrOrangeDropCaps);
     let displayBool;
-    let capacitance = utils.roundValue("farads",utils.threeDigitCodeCalculator(dropDownValues[1]),-6,4);
+    let capacitance = utils.roundCapacitance(utils.threeDigitCodeCalculator(dropDownValues[1]),true);
     let testCapObj;
     if(dropDownValues[1]!=="") {
         testCapObj = checkCapacitanceTable(dropDownValues[0],dropDownValues[3],capacitance);

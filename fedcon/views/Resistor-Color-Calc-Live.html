@@ -28,14 +28,14 @@
             </div>
         </div>
     </div>
-    <div class="panel panel-default page-cen-mid">
+    <div class="panel panel-default">
         <div class="panel-heading text-center"><h2 class="text-center">Resistor Color Code Calculator</h2></div>
-        <div class="panel-body">
+        <div class="panel-body body-content">
             <form id="formResColorCode" onsubmit="return false;">
                 <table id="resTable" class="resTable">
                     <tbody>
                         <tr>
-                            <td id="band1" width="25%" class="default">&nbsp;</td>
+                            <td id="band1" width="24%" class="default">&nbsp;</td>
                             <td id="band2" width="19%">&nbsp;</td>
                             <td id="band3" width="19%">&nbsp;</td>
                             <td id="band4" width="19%">&nbsp;</td>
@@ -46,8 +46,8 @@
                 <div class="text-center"><input id="resCalcHelp" type="button" value="Help" class="btn button-color btn-lg"></div>
                 <div class="well body-content">
                     <div class="row">
-                        <div class="col-lg-2 col-lg-offset-1">
-                            <label for="colorBandDropDown1">1st Band</label>
+                        <div class="col-md-2 col-md-offset-1">
+                            <label for="colorBandDropDown1">1st Color Band</label>
                             <select id="colorBandDropDown1" class="form-control" 
                             onfocus="cursorBand(colorBandDropDown1.value);" onchange="validateResColorCode();changeColorBand(colorBandDropDown1.value,'band1');" autofocus>
                                 <option value=""></option>
@@ -62,8 +62,8 @@
                                 <option value="White">White</option>
                             </select>
                         </div>
-                        <div class="col-lg-2">
-                            <label for="colorBandDropDown2">2nd Band</label>
+                        <div class="col-md-2">
+                            <label for="colorBandDropDown2">2nd Color Band</label>
                             <select id="colorBandDropDown2" class="form-control"
                             onfocus="cursorBand(colorBandDropDown2.value);" onchange="validateResColorCode();changeColorBand(colorBandDropDown2.value,'band2');">
                                 <option value=""></option>
@@ -79,8 +79,8 @@
                                 <option value="White">White</option>
                             </select>
                         </div>
-                        <div class="col-lg-2">
-                            <label for="colorBandDropDown3">3rd Band</label>
+                        <div class="col-md-2">
+                            <label for="colorBandDropDown3">3rd Color Band</label>
                             <select id="colorBandDropDown3" class="form-control" 
                             onfocus="cursorBand(colorBandDropDown3.value);" onchange="validateResColorCode();changeColorBand(colorBandDropDown3.value,'band3');">
                                 <option value=""></option>
@@ -95,8 +95,8 @@
                                 <option value="Gold">Gold</option>
                             </select>
                         </div>
-                        <div class="col-lg-2">
-                            <label for="colorBandDropDown4">4th Band</label>
+                        <div class="col-md-2">
+                            <label for="colorBandDropDown4">4th Color Band</label>
                             <select id="colorBandDropDown4" class="form-control" 
                             onfocus="cursorBand(colorBandDropDown4.value);" onchange="validateResColorCode();changeColorBand(colorBandDropDown4.value,'band4');">
                                 <option value=""></option>
@@ -105,8 +105,8 @@
                                 <option value="Empty">No Color</option>
                             </select>
                         </div>
-                        <div class="col-lg-2">
-                            <label for="colorBandDropDown5">5th Band</label>
+                        <div class="col-md-2">
+                            <label for="colorBandDropDown5">5th Color Band</label>
                             <select id="colorBandDropDown5" class="form-control"
                             onfocus="cursorBand(colorBandDropDown5.value);" onchange="validateResColorCode();changeColorBand(colorBandDropDown5.value,'band5');">
                                 <option value=""></option>
@@ -121,26 +121,42 @@
                 </div>
                 <div id="colorCodeOutput" class="hidden">
                     <div class="well body-content">
-                        <div class="row">
-                            <div class="col-md-4">
-                                <label for="resColorCodeResistance">Resistance</label>
-                                <input id="resColorCodeResistance" type="text" class="form-control" disabled>
-                            </div>
-                            <div class="col-md-4">
-                                <label for="resColorCodeTolerance">Tolerance</label>
-                                <input id="resColorCodeTolerance" type="text" class="form-control" disabled>
+                         <div class="row">
+                             <div class="col-md-4">
+                                 <label for="resColorCodeResistance">Resistance</label>
+                                 <input id="resColorCodeResistance" type="text" class="form-control" disabled>
                              </div>
-                            <div class="col-md-4">
-                                <label for="resColorCodeFailureRate">Failure Rate</label>
-                                <input id="resColorCodeFailureRate" type="text" class="form-control" disabled>
-                            </div>
-                        </div>
-                        <div class="text-center div-parent">
-                            <input id="resetColorCode" type="reset" value="Reset" class="btn button-color btn-lg div-child">
-                       </div>
+                             <div class="col-md-4">
+                                 <label for="resColorCodeTolerance">Tolerance</label>
+                                 <input id="resColorCodeTolerance" type="text" class="form-control" disabled>
+                             </div>
+                             <div class="col-md-4">
+                                 <label for="resColorCodeFailureRate">Failure Rate</label>
+                                 <input id="resColorCodeFailureRate" type="text" class="form-control" disabled>
+                             </div>
+                         </div>
+                    </div>
+                    <div class="text-center">
+                         <input id="resetColorCode" type="reset" value="Reset" class="btn button-color btn-lg">
                     </div>
                 </div> 
             </form>
+        </div>
+    </div>
+    <div class="well body-content">
+        <div class="row text-center">
+            <div class="col-md-3">
+                <img src="/fedcon/content/images/shared/federalConnectorLogo.png" alt="FedConLogo" class="ri" />
+            </div>
+            <div class="col-md-9 text-center">
+                <h2><a href="https://federalconnectors.com/CarbonCompositionResistors" target="_blank">Click here to browse our <strong>Carbon Composition Resistors</strong> inventory</a></h2>
+                <p class="text-justify">
+                    <strong>Federal Connectors</strong> is a supplier of Military Connectors,
+                    Military Fuses, Military Potentiometers, Military Resistors, Military Relays and other electronic components to the US government and various subcontractors.
+                    Our team at Federal Connectors has been serving government agencies and industrial organizations throughout the electronics community for over 25 years.
+                    We provide our customers with an easy shopping experience and reliable fulfillment.
+                </p>
+            </div>
         </div>
     </div>
     <script type="text/javascript" src="/utils/Utils.js"></script>
