@@ -57,9 +57,10 @@ function getResistance(colorCodeArr){
     let resValue = utilsRes.roundResistance(rawResValue)
     return resValue;
 }
-function getTolerance(tolerance){
-    tolerance = tolerance.toLowerCase();
-    switch(tolerance){
+function getTolerance(color){
+    let tolerance;
+    color = color.toLowerCase();
+    switch(color){
         case "gold":  tolerance = "±5%";
         break;
         case "silver":  tolerance = "±10%";
@@ -68,20 +69,22 @@ function getTolerance(tolerance){
         break;
     } return tolerance;
 }
-function getFailureRate(failureRate){
-    failureRate = failureRate.toLowerCase();
-    switch(failureRate){
-        case "brown" :  failureRate = "1.0%";
-        break;
-        case "red":  failureRate = "0.1%";
-        break;
-        case "orange":  failureRate = "0.01%";
-        break;
-        case "yellow":  failureRate = "0.001%";
-        break;
-        case "no color" :  failureRate = "No Failure Rate";
-        break;
-    } return failureRate;
+function getFailureRate(color){
+    let failureRate;
+    color = color.toLowerCase();
+    if(color==="no color") return "No Failure Rate";
+    else{
+        switch(color){
+            case "brown" :  failureRate = "1.0%";
+            break;
+            case "red":  failureRate = "0.1%";
+            break;
+            case "orange":  failureRate = "0.01%";
+            break;
+            case "yellow":  failureRate = "0.001%";
+            break;
+        } return failureRate + " @ 1000 hrs.";
+    }
 }
 function resetResistorColors(){
     let resColorID = $("#resTable td");
