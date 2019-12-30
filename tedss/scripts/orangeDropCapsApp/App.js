@@ -116,7 +116,7 @@ function loadData(dropDownValues, capacitanceVal){
     const obj = {
         capacitance: capacitanceVal,
         tolerance : (function(){return returnTolerance(dropDownValues[2])})(),
-        voltage :  dropDownValues[3]+"VDC",
+        voltage :  dropDownValues[3]+"VDC / "+returnVAC(dropDownValues[0],dropDownValues[3]),
         leadLength : (function(){return returnLeadLength(dropDownValues[6])})(),
         partNumber : (function(){
             dropDownValues[3] = (dropDownValues[3].length===4)? dropDownValues[3].substring(0,2) : dropDownValues[3].substring(0,1);
@@ -168,4 +168,34 @@ function returnLeadLength(leadLength){
         case "1": leadLength = " 0.187[4.750]";
         break;
     } return leadLength;
+}
+function returnVAC(type,voltage){
+    let vac;
+    if(type==="418P"){
+        switch(voltage){
+            case "100": vac = "75 VAC";
+            break;
+            case "200": vac = "140 VAC";
+            break;
+            case "400":
+            case "600": 
+            case "1000": 
+                vac = "200 VAC";
+            break;
+        }
+    } else{
+        switch(voltage){
+            case "200": vac = "155 VAC";
+            break;
+            case "400": 
+            case "600": vac = "200 VAC";
+            break;
+            case "800": vac = "450 VAC";
+            break;
+            case "1200": vac = "475 VAC";
+            break;
+            case "1600": vac = "500 VAC";
+            break;
+        }
+    } return vac;
 }
