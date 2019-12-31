@@ -29,10 +29,30 @@ function showTerminalM39006(specificationNumber) {
         pic = "M39006";
     } return `/fedcon/content/images/tantalumCaps/${pic}.png`;
 }
+const showPopupM39006 = (function(){
+    $("#specSheetM39006").click(function(){
+        let specificationNumber = $("#specificationNumberM39006").val();
+        if(specificationNumber===""){
+            (function () {
+                displayBool = false
+                utilsM39006.showHideJs(true,"popupM39006");
+                $('body').css("overflow", "hidden");
+                const popupArea = document.getElementById("popupM39006");
+                $(window).click(function (event) {
+                    if (event.target == popupArea) {
+                        utilsM39006.showHideJs(false,"popupM39006");
+                        $('body').css("overflow", "visible");
+                    }
+                });
+            })();
+        }
+    });
+})();
+window.onload = showPopupM39006;
 const resetAppM39006 = (function(){
     $("#specificationNumberM39006").change(function(){
-        let resetDropDownVal = $("#specificationNumberM39006 option:selected").val();
-        if(resetDropDownVal==="") {
+        let specificationNumber = $("#specificationNumberM39006 option:selected").val();
+        if(specificationNumber==="") {
             utilsM39006.resetFedCon("formM39006","resetM39006");
             resetLink();
         }
