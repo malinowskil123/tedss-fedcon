@@ -16,7 +16,7 @@ function validateMilF19207(partNumber) {
                     $('body').css("overflow", "visible");
                 }
             });
-        })();//blah
+        })();
     } else {
         displayBool = true;
         displayTableMilF19207(fuseHolderObject);
